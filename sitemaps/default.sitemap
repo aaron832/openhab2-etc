@@ -1,0 +1,37 @@
+sitemap default label="Rose House"
+{
+	Frame label="Living Room" icon="sofa" {
+		Switch item=samsungtv_lr_power_interface
+		Setpoint item=samsungtv_lr_volume step=1 minValue=0 maxValue=10
+		Selection item=samsungtv_lr_sourcename mappings=[HDMI2="PC", COMPONENT="Wii"] valuecolor=[68="green", 61="blue"]
+		Switch item=yamahareceiver_power		
+		Slider item=yamahareceiver_volume		
+		Text item=yamahareceiver_volumeDB		
+	}	
+	Frame label="Garage" {
+		Switch item=zwave_node3_garagelight_switch	
+		Text item=sensorGarage		
+		Text item=tempGarage01		
+		Text item=humGarage01		
+		Text item=bayDoorGarage01		
+		Text item=doorGarage01		
+		Switch item=relayGarage01 mappings=[ON="Go!"]		
+	}	
+	Frame label="Man Cave" {
+		Switch item=halvr_wol mappings=[ON="Wake!"]
+	}	
+	Frame label="Home" icon="house" {
+		Slider item=zwave_node2_uphallway_dimmer		
+		Switch item=home_away mappings=[home="Home", away="Away"]		
+		Text item=nest_room_ambient_temperature_f visibility=[nest_room_temperature_scale=="F"]		
+		Text item=nest_room_ambient_temperature_c visibility=[nest_room_temperature_scale=="C"]		
+		Text item=nest_room_humidity		
+		Switch item=nest_room_hvac_mode mappings=[heat="Heat", cool="Cool", off="Off"]		
+		Text item=nest_room_away_temperature_low_f visibility=[home_away=="away", home_away=="auto-away"]		
+		Text item=nest_room_away_temperature_high_f visibility=[home_away=="away", home_away=="auto-away"]		
+		Setpoint item=nest_room_target_temperature_f label="Target Temperature [%.1f °F]" minValue=50 maxValue=80 step=1 visibility=[nest_room_hvac_mode=="heat", nest_room_hvac_mode=="cool"]		
+		Setpoint item=nest_room_target_temperature_low_f label="Minimum Temperature [%.1f °F]" minValue=50 maxValue=80 step=1 visibility=[nest_room_hvac_mode=="heat-cool"]		
+		Setpoint item=nest_room_target_temperature_high_f label="Maximum Temperature [%.1f °F]" minValue=50 maxValue=80 step=1 visibility=[nest_room_hvac_mode=="heat-cool"]		
+		Text item=nest_room_last_connection		
+	}	
+}

@@ -1,0 +1,12 @@
+sitemap testalexa label="Alexa Test"
+{
+	Frame label="Alexa" icon="sofa" {
+		Switch item=alexa_media_center_power
+		Selection item=alexa_tv_mode mappings=[pc="PC", wii="Wii"]
+	}
+	Frame label="Alexa Status" icon="sofa" {
+		Text item=ECHO_Processed
+		Text item=ECHO_VoiceCMD
+		Text item=ECHO_Answer
+	}
+}

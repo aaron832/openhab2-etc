@@ -1,0 +1,30 @@
+var Timer timer
+var Number raceCheck = 0
+
+rule "autoGarageLightOnBayDoor"
+when
+        Item bayDoorGarage01 changed from 0 to 1
+then
+        raceCheck = 1
+        if(timer!=null){
+                timer.cancel
+                timer = null
+        }
+
+        sendCommand(zwave_node3_garagelight_switch, ON)
+
+        timer = createTimer(now.plusMinutes(5)) [|
+                sendCommand(zwave_node3_garagelight_switch, OFF)
+        ]
+        raceCheck = 0
+end
+
+when
+        Item zwave_node3_garagelight_switch changed
+then
+        logInfo("garage", "Light state: " + zwave_node3_garagelight_switch.state)
+        if(timer!=null and raceCheck == 0){
+                timer.cancel
+                timer = null
+        }
+end

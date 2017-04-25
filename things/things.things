@@ -1,0 +1,1 @@
+Thing samsungtv:tv:samsung_tv_livingroom_thing "Samsung TV LR" @ "Living Room" [ hostName="192.168.1.19", port=55000, refreshInterval=1000 ]

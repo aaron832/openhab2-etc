@@ -1,0 +1,35 @@
+
+rule "alexa_media_center_power_rule"
+when
+        Item alexa_media_center_power received command
+then
+	if(samsungtv_lr_power_interface.state != receivedCommand) {
+		sendCommand(samsungtv_lr_power_interface, receivedCommand)
+	}
+	if(yamahareceiver_power.state != receivedCommand) {
+		sendCommand(yamahareceiver_power, receivedCommand)
+	}
+
+        //if(receivedCommand==OFF) {
+        //        sendCommand(samsungtv_lr_power_interface, OFF)
+	//	sendCommand(yamahareceiver_power, OFF)
+        //}
+        //else if(receivedCommand==ON) {
+        //        sendCommand(samsungtv_lr_power_interface, ON)
+	//	sendCommand(yamahareceiver_power, ON)
+        //}
+end
+
+rule "alexa_media_center_power_update_rule"
+when
+	Item samsungtv_lr_power_interface changed or
+        Item yamahareceiver_power changed
+then
+	if(samsungtv_lr_power_interface.state==ON && yamahareceiver_power.state==ON) {
+		postUpdate(alexa_media_center_power, ON);
+	}
+	else {
+		postUpdate(alexa_media_center_power, OFF);
+	}
+end
+

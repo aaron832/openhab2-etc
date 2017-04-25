@@ -1,0 +1,47 @@
+var Timer samsung_volume_timer = null
+var Timer samsung_sourceid_timer = null
+
+rule "alexa_tv_mode_rule"
+when
+        //Item alexa_tv_mode received command
+	//Item alexa_tv_mode changed
+	Item alexa_tv_mode received command
+then
+        logInfo("alexa_tv_mode_rule : ", receivedCommand.toString)
+        if(receivedCommand.toString.equals("wii")) {
+                if(samsungtv_lr_power_interface.state==OFF) {
+                        sendCommand(samsungtv_lr_power_interface, ON)
+
+                        samsung_volume_timer = createTimer(now.plusSeconds(5)) [|
+                                sendCommand(samsungtv_lr_volume, 6)
+                                samsung_volume_timer = null
+                        ]
+                        samsung_sourceid_timer = createTimer(now.plusSeconds(6)) [|
+                                sendCommand(samsungtv_lr_sourcename, "COMPONENT")
+                                samsung_volume_timer = null
+                        ]
+                }
+                else {
+                        sendCommand(samsungtv_lr_volume, 6)
+                        sendCommand(samsungtv_lr_sourcename, "COMPONENT")
+                }
+        }
+        else if(receivedCommand.toString.equals("pc")) {
+                if(samsungtv_lr_power_interface.state==OFF) {
+                        sendCommand(samsungtv_lr_power_interface, ON)
+
+                        samsung_volume_timer = createTimer(now.plusSeconds(5)) [|
+                                sendCommand(samsungtv_lr_volume, 0)
+                                samsung_volume_timer = null
+                        ]
+                        samsung_sourceid_timer = createTimer(now.plusSeconds(6)) [|
+                                sendCommand(samsungtv_lr_sourcename, "HDMI2")
+                                samsung_volume_timer = null
+                        ]
+                }
+                else {
+                        sendCommand(samsungtv_lr_volume, 0)
+                        sendCommand(samsungtv_lr_sourcename, "HDMI2")
+                }
+        }
+end

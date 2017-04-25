@@ -1,0 +1,1 @@
+Switch halvr_wol   "HalVR Wol" <switch>  (Status, Network) ["Lighting"]  { autoupdate="false", wol="192.168.1.255#4c:cc:6a:05:96:e7" }

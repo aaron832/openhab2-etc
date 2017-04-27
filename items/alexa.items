@@ -1,6 +1,10 @@
 Switch alexa_media_center_power "Media Center" <switch> (TV) ["NoTag"]
 String alexa_tv_mode "TV Mode [%s]" <heating-0> (TV) ["NoTag"]
 
+Switch alexa_media_center_default_netflix "Media Center Netflix" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch alexa_media_center_default_games "Media Center Games" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch alexa_media_center_default_music "Media Center Music" <switch> (TV) ["NoTag"] { autoupdate="false" }
+
 String ECHO_Processed "ECHO_Processed: [%s]" <string> (Alexa) ["NoTag"]
 String ECHO_VoiceCMD "ECHO_VoiceCMD: [%s]" <string> (Alexa) ["NoTag"]
 String ECHO_Answer "ECHO_Answer: [%s]" <string> (Alexa) ["NoTag"]

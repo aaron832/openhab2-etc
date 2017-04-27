@@ -27,6 +27,10 @@ then
                 }
         }
         else if(receivedCommand.toString.equals("pc")) {
+		if(yamahareceiver_power.state==OFF) {
+                        sendCommand(yamahareceiver_power,ON);
+			sendCommand(yamahareceiver_input,"HDMI1");
+                }
                 if(samsungtv_lr_power_interface.state==OFF) {
                         sendCommand(samsungtv_lr_power_interface, ON)
 

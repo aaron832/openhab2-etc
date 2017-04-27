@@ -1,0 +1,14 @@
+rule "alexa_media_center_default_netflix_rule"
+when
+	Item alexa_media_center_default_netflix received command
+then
+	sendCommand(alexa_tv_mode, "pc");
+	sendCommand(autoit_mc_netflix, ON);
+end
+
+rule "alexa_media_center_default_games_rule"
+when
+        Item alexa_media_center_default_games received command
+then
+        sendCommand(alexa_tv_mode, "wii");
+end

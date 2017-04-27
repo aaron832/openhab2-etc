@@ -1,0 +1,23 @@
+rule "autoit_mc_netflix_rule"
+when
+	Item autoit_mc_netflix received command
+then
+	val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\startnetflix.au3\"", 5000)
+	logInfo("autoit_mc_netflix_rule", results)
+end
+
+rule "autoit_mc_watch_ponyo_rule"
+when
+	Item autoit_mc_watch_ponyo received command
+then
+	val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\emimoteB.au3\" 3", 5000)
+	logInfo("autoit_mc_watch_ponyo_rule", results)
+end
+
+rule "autoit_mc_watch_danieltiger_rule"
+when
+	Item autoit_mc_watch_danieltiger received command
+then
+	val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\emimoteB.au3\" 2", 5000)
+	logInfo("autoit_mc_watch_danieltiger_rule", results)
+end

@@ -22,14 +22,18 @@ end
 
 rule "alexa_media_center_power_update_rule"
 when
-	Item samsungtv_lr_power_interface changed or
+        Item samsungtv_lr_power_interface changed or
         Item yamahareceiver_power changed
 then
-	if(samsungtv_lr_power_interface.state==ON && yamahareceiver_power.state==ON) {
-		postUpdate(alexa_media_center_power, ON);
-	}
-	else {
-		postUpdate(alexa_media_center_power, OFF);
-	}
+        if(samsungtv_lr_power_interface.state==ON && yamahareceiver_power.state==ON) {
+                postUpdate(alexa_media_center_power, 1);
+        }
+        else if(samsungtv_lr_power_interface.state==OFF && yamahareceiver_power.state==OFF) {
+                postUpdate(alexa_media_center_power, 0);
+        }
+        else {
+                 postUpdate(alexa_media_center_power, 2);
+        }
 end
+
 

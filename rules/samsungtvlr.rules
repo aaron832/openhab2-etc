@@ -3,7 +3,9 @@ when
 	Item samsungtv_lr_power_interface received command
 then
 	if(receivedCommand==OFF) {
-		sendCommand(samsungtv_lr_power, OFF)
+		//sendCommand(samsungtv_lr_power, OFF)
+		val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\IR Server Suite\\IRBlast-NoWindow.exe\" \"SamsungTV_Power.IR\"", 5000)
+                logInfo("samsungtv_lr_power_interface_rule", results)
 	}
 	else if(receivedCommand==ON) {
 		val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\IR Server Suite\\IRBlast-NoWindow.exe\" \"SamsungTV_Power.IR\"", 5000)

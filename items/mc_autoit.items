@@ -1,3 +1,5 @@
 Switch autoit_mc_netflix "Media Center Netflix" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch autoit_mc_watch_ponyo "Media Center watch Ponyo" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch autoit_mc_watch_danieltiger "Media Center watch Daniel Tiger" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_mc_start_spotify "Start Spotify Airplay" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_mc_stop_spotify "Stop Spotify Airplay" <switch> (TV) ["NoTag"] { autoupdate="false" }

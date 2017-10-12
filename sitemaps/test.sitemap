@@ -1,7 +1,7 @@
 sitemap test label="Alexa Test"
 {
 	Frame label="Alexa" icon="sofa" {
-		Switch item=alexa_media_center_power
+		Switch item=alexa_media_center_power mappings=[0="OFF",1="ON",2="HALF"]
 		Selection item=alexa_tv_mode mappings=[pc="PC", wii="Wii"]
 		Switch item=alexa_media_center_default_netflix mappings=[ON="Go!"]
 		Switch item=alexa_media_center_default_games mappings=[ON="Go!"]
@@ -16,5 +16,7 @@ sitemap test label="Alexa Test"
 		Switch item=autoit_mc_netflix mappings=[ON="Go!"]
 		Switch item=autoit_mc_watch_ponyo mappings=[ON="Go!"]
 		Switch item=autoit_mc_watch_danieltiger mappings=[ON="Go!"]
+                Switch item=autoit_mc_start_spotify mappings=[ON="Go!"]
+                Switch item=autoit_mc_stop_spotify mappings=[ON="Go!"]
 	}
 }

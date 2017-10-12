@@ -23,6 +23,7 @@ then
                 }
                 else {
                         sendCommand(samsungtv_lr_volume, 6)
+			Thread::sleep(500)
                         sendCommand(samsungtv_lr_sourcename, "COMPONENT")
                 }
         }
@@ -45,6 +46,7 @@ then
                 }
                 else {
                         sendCommand(samsungtv_lr_volume, 0)
+			Thread::sleep(500)
                         sendCommand(samsungtv_lr_sourcename, "HDMI2")
                 }
         }

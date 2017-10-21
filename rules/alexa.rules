@@ -26,13 +26,13 @@ when
         Item yamahareceiver_power changed
 then
         if(samsungtv_lr_power_interface.state==ON && yamahareceiver_power.state==ON) {
-                postUpdate(alexa_media_center_power, 1);
+                postUpdate(alexa_media_center_power, ON);
         }
         else if(samsungtv_lr_power_interface.state==OFF && yamahareceiver_power.state==OFF) {
-                postUpdate(alexa_media_center_power, 0);
+                postUpdate(alexa_media_center_power, OFF);
         }
         else {
-                 postUpdate(alexa_media_center_power, 2);
+                 postUpdate(alexa_media_center_power, ON);
         }
 end
 

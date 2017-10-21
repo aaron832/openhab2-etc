@@ -8,6 +8,9 @@ sitemap default label="Rose House"
 		Slider item=yamahareceiver_volume		
 		Text item=yamahareceiver_volumeDB		
 		Switch item=mediacenter_wol mappings=[ON="Wake!"]
+		Switch item=mediacenter_sleep mappings=[ON="Sleep"]
+		Switch item=autoit_mc_start_spotify mappings=[ON="Go!"]
+                Switch item=autoit_mc_stop_spotify mappings=[ON="Go!"]
 	}	
 	Frame label="Garage" {
 		Switch item=zwave_node3_garagelight_switch	

@@ -21,3 +21,19 @@ then
 	val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\emimoteB.au3\" 2", 5000)
 	logInfo("autoit_mc_watch_danieltiger_rule", results)
 end
+
+rule "autoit_mc_start_spotify_rule"
+when
+        Item autoit_mc_start_spotify received command
+then
+        val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\start_spotify.au3\" 3", 5000)
+        logInfo("autoit_mc_start_spotify_rule", results)
+end
+
+rule "autoit_mc_stop_spotify_rule"
+when
+        Item autoit_mc_stop_spotify received command
+then
+        val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\stop_spotify.au3\" 3", 5000)
+        logInfo("autoit_mc_stop_spotify_rule", results)
+end

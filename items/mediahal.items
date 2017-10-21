@@ -1,1 +1,2 @@
 Switch samsungtv_on "Samsung TV On" <switch_on>
+Switch mediacenter_sleep "Media Center Sleep" <switch> (TV) ["NoTag"] { autoupdate="false" }

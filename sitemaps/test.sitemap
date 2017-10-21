@@ -1,7 +1,7 @@
 sitemap test label="Alexa Test"
 {
 	Frame label="Alexa" icon="sofa" {
-		Switch item=alexa_media_center_power mappings=[0="OFF",1="ON",2="HALF"]
+		Switch item=alexa_media_center_power
 		Selection item=alexa_tv_mode mappings=[pc="PC", wii="Wii"]
 		Switch item=alexa_media_center_default_netflix mappings=[ON="Go!"]
 		Switch item=alexa_media_center_default_games mappings=[ON="Go!"]

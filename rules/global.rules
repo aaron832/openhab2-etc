@@ -1,0 +1,34 @@
+rule "global_lockitdown_rule"
+when
+        Item global_lockitdown received command
+then
+	autoit_mc_kill_vlc.sendCommand(ON)
+	autoit_mc_stop_spotify.sendCommand(ON)
+	
+        if(samsungtv_lr_power_interface.state != OFF) {
+                samsungtv_lr_power_interface.sendCommand(OFF)
+        }
+        if(yamahareceiver_power.state != OFF) {
+                yamahareceiver_power.sendCommand(OFF)
+        }
+
+	if(bayDoorGarage01.state != 0) {
+		relayGarage01.sendCommand(ON)
+	}
+	if(doorGarage01.state != 0) {
+		logInfo("rule", "Garage back door is open!")
+	}
+
+	if(zwave_node2_uphallway_dimmer.state != 0) {
+		zwave_node2_uphallway_dimmer.sendCommand(0)
+	}
+	if(zwave_node3_garagelight_switch.state != OFF) {
+		zwave_node3_garagelight_switch.sendCommand(OFF)
+	}
+	
+	//This thing isnt working... enable when it is
+	//if(meidacenter_status != OFF) {
+		mediacenter_sleep.sendCommand(ON)
+	//}
+end
+

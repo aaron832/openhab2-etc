@@ -1,0 +1,1 @@
+Switch global_lockitdown "Lock It Down" <switch> (TV) ["NoTag"] { autoupdate="false" }

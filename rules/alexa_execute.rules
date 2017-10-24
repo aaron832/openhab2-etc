@@ -1,0 +1,6 @@
+rule "alexa_media_center_execute_lockitdown_rule"
+when
+        Item alexa_media_center_execute_lockitdown received command
+then
+        global_lockitdown.sendCommand(receivedCommand);
+end

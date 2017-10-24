@@ -12,3 +12,59 @@ when
 then
         sendCommand(alexa_tv_mode, "wii");
 end
+
+rule "alexa_media_center_watch_ponyo_rule"
+when
+        Item alexa_media_center_watch_ponyo received command
+then
+        autoit_mc_watch_ponyo.sendCommand(receivedCommand);
+	logInfo("rules", "foward to autoit_mc_watch_ponyo");
+end
+
+rule "alexa_media_center_watch_kidsmovie_rule"
+when
+        Item alexa_media_center_watch_kidsmovie received command
+then
+        autoit_mc_watch_kidsmovie.sendCommand(receivedCommand);
+	logInfo("rules","foward to autoit_mc_watch_kidsmovie");
+end
+
+rule "alexa_media_center_default_music_rule"
+when
+        Item alexa_media_center_default_music received command
+then
+        autoit_mc_start_spotify.sendCommand(receivedCommand);
+	logInfo("rules","foward to autoit_mc_start_spotify");
+end
+
+rule "alexa_media_center_listen_airplay_rule"
+when
+        Item alexa_media_center_listen_airplay received command
+then
+        autoit_mc_start_airplay.sendCommand(receivedCommand);
+	logInfo("rules","foward to autoit_mc_start_airplay"); 
+end
+
+rule "alexa_media_center_stop_music_rule"
+when
+	Item alexa_media_center_stop_music received command
+then
+	autoit_mc_stop_spotify.sendCommand(receivedCommand);
+	logInfo("rules","forard to autoit_mc_stop_spotify");
+end
+
+rule "alexa_media_center_stop_airplay_rule"
+when
+	Item alexa_media_center_stop_airplay received command
+then
+	autoit_mc_stop_spotify.sendCommand(receivedCommand);
+	logInfo("rules","forard to autoit_mc_stop_spotify");
+end
+
+rule "alexa_media_center_stop_vlc_rule"
+when
+        Item alexa_media_center_stop_vlc received command
+then
+	autoit_mc_kill_vlc.sendCommand(receivedCommand);
+	logInfo("rules","forward to autoit_mc_kill_vlc");
+end

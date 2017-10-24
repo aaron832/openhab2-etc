@@ -1,23 +1,27 @@
-
+var Timer timer = null
 rule "alexa_media_center_power_rule"
 when
         Item alexa_media_center_power received command
 then
-	if(samsungtv_lr_power_interface.state != receivedCommand) {
-		sendCommand(samsungtv_lr_power_interface, receivedCommand)
+	if(receivedCommand == ON && meidacenter_status.state == OFF && (timer == null || timer.has terminated)) {
+		mediacenter_wol.sendCommand(ON)
+		logInfo("rule", "delay timer for alexa_media_center_power started")
+		timer = createTimer(now.plusSeconds(6)) [|
+			logInfo("rule", "delay timer for alexa_media_center_power running")
+			if(samsungtv_lr_power_interface.state != ON) {
+				samsungtv_lr_power_interface.sendCommand(ON)
+			}
+		]	
 	}
+	else {
+		if(samsungtv_lr_power_interface.state != receivedCommand) {
+			sendCommand(samsungtv_lr_power_interface, receivedCommand)
+		}
+	}
+
 	if(yamahareceiver_power.state != receivedCommand) {
 		sendCommand(yamahareceiver_power, receivedCommand)
 	}
-
-        //if(receivedCommand==OFF) {
-        //        sendCommand(samsungtv_lr_power_interface, OFF)
-	//	sendCommand(yamahareceiver_power, OFF)
-        //}
-        //else if(receivedCommand==ON) {
-        //        sendCommand(samsungtv_lr_power_interface, ON)
-	//	sendCommand(yamahareceiver_power, ON)
-        //}
 end
 
 rule "alexa_media_center_power_update_rule"
@@ -35,5 +39,4 @@ then
                  postUpdate(alexa_media_center_power, ON);
         }
 end
-
 

@@ -14,12 +14,37 @@ then
 	logInfo("autoit_mc_watch_ponyo_rule", results)
 end
 
+rule "autoit_mc_watch_kidsmovie_rule"
+when
+        Item autoit_mc_watch_kidsmovie received command
+then
+        val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\emimoteB.au3\" 1", 5000)
+        logInfo("autoit_mc_watch_kidsmovie_rule", results)
+end
+
 rule "autoit_mc_watch_danieltiger_rule"
 when
 	Item autoit_mc_watch_danieltiger received command
 then
 	val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\emimoteB.au3\" 2", 5000)
 	logInfo("autoit_mc_watch_danieltiger_rule", results)
+end
+
+rule "autoit_mc_kill_vlc_rule"
+when
+        Item autoit_mc_kill_vlc received command
+then
+        val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\emimoteB.au3\" 99", 5000)
+        logInfo("autoit_mc_kill_vlc_rule", results)
+end
+
+
+rule "autoit_mc_start_airplay_rule"
+when
+        Item autoit_mc_start_airplay received command
+then
+        val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\start_airplay.au3\" 3", 5000)
+        logInfo("autoit_mc_start_airplay_rule", results)
 end
 
 rule "autoit_mc_start_spotify_rule"

@@ -1,2 +1,9 @@
-Switch halvr_wol   "HalVR Wol" <switch>  (Status, Network) ["Lighting"]  { autoupdate="false", wol="192.168.1.255#4c:cc:6a:05:96:e7" }
+Switch halvr_wol   "HalVR Wol" <switch>  (Status, Network) ["NoTag"]  { autoupdate="false", wol="192.168.1.255#4c:cc:6a:05:96:e7" }
+Switch halvr_sleep "HalVR Sleep" <switch> (TV) ["NoTag"]
+Switch halvr_status "HalVR Ping Status" { channel="network:device:halvr2016_ping_thing:online" }
+Switch halvr_sleep_control "HALVR" <switch> (TV) ["NoTag"] { autoupdate="false" }
+
 Switch mediacenter_wol   "Media Center Wol" <switch>  (Status, Network) ["Lighting"]  { autoupdate="false", wol="192.168.1.255#e0:3f:49:18:c0:fa" }
+Switch mediacenter_sleep "Media Center Sleep" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch meidacenter_status "MC Ping Status" { channel="network:device:mediahal_ping_thing:online" }
+Switch mediacenter_sleep_control "Media Center" <switch> (TV) ["NoTag"] { autoupdate="false" }

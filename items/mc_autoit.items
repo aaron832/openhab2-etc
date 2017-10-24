@@ -1,5 +1,8 @@
 Switch autoit_mc_netflix "Media Center Netflix" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch autoit_mc_watch_ponyo "Media Center watch Ponyo" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_mc_watch_kidsmovie "MC Kids Movie" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_mc_kill_vlc "MC Kill VLC" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch autoit_mc_watch_danieltiger "Media Center watch Daniel Tiger" <switch> (TV) ["NoTag"] { autoupdate="false" }
-Switch autoit_mc_start_spotify "Start Spotify Airplay" <switch> (TV) ["NoTag"] { autoupdate="false" }
-Switch autoit_mc_stop_spotify "Stop Spotify Airplay" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_mc_start_spotify "Start Spotify" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_mc_stop_spotify "Stop Music" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_mc_start_airplay "Start Airplay" <switch> (TV) ["NoTag"] { autoupdate="false" }

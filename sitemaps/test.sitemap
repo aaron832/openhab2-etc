@@ -1,11 +1,21 @@
 sitemap test label="Alexa Test"
 {
+	Frame label="General Status" icon="sofa" {
+		Switch item=meidacenter_status
+		Switch item=halvr_status
+	}
 	Frame label="Alexa" icon="sofa" {
 		Switch item=alexa_media_center_power
 		Selection item=alexa_tv_mode mappings=[pc="PC", wii="Wii"]
 		Switch item=alexa_media_center_default_netflix mappings=[ON="Go!"]
 		Switch item=alexa_media_center_default_games mappings=[ON="Go!"]
 		Switch item=alexa_media_center_default_music mappings=[ON="Go!"]
+		Switch item=alexa_media_center_listen_airplay mappings=[ON="Go!"]
+		Switch item=alexa_media_center_stop_music mappings=[ON="Go!"]
+		Switch item=alexa_media_center_stop_airplay mappings=[ON="Go!"]
+		Switch item=alexa_media_center_watch_ponyo mappings=[ON="Go!"]
+		Switch item=alexa_media_center_watch_kidsmovie mappings=[ON="Go!"]
+		Switch item=alexa_media_center_stop_vlc mappings=[ON="Go!"]
 	}
 	Frame label="Alexa Status" icon="sofa" {
 		Text item=ECHO_Processed
@@ -16,6 +26,8 @@ sitemap test label="Alexa Test"
 		Switch item=autoit_mc_netflix mappings=[ON="Go!"]
 		Switch item=autoit_mc_watch_ponyo mappings=[ON="Go!"]
 		Switch item=autoit_mc_watch_danieltiger mappings=[ON="Go!"]
+		Switch item=autoit_mc_kill_vlc mappings=[ON="Go!"]
+		Switch item=autoit_mc_start_airplay mappings=[ON="Go!"]
                 Switch item=autoit_mc_start_spotify mappings=[ON="Go!"]
                 Switch item=autoit_mc_stop_spotify mappings=[ON="Go!"]
 	}

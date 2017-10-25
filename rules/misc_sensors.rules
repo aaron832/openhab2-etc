@@ -1,0 +1,10 @@
+rule "nodeReqLove01_rule"
+when
+	Item nodeReqLove01 received command
+then
+	if(global_love_switch.state == ON) {
+		logInfo("rules","forward to nodeReqLove01")
+		relayLove01.sendCommand(receivedCommand)
+		global_love_switch.postUpdate(OFF)
+	}
+end

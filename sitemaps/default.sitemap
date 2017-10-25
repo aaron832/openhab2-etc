@@ -37,5 +37,8 @@ sitemap default label="Rose House"
 		Setpoint item=nest_room_target_temperature_low_f label="Minimum Temperature [%.1f °F]" minValue=50 maxValue=80 step=1 visibility=[nest_room_hvac_mode=="heat-cool"]		
 		Setpoint item=nest_room_target_temperature_high_f label="Maximum Temperature [%.1f °F]" minValue=50 maxValue=80 step=1 visibility=[nest_room_hvac_mode=="heat-cool"]		
 		Text item=nest_room_last_connection		
-	}	
+	}
+	Frame label="Misc" icon="house" {
+		Switch item=global_love_switch
+	}
 }

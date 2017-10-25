@@ -31,4 +31,7 @@ sitemap test label="Alexa Test"
                 Switch item=autoit_mc_start_spotify mappings=[ON="Go!"]
                 Switch item=autoit_mc_stop_spotify mappings=[ON="Go!"]
 	}
+	Frame label="MySensor Test" icon="sofa" {
+		Switch item=global_love_switch
+	}
 }

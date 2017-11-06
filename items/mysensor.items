@@ -10,3 +10,5 @@ String  sensorGarageStatus "Garage Sensor Status [%s]" <zoom> (status) { mqtt="<
 //Switch  relayLove01   "Love"   <garagedoor>    (All)           { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/10/0/1/0/2:command:ON:1]" }
 Switch  relayLove01   "Love Relay"   <garagedoor>    (All)           { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/10/0/1/0/2:command:ON:1]" }
 Switch nodeReqLove01 "NREQ Love" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/10/0/2/0/2:command:ON]" }
+Number relayLoveSleep   "Love Sleep"   <garagedoor>    (All)           { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/10/1/1/0/24:command:*:${command}]" }
+Switch nodeReqLoveSleep "NREQ Love Sleep" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/10/1/2/0/24:command:ON]" }

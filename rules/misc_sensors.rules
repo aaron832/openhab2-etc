@@ -8,3 +8,11 @@ then
 		global_love_switch.postUpdate(OFF)
 	}
 end
+
+rule "nodeReqLoveSleep_rule"
+when
+	Item nodeReqLoveSleep received command
+then
+	logInfo("rules","forward to relayLoveSleep")
+	relayLoveSleep.sendCommand(new DecimalType(900000))
+end

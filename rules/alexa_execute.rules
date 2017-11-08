@@ -2,5 +2,23 @@ rule "alexa_media_center_execute_lockitdown_rule"
 when
         Item alexa_media_center_execute_lockitdown received command
 then
+	val myString = ""
+	if(bayDoorGarage01.state != 0) {
+		myString += "Bay door open. "
+        }
+        if(doorGarage01.state != 0) {
+		myString += "Garage door open. "
+        }
+	if(zwave_node3_garagelight_switch.state != OFF) {
+                myString += "Garage light on. "
+        }
+	if(halvr_status.state != OFF {
+		myString += "Hal VR is on. "
+	}
+
+	if(myString == "") {
+		myString = "All clear."
+	}
+	postUpdate(alexaresp, myString)
         global_lockitdown.sendCommand(receivedCommand);
 end

@@ -40,3 +40,11 @@ then
         }
 end
 
+rule "alexa_execute_test_rule"
+when
+	Item alexa_execute_test received command
+then
+	val myString = "salt,"
+	myString += "pepper"
+	postUpdate(alexaresp, myString)
+end

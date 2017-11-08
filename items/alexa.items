@@ -11,6 +11,8 @@ Switch alexa_media_center_watch_kidsmovie "MC Watch KidsMovie" <switch> (TV) ["N
 Switch alexa_media_center_stop_music "MC Stop Music"  <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch alexa_media_center_stop_airplay "MC Stop Airplay" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch alexa_media_center_stop_vlc "MC Stop VLC" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch alexa_execute_test "Alexa Execute Test" <switch> (TV) ["NoTag"] { autoupdate="false" }
+String alexaresp "Alexa Execute Test Resp: [%s]" <string> (Alexa) ["NoTag"]
 
 String ECHO_Processed "ECHO_Processed: [%s]" <string> (Alexa) ["NoTag"]
 String ECHO_VoiceCMD "ECHO_VoiceCMD: [%s]" <string> (Alexa) ["NoTag"]

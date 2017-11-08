@@ -1,5 +1,5 @@
 Switch halvr_wol   "HalVR Wol" <switch>  (Status, Network) ["NoTag"]  { autoupdate="false", wol="192.168.1.255#4c:cc:6a:05:96:e7" }
-Switch halvr_sleep "HalVR Sleep" <switch> (TV) ["NoTag"]
+Switch halvr_sleep "HalVR Sleep" <switch> (TV) ["NoTag"] { autoupdate="false", wol="halvr2016#e7:96:05:6a:cc:4c" }
 Switch halvr_status "HalVR Ping Status" { channel="network:device:halvr2016_ping_thing:online" }
 Switch halvr_sleep_control "HALVR" <switch> (TV) ["NoTag"] { autoupdate="false" }
 

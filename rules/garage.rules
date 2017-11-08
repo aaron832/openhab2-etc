@@ -1,9 +1,25 @@
 var Timer timer
 var Number raceCheck = 0
 
+rule "sensorGarageLastCom_rule"
+when
+        Item bayDoorGarage01 received update
+or
+        Item doorGarage01 received update
+or
+        Item tempGarage01 received update
+or
+        Item humGarage01 received update
+then
+        sensorGarageLastCom.postUpdate( new DateTimeType() )
+end
+
+
 rule "autoGarageLightOnBayDoor"
 when
-        Item bayDoorGarage01 changed from 0 to 1
+        Item bayDoorGarage01 changed from 0 to 1 
+or
+	Item zwave_device_node4_sensor_binary changed from OFF to ON
 then
         raceCheck = 1
         if(timer!=null){

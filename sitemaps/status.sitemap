@@ -1,0 +1,9 @@
+sitemap test label="Devices Status"
+{
+	Frame label="Sensors Status" icon="sofa" {
+		Text item=sensorGarageLastCom
+	}
+	Frame label="Other Status" icon="sofa" {
+		Text item=nest_room_last_connection
+	}
+}

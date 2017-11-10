@@ -13,3 +13,4 @@ Switch  relayLove01   "Love Relay"   <garagedoor>    (All)           { autoupdat
 Switch nodeReqLove01 "NREQ Love" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/10/0/2/0/2:command:ON]" }
 Number relayLoveSleep   "Love Sleep"   <garagedoor>    (All)           { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/10/1/1/0/24:command:*:${command}]" }
 Switch nodeReqLoveSleep "NREQ Love Sleep" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/10/1/2/0/24:command:ON]" }
+DateTime sensorLoveLastCom "Love Box Last Com [%1$tm/%1$td/%1$ty %1$tH:%1$tM]" <calendar> (status) ["NoTag"]

@@ -1,4 +1,12 @@
-rule "nodeReqLove01_rule"
+rule "nodeReqlcddisplaytime_rule"
+when
+        Item nodeReqlcddisplaytime received command
+then
+		logInfo("rules","forward to nodeSndlcddisplaytime")
+        //nodeSndlcddisplaytime.sendCommand( new DecimalType(now.millis/1000) )
+        nodeSndlcddisplaytime.sendCommand( new DecimalType(now.minusHours(8).millis/1000) )
+        //nodeSndlcddisplaytime.sendCommand( new DecimalType(((new DateTimeType()) as DateTimeType).calendar.timeInMillis / 1000) )
+end
 
 rule "sensorLoveLastCom_rule"
 when
@@ -9,6 +17,7 @@ then
         sensorLoveLastCom.postUpdate( new DateTimeType() )
 end
 
+rule "nodeReqLove01_rule"
 when
 	Item nodeReqLove01 received command
 then
@@ -24,5 +33,16 @@ when
 	Item nodeReqLoveSleep received command
 then
 	logInfo("rules","forward to relayLoveSleep")
-	relayLoveSleep.sendCommand(new DecimalType(300000))
+	//relayLoveSleep.sendCommand(new DecimalType(300000))
+	relayLoveSleep.sendCommand(new DecimalType(60000))
+end
+
+rule "nodeReqlcddisplay01_rule"
+when
+	Item nodeReqlcddisplay00 received command or
+	Item nodeReqlcddisplay01 received command
+then
+	logInfo("rules","forward to relayLoveSleep")
+	nodeSndlcddisplay00.sendCommand("|   Hello Emi  |")
+	nodeSndlcddisplay01.sendCommand("|  I LOVE YOU  |")
 end

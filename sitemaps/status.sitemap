@@ -1,4 +1,4 @@
-sitemap test label="Devices Status"
+sitemap status label="Devices Status"
 {
 	Frame label="Sensors Status" icon="sofa" {
 		Text item=sensorGarageLastCom

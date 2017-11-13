@@ -10,6 +10,7 @@
 rule "emiremote_ponyo_rule"
 when
 	Item emiremote_ponyo received command
+then
 	val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\emimoteB.au3\" 3", 5000)
 	logInfo("emiremote_ponyo_rule", results)
 end
@@ -17,6 +18,7 @@ end
 rule "mediacenter_sleep_rule"
 when
 	Item mediacenter_sleep received command
+then
 	val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\sleep.au3\" 3", 5000)
 	logInfo("mediacenter_sleep_rule", results)
 end

@@ -26,9 +26,7 @@ then
 		zwave_node3_garagelight_switch.sendCommand(OFF)
 	}
 	
-	//This thing isnt working... enable when it is
-	//if(meidacenter_status != OFF) {
-		mediacenter_sleep.sendCommand(ON)
-	//}
+	mediacenter_sleep.sendCommand(ON)
+	halvr_sleep.sendcommand(ON)
 end
 

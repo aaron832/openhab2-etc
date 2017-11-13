@@ -3,7 +3,7 @@ rule "alexa_media_center_power_rule"
 when
         Item alexa_media_center_power received command
 then
-	if(receivedCommand == ON && meidacenter_status.state == OFF && (timer == null || timer.has terminated)) {
+	if ( (receivedCommand == ON) && (meidacenter_status.state == OFF) && (timer == null || timer.hasTerminated) ) {
 		mediacenter_wol.sendCommand(ON)
 		logInfo("rule", "delay timer for alexa_media_center_power started")
 		timer = createTimer(now.plusSeconds(6)) [|
@@ -44,7 +44,7 @@ rule "alexa_execute_test_rule"
 when
 	Item alexa_execute_test received command
 then
-	val myString = "salt,"
+	var myString = "salt,"
 	myString += "pepper"
 	postUpdate(alexaresp, myString)
 end

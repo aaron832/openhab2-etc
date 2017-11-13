@@ -17,9 +17,9 @@ end
 
 rule "autoGarageLightOnBayDoor"
 when
-        Item bayDoorGarage01 changed from 0 to 1 
+        Item bayDoorGarage01 changed to 1 
 or
-	Item zwave_device_node4_sensor_binary changed from OFF to ON
+	Item zwave_device_node4_sensor_binary changed to ON
 then
         raceCheck = 1
         if(timer!=null){
@@ -35,12 +35,14 @@ then
         raceCheck = 0
 end
 
+rule "zwave_node3_garagelight_switch_rule"
 when
         Item zwave_node3_garagelight_switch changed
 then
         logInfo("garage", "Light state: " + zwave_node3_garagelight_switch.state)
-        if(timer!=null and raceCheck == 0){
+        if(timer!=null) and (raceCheck == 0){
                 timer.cancel
                 timer = null
         }
 end
+

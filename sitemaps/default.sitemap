@@ -6,7 +6,7 @@ sitemap default label="Rose House"
 		Selection item=samsungtv_lr_sourcename mappings=[HDMI2="PC", COMPONENT="Wii"] valuecolor=[68="green", 61="blue"]
 		Switch item=yamahareceiver_power		
 		Slider item=yamahareceiver_volume		
-		Text item=yamahareceiver_volumeDB
+		Slider item=yamahareceiver_volumeDB
 		Switch item=mediacenter_sleep_control		
 		Switch item=autoit_mc_start_airplay mappings=[ON="Go!"]
 		Switch item=autoit_mc_start_spotify mappings=[ON="Go!"]

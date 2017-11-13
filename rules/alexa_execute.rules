@@ -2,7 +2,7 @@ rule "alexa_media_center_execute_lockitdown_rule"
 when
         Item alexa_media_center_execute_lockitdown received command
 then
-	var myString = NULL
+	var myString = " "
 	if(bayDoorGarage01.state != 0) {
 		myString += "Bay door open. "
         }
@@ -16,9 +16,9 @@ then
 		myString += "Hal VR is on. "
 	}
 
-	if(myString == NULL) {
+	if(myString == " ") {
 		myString = "All clear."
 	}
 	postUpdate(alexaresp, myString)
-        global_lockitdown.sendCommand(receivedCommand);
+        global_lockitdown.sendCommand(ON);//receivedCommand);
 end

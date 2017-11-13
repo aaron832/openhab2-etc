@@ -27,6 +27,6 @@ then
 	}
 	
 	mediacenter_sleep.sendCommand(ON)
-	halvr_sleep.sendcommand(ON)
+	halvr_sleep.sendCommand(ON)
 end
 

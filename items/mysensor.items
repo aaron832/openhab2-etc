@@ -15,11 +15,11 @@ Number relayLoveSleep   "Love Sleep"   <garagedoor>    (All)           { autoupd
 Switch nodeReqLoveSleep "NREQ Love Sleep" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/10/1/2/0/24:command:ON]" }
 DateTime sensorLoveLastCom "Love Box Last Com [%1$tm/%1$td/%1$ty %1$tH:%1$tM]" <calendar> (status) ["NoTag"]
 
-Switch nodeReqlcddisplay00 "NREQ LCD1" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/11/0/2/0/47:command:ON]" }
-String nodeSndlcddisplay00 "NSND LCD1" <garagedoor>    (All)    { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/11/0/1/0/47:command:*:${command}]" }
-Switch nodeReqlcddisplay01 "NREQ LCD1" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/11/1/2/0/47:command:ON]" }
-String nodeSndlcddisplay01 "NSND LCD1" <garagedoor>    (All)    { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/11/1/1/0/47:command:*:${command}]" }
-
 //mygateway1-out/11/255/3/0/1
 Switch nodeReqlcddisplaytime "NREQ LCDTime" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/11/255/3/0/1:command:ON]" }
 Number nodeSndlcddisplaytime "NSND LCDTime" <garagedoor>    (All)    { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/11/255/3/0/1:command:*:${command}]" }
+
+Switch nodeReqlcdtop "NREQ LCDTop" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/11/0/2/0/47:command:ON]" }
+Switch nodeReqlcdbottom "NREQ LCDBottom" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/11/1/2/0/47:command:ON]" }
+String nodeSndlcdtop "NSND LCDTop [%s]" <switch> (All) ["NoTag"] { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/11/0/1/0/47:command:*:${command}]" }
+String nodeSndlcdbottom "NSND LCDBottom [%s]" <switch> (All) ["NoTag"] { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/11/1/1/0/47:command:*:${command}]" }

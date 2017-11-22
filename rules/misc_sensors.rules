@@ -37,12 +37,18 @@ then
 	relayLoveSleep.sendCommand(new DecimalType(60000))
 end
 
-rule "nodeReqlcddisplay01_rule"
+rule "nodeReqlcdtop_rule"
 when
-	Item nodeReqlcddisplay00 received command or
-	Item nodeReqlcddisplay01 received command
+	Item nodeReqlcdtop received command
 then
-	logInfo("rules","forward to relayLoveSleep")
-	nodeSndlcddisplay00.sendCommand("|   Hello Emi  |")
-	nodeSndlcddisplay01.sendCommand("|  I LOVE YOU  |")
+	logInfo("rules","forward to nodeSndlcdtop and nodeSndlcdbottom")
+
+	if(nodeSndlcdtop.state == NULL) {
+		nodeSndlcdtop.postUpdate(new StringType("OpenHab"))
+	}
+	if(nodeSndlcdbottom.state == NULL) {
+		nodeSndlcdbottom.postUpdate(new StringType("OpenHab Connect"))
+	}
+	nodeSndlcdtop.sendCommand(nodeSndlcdtop.state.toString)
+	nodeSndlcdbottom.sendCommand(nodeSndlcdbottom.state.toString)
 end

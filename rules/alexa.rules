@@ -3,6 +3,9 @@ rule "alexa_media_center_power_rule"
 when
         Item alexa_media_center_power received command
 then
+	if (receivedCommand == OFF) {
+		autoit_mc_closeall.sendCommand(ON)
+	}
 	if ( (receivedCommand == ON) && (meidacenter_status.state == OFF) && (timer == null || timer.hasTerminated) ) {
 		mediacenter_wol.sendCommand(ON)
 		logInfo("rule", "delay timer for alexa_media_center_power started")
@@ -47,4 +50,12 @@ then
 	var myString = "salt,"
 	myString += "pepper"
 	postUpdate(alexaresp, myString)
+end
+
+rule "alexa_netflixprof_rule"
+when
+	Item alexa_netflixprof received command
+then
+	logInfo("rules","foward to autoit_mc_netflixprof")
+	autoit_mc_netflixprof.sendCommand(receivedCommand)
 end

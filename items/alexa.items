@@ -1,5 +1,6 @@
 Switch alexa_media_center_power "Media Center" <switch> (TV) ["NoTag"]
 String alexa_tv_mode "TV Mode [%s]" <heating-0> (TV) ["NoTag"]
+String alexa_netflixprof "Netflix Profile: [%s]" <string> (TV) ["NoTag"]
 
 Switch alexa_media_center_default_netflix "Media Center Netflix" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch alexa_media_center_default_games "Media Center Games" <switch> (TV) ["NoTag"] { autoupdate="false" }
@@ -11,8 +12,15 @@ Switch alexa_media_center_watch_kidsmovie "MC Watch KidsMovie" <switch> (TV) ["N
 Switch alexa_media_center_stop_music "MC Stop Music"  <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch alexa_media_center_stop_airplay "MC Stop Airplay" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch alexa_media_center_stop_vlc "MC Stop VLC" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch alexa_media_center_stop_netflix "MC Stop Netflix" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch alexa_media_center_stop_everything "MC Stop Everything" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch alexa_execute_test "Alexa Execute Test" <switch> (TV) ["NoTag"] { autoupdate="false" }
-String alexaresp "Alexa Execute Test Resp: [%s]" <string> (Alexa) ["NoTag"]
+Switch alexa_playsearchkodi_test "Alexa Play Search Kodi Test" <switch> (TV) ["NoTag"] { autoupdate="false" }
+String alexa_playsearchkodi "Play Search Kodi: [%s]" <string> (TV) ["NoTag"]
+Switch alexa_playsearchnetflix_test "Alexa Play Search Netflix Test" <switch> (TV) ["NoTag"] { autoupdate="false" }
+String alexa_playsearchnetflix "Play Search Netflix: [%s]" <string> (TV) ["NoTag"]
+
+String alexaresp "Alexa Execute Resp: [%s]" <string> (Alexa) ["NoTag"]
 
 String ECHO_Processed "ECHO_Processed: [%s]" <string> (Alexa) ["NoTag"]
 String ECHO_VoiceCMD "ECHO_VoiceCMD: [%s]" <string> (Alexa) ["NoTag"]

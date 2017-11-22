@@ -5,4 +5,8 @@ Switch autoit_mc_kill_vlc "MC Kill VLC" <switch> (TV) ["NoTag"] { autoupdate="fa
 Switch autoit_mc_watch_danieltiger "Media Center watch Daniel Tiger" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch autoit_mc_start_spotify "Start Spotify" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch autoit_mc_stop_spotify "Stop Music" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_mc_stop_netflix "Stop Netflix" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch autoit_mc_start_airplay "Start Airplay" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_mc_killkodi "Kill Kodi" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_mc_closeall "Close All" <switch> (TV) ["NoTag"] { autoupdate="false" }
+String autoit_mc_netflixprof "Netflix Profile: [%s]" <string> (TV) ["NoTag"]

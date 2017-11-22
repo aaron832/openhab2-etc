@@ -1,5 +1,8 @@
 sitemap test label="Alexa Test"
 {
+	Frame label="zwave test" {
+		Switch item=zwave_device_node4_sensor_binary
+	}
 	Frame label="General Status" icon="sofa" {
 		Switch item=meidacenter_status
 		Switch item=halvr_status
@@ -17,6 +20,10 @@ sitemap test label="Alexa Test"
 		Switch item=alexa_media_center_watch_kidsmovie mappings=[ON="Go!"]
 		Switch item=alexa_media_center_stop_vlc mappings=[ON="Go!"]
 		Switch item=alexa_media_center_execute_lockitdown mappings=[ON="Go!"]
+		Switch item=alexa_playsearchkodi_test mappings=[ON="Go!"]
+		Switch item=autoit_mc_killkodi mappings=[ON="Go!"]
+		Switch item=alexa_playsearchnetflix_test mappings=[ON="Go!"]
+		Selection item=alexa_netflixprof label="Netflix Profile" mappings=["Aaron"="Aaron", "Brenna"="Brenna", "Emi"="Emi"]
 		Text item=alexaresp
 	}
 	Frame label="Alexa Status" icon="sofa" {

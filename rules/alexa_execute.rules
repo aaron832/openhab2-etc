@@ -1,24 +1,27 @@
 rule "alexa_media_center_execute_lockitdown_rule"
 when
-        Item alexa_media_center_execute_lockitdown received command
+	Item alexa_media_center_execute_lockitdown received command
 then
 	var myString = " "
 	if(bayDoorGarage01.state != 0) {
-		myString += "Bay door open. "
-        }
-        if(doorGarage01.state != 0) {
-		myString += "Garage door open. "
-        }
+		myString += "Closing garage bay door."
+	}
+	if(doorGarage01.state != 0) {
+		myString += "Garage back door is open.  Please close it."
+	}
 	if(zwave_node3_garagelight_switch.state != OFF) {
-                myString += "Garage light on. "
-        }
+		myString += "Turning off garage light. "
+	}
+	if(zwav_node5_laundryroomlight_switch.state != OFF) {
+		myString += "Turning off laundry room light. "
+	}
 	if(halvr_status.state != OFF) {
-		myString += "Hal VR is on. "
+		myString += "Putting Hal V.R. to sleep. "
 	}
 
 	if(myString == " ") {
 		myString = "All clear."
 	}
 	postUpdate(alexaresp, myString)
-        global_lockitdown.sendCommand(ON);//receivedCommand);
+	global_lockitdown.sendCommand(ON);//receivedCommand);
 end

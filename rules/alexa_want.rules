@@ -68,3 +68,19 @@ then
 	autoit_mc_kill_vlc.sendCommand(receivedCommand);
 	logInfo("rules","forward to autoit_mc_kill_vlc");
 end
+
+rule "alexa_media_center_stop_netflix_rule"
+when
+        Item alexa_media_center_stop_netflix received command
+then
+	autoit_mc_stop_netflix.sendCommand(receivedCommand);
+	logInfo("rules","forward to autoit_mc_stop_netflix");
+end
+
+rule "alexa_media_center_stop_everything_rule"
+when
+        Item alexa_media_center_stop_everything received command
+then
+	autoit_mc_closeall.sendCommand(receivedCommand);
+	logInfo("rules","forward to autoit_mc_closeall");
+end

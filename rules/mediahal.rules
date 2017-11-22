@@ -19,7 +19,21 @@ rule "mediacenter_sleep_rule"
 when
 	Item mediacenter_sleep received command
 then
-	val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\sleep.au3\" 3", 5000)
-	logInfo("mediacenter_sleep_rule", results)
+	val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\sleep.au3\" 3", 5000)	logInfo("mediacenter_sleep_rule", results)
 end
 
+rule "alexa_playsearchkodi_test_rule"
+when
+	Item alexa_playsearchkodi_test received command
+then
+	logInfo("rule", "forward to alexa_playsearchkodi")
+	alexa_playsearchkodi.sendCommand("Baby Driver")
+end
+
+rule "alexa_playsearchnetflix_test_rule"
+when
+	Item alexa_playsearchnetflix_test received command
+then
+	logInfo("rule", "forward to alexa_playsearchkodi")
+	alexa_playsearchnetflix.sendCommand("Stranger Things")
+end

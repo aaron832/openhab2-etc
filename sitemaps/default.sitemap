@@ -11,7 +11,10 @@ sitemap default label="Rose House"
 		Switch item=autoit_mc_start_airplay mappings=[ON="Go!"]
 		Switch item=autoit_mc_start_spotify mappings=[ON="Go!"]
                 Switch item=autoit_mc_stop_spotify mappings=[ON="Go!"]
-	}	
+	}
+	Frame label="Downstairs" {
+		Switch item=zwav_node5_laundryroomlight_switch
+	}
 	Frame label="Garage" {
 		Switch item=zwave_node3_garagelight_switch	
 		Text item=sensorGarage		

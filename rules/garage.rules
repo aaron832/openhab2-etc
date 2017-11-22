@@ -1,4 +1,5 @@
-var Timer timer
+var Timer timerGL = null
+var Timer timerLL = null
 var Number raceCheck = 0
 
 rule "sensorGarageLastCom_rule"
@@ -22,16 +23,37 @@ or
 	Item zwave_device_node4_sensor_binary changed to ON
 then
         raceCheck = 1
-        if(timer!=null){
-                timer.cancel
-                timer = null
+
+        if(timerGL != null && !timerGL.isRunning() && !timerGL.hasTerminated() && zwave_node3_garagelight_switch.state == ON) {
+                logInfo("garage", "Garage light reschedule")
+                timerGL.reschedule(now.plusMinutes(2))
+        }
+        else if(zwave_node3_garagelight_switch.state == OFF) {
+                if(timerGL != null){
+                        timerGL.cancel
+                        timerGL = null
+                }
+                timerGL = createTimer(now.plusMinutes(2)) [|
+                        zwave_node3_garagelight_switch.sendCommand(OFF)
+                ]
+                zwave_node3_garagelight_switch.sendCommand(ON)
         }
 
-        sendCommand(zwave_node3_garagelight_switch, ON)
-
-        timer = createTimer(now.plusMinutes(5)) [|
-                sendCommand(zwave_node3_garagelight_switch, OFF)
-        ]
+        if(timerLL != null && !timerLL.isRunning() && !timerLL.hasTerminated() && zwave_node3_garagelight_switch.state == ON) {
+                logInfo("laundry room", "Laundry room light reschedule")
+                timerLL.reschedule(now.plusMinutes(2))
+        }
+        if(zwav_node5_laundryroomlight_switch.state == OFF) {
+                if(timerLL != null){
+                        timerLL.cancel
+                        timerLL = null
+                }
+                timerLL = createTimer(now.plusMinutes(2)) [|
+                        zwav_node5_laundryroomlight_switch.sendCommand(OFF)
+                ]
+                zwav_node5_laundryroomlight_switch.sendCommand(ON)
+        }
+        Thread::sleep(2000)
         raceCheck = 0
 end
 
@@ -39,10 +61,25 @@ rule "zwave_node3_garagelight_switch_rule"
 when
         Item zwave_node3_garagelight_switch changed
 then
-        logInfo("garage", "Light state: " + zwave_node3_garagelight_switch.state)
-        if(timer!=null) and (raceCheck == 0){
-                timer.cancel
-                timer = null
+        logInfo("garage", "Garage light state: " + zwave_node3_garagelight_switch.state)
+        if(timerGL != null && raceCheck == 0){
+                logInfo("garage", "Cancel timerGL")
+                timerGL.cancel
+                timerGL = null
+        }
+end
+
+rule "zwav_node5_laundryroomlight_switch_rule"
+when
+        Item zwav_node5_laundryroomlight_switch changed
+then
+        logInfo("laundry room", "Laundry light state: " + zwav_node5_laundryroomlight_switch.state)
+        //Can check isRunning on timer to see if this is triggered by timer.
+        //But there doesn't seem to be a need
+        if(timerLL != null && raceCheck == 0){
+                logInfo("laundry room", "Cancel timerLL")
+                timerLL.cancel
+                timerLL = null
         }
 end
 

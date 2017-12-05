@@ -1,4 +1,5 @@
 Switch alexa_media_center_power "Media Center" <switch> (TV) ["NoTag"]
+Switch alexa_tv_power "TV/Rec Power" <switch> (TV) ["NoTag"]
 String alexa_tv_mode "TV Mode [%s]" <heating-0> (TV) ["NoTag"]
 String alexa_netflixprof "Netflix Profile: [%s]" <string> (TV) ["NoTag"]
 

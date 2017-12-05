@@ -1,2 +1,0 @@
-network:device:mediahal_ping_thing [ hostname="mediahal2015", port=554 ]
-network:device:halvr2016_ping_thing [ hostname="halvr2016", port=554 ]

@@ -2,7 +2,7 @@ rule "mediacenter_sleep_control_update_rule"
 when
 	Item meidacenter_status received update
 then
-	logInfo("rules", "foward update to mediacenter_sleep_control")
+	logInfo("mediacenter_sleep_control_update_rule", "foward update to mediacenter_sleep_control")
 	mediacenter_sleep_control.state = meidacenter_status.state
 end
 
@@ -10,7 +10,7 @@ rule "halvr_sleep_control_update_rule"
 when
 	Item halvr_status received update
 then
-	logInfo("rules", "foward update to halvr_sleep_control")
+	logInfo("halvr_sleep_control_update_rule", "foward update to halvr_sleep_control")
 	halvr_sleep_control.state = halvr_status.state
 end
 
@@ -19,11 +19,11 @@ when
 	Item mediacenter_sleep_control received command
 then
 	if(receivedCommand == OFF) {
-		logInfo("rules", "foward to mediacenter_sleep")
+		logInfo("mediacenter_sleep_control_rule", "foward to mediacenter_sleep")
 		mediacenter_sleep.sendCommand(ON)
 	}
 	else {
-		logInfo("rules", "foward to mediacenter_wol")
+		logInfo("mediacenter_sleep_control_rule", "foward to mediacenter_wol")
 		mediacenter_wol.sendCommand(ON)
 	}
 end
@@ -33,11 +33,11 @@ when
         Item halvr_sleep_control received command
 then
         if(receivedCommand == OFF) {
-		logInfo("rules", "foward to halvr_sleep")
+		logInfo("halvr_sleep_control_rule", "foward to halvr_sleep")
                 halvr_sleep.sendCommand(ON)
         }
         else {
-		logInfo("rules", "foward to halvr_wol")
+		logInfo("halvr_sleep_control_rule", "foward to halvr_wol")
                 halvr_wol.sendCommand(ON)
         }
 end

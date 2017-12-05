@@ -39,16 +39,49 @@ end
 
 rule "nodeReqlcdtop_rule"
 when
-	Item nodeReqlcdtop received command
+	Item nodeReqlcdtop received command or
+	Item nodelcdtop received command
 then
-	logInfo("rules","forward to nodeSndlcdtop and nodeSndlcdbottom")
+	logInfo("rules","forward to nodeSndlcdtop")
 
-	if(nodeSndlcdtop.state == NULL) {
-		nodeSndlcdtop.postUpdate(new StringType("OpenHab"))
+	if(nodelcdtop.state == NULL) {
+		logInfo("rules","setting default for nodelcdtop")
+		nodelcdtop.postUpdate(new StringType("OpenHab"))
+		Thread::sleep(200)
 	}
-	if(nodeSndlcdbottom.state == NULL) {
-		nodeSndlcdbottom.postUpdate(new StringType("OpenHab Connect"))
+
+	logInfo("rules","Sending top: " + nodelcdtop.state.toString)
+	nodeSndlcdtop.sendCommand(nodelcdtop.state.toString)
+end
+
+rule "nodeReqlcdbottom_rule"
+when
+	Item nodeReqlcdbottom received command or
+	Item nodelcdbottom received command
+then
+	logInfo("rules","forward to nodeSndlcdbottom")
+
+	if(nodelcdbottom.state == NULL) {
+		logInfo("rules","setting default for nodelcdbottom")
+		nodelcdbottom.postUpdate(new StringType("OpenHab Connect"))
+		Thread::sleep(200)
 	}
-	nodeSndlcdtop.sendCommand(nodeSndlcdtop.state.toString)
-	nodeSndlcdbottom.sendCommand(nodeSndlcdbottom.state.toString)
+
+	logInfo("rules","Sending bottom: " + nodelcdbottom.state.toString)
+	nodeSndlcdbottom.sendCommand(nodelcdbottom.state.toString)
+end
+
+rule "nodeReqlcdbright_rule"
+when
+	Item nodeReqlcdbright received command or
+	Item nodelcdbright received command
+then
+	logInfo("rules","forward to nodeSndlcdbright")
+
+	if(nodelcdbright.state == NULL) {
+		logInfo("rules","setting default for nodelcdbright")
+		nodelcdbright.postUpdate(new DecimalType(0))
+		Thread::sleep(200)
+	}
+	nodeSndlcdbright.sendCommand(nodelcdbright.state as DecimalType)
 end

@@ -20,6 +20,12 @@ Switch nodeReqlcddisplaytime "NREQ LCDTime" <switch> (All) ["NoTag"] { autoupdat
 Number nodeSndlcddisplaytime "NSND LCDTime" <garagedoor>    (All)    { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/11/255/3/0/1:command:*:${command}]" }
 
 Switch nodeReqlcdtop "NREQ LCDTop" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/11/0/2/0/47:command:ON]" }
-Switch nodeReqlcdbottom "NREQ LCDBottom" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/11/1/2/0/47:command:ON]" }
 String nodeSndlcdtop "NSND LCDTop [%s]" <switch> (All) ["NoTag"] { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/11/0/1/0/47:command:*:${command}]" }
+Switch nodeReqlcdbottom "NREQ LCDBottom" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/11/1/2/0/47:command:ON]" }
 String nodeSndlcdbottom "NSND LCDBottom [%s]" <switch> (All) ["NoTag"] { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/11/1/1/0/47:command:*:${command}]" }
+Switch nodeReqlcdbright "NREQ LCDBrightness" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/11/2/2/0/3:command:ON]" }
+Number nodeSndlcdbright "NSND LCDBrightness [%d %%]" <switch> (All) ["NoTag"] { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/11/2/1/0/3:command:*:${command}]" }
+
+String nodelcdtop "LCDTop [%s]" <switch> (All) ["NoTag"]
+String nodelcdbottom "LCDBottom [%s]" <switch> (All) ["NoTag"]
+Number nodelcdbright "LCDBrightness [%d %%]" <switch> (All) ["NoTag"]

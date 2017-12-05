@@ -23,6 +23,9 @@ sitemap default label="Rose House"
 		Text item=bayDoorGarage01		
 		Text item=doorGarage01		
 		Switch item=relayGarage01 mappings=[ON="Go!"]		
+	}
+	Frame label="Outdoor" {
+		Slider item=zwav_node6_outdoorlighting_switch
 	}	
 	Frame label="Man Cave" {
 		Switch item=halvr_sleep_control

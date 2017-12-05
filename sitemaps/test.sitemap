@@ -6,10 +6,13 @@ sitemap test label="Alexa Test"
 	Frame label="General Status" icon="sofa" {
 		Switch item=meidacenter_status
 		Switch item=halvr_status
+		Switch item=mediacenter_sleep_control
+		Switch item=halvr_sleep_control
 	}
 	Frame label="Alexa" icon="sofa" {
 		Switch item=alexa_media_center_power
-		Selection item=alexa_tv_mode mappings=[pc="PC", wii="Wii"]
+		Switch item=alexa_tv_power
+		Selection item=alexa_tv_mode mappings=["pc"="PC", "wii"="Wii"]
 		Switch item=alexa_media_center_default_netflix mappings=[ON="Go!"]
 		Switch item=alexa_media_center_default_games mappings=[ON="Go!"]
 		Switch item=alexa_media_center_default_music mappings=[ON="Go!"]
@@ -41,8 +44,10 @@ sitemap test label="Alexa Test"
                 Switch item=autoit_mc_stop_spotify mappings=[ON="Go!"]
 	}
 	Frame label="MySensor Test" icon="sofa" {
-		Text item=nodeSndlcdtop
-		Text item=nodeSndlcdbottom
+		Text item=nodelcdtop
+		Text item=nodelcdbottom
 		Switch item=global_love_switch
+		Selection item=nodelcdtop label="LCD Top" mappings=["\u0001Heart"="Heart","\u0002Something" = "Something","\u0009Emergency!"="Emergency!", "\u000AAlarm"="Alarm", "\u000BWarning"="Warning","\u000CInfo"="Info"]
+		Selection item=nodelcdbright mappings=[0="Off",10="Night",20="Low", 30="Less Low", 100="Full"]
 	}
 }

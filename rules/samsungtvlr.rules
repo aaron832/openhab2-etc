@@ -2,12 +2,12 @@ rule "samsungtv_lr_power_interface_rule"
 when
 	Item samsungtv_lr_power_interface received command
 then
-	if(receivedCommand==OFF) {
-		//sendCommand(samsungtv_lr_power, OFF)
-		val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\IR Server Suite\\IRBlast-NoWindow.exe\" \"SamsungTV_Power.IR\"", 5000)
-                logInfo("samsungtv_lr_power_interface_rule", results)
+	if(receivedCommand==OFF && (samsungtv_lr_power.state == ON || samsungtv_status.state == ON) ) {
+		samsungtv_lr_power.sendCommand(OFF)
+		//val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\IR Server Suite\\IRBlast-NoWindow.exe\" \"SamsungTV_Power.IR\"", 5000)
+        //logInfo("samsungtv_lr_power_interface_rule", results)
 	}
-	else if(receivedCommand==ON) {
+	else if(receivedCommand==ON && (samsungtv_lr_power.state == OFF || samsungtv_status.state == OFF) ) {
 		val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\IR Server Suite\\IRBlast-NoWindow.exe\" \"SamsungTV_Power.IR\"", 5000)
         	logInfo("samsungtv_lr_power_interface_rule", results)
 	}
@@ -18,4 +18,11 @@ when
 	Item samsungtv_lr_power changed
 then
 	postUpdate(samsungtv_lr_power_interface, samsungtv_lr_power.state)
+end
+
+rule "samsungtv_status_rule"
+when
+	Item samsungtv_status changed
+then
+	postUpdate(samsungtv_lr_power_interface, samsungtv_status.state)
 end

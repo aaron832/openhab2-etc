@@ -1,0 +1,45 @@
+rule "zwave_node7_livingroom_dimmer_interface_rule"
+when
+	Item zwave_node7_livingroom_dimmer_interface received command
+then
+	if(receivedCommand == ON)
+	{
+		zwave_node7_livingroom_dimmer.sendCommand(20)
+	}
+	else if(receivedCommand == OFF)
+	{
+		zwave_node7_livingroom_dimmer.sendCommand(receivedCommand)
+	}
+	else
+	{
+		var receivedValue = receivedCommand as DecimalType
+		var newValue = receivedValue / 2
+		var currentValue = zwave_node7_livingroom_dimmer.state as DecimalType
+		//Need to power up lights for lower levels
+		//logInfo("zwave_node7_livingroom_dimmer_interface_rule", "current value: " + zwave_node7_livingroom_dimmer.state.toString)
+		if(currentValue == 0 && newValue < 10) {
+			//logInfo("zwave_node7_livingroom_dimmer_interface_rule", "Starting lights brighter to power them up with 20")
+			zwave_node7_livingroom_dimmer.sendCommand(new DecimalType(20))	
+			Thread::sleep(1000)
+			//logInfo("zwave_node7_livingroom_dimmer_interface_rule", "set to correct lighting value")
+			zwave_node7_livingroom_dimmer.sendCommand(newValue)
+		}
+		else
+		{
+			zwave_node7_livingroom_dimmer.sendCommand(newValue)
+		}
+	}
+end
+
+rule "zwave_node7_livingroom_dimmer_rule"
+when
+	Item zwave_node7_livingroom_dimmer changed
+then
+	var switchValue = zwave_node7_livingroom_dimmer.state as DecimalType
+	var updateValue = switchValue * 2
+	if(updateValue > 100) {
+		updateValue = 100
+	}
+	//logInfo("zwave_node7_livingroom_dimmer_rule", "update to: " + updateValue.toString)
+	zwave_node7_livingroom_dimmer_interface.postUpdate(updateValue)
+end

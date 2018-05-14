@@ -1,6 +1,12 @@
 sitemap default label="Rose House"
 {
+	Frame label="Global" icon="sofa" {
+		Switch item=global_alarm
+		Switch item=global_alarm_triggered
+		Switch item=global_lovedoorbell_switch
+	}
 	Frame label="Living Room" icon="sofa" {
+		Slider item=zwave_node7_livingroom_dimmer_interface
 		Switch item=samsungtv_lr_power_interface
 		Setpoint item=samsungtv_lr_volume step=1 minValue=0 maxValue=10
 		Selection item=samsungtv_lr_sourcename mappings=[HDMI2="PC", COMPONENT="Wii"] valuecolor=[68="green", 61="blue"]
@@ -25,6 +31,7 @@ sitemap default label="Rose House"
 		Switch item=relayGarage01 mappings=[ON="Go!"]		
 	}
 	Frame label="Outdoor" {
+		Switch item=BackYardLights_Switch
 		Slider item=zwav_node6_outdoorlighting_switch
 	}	
 	Frame label="Man Cave" {

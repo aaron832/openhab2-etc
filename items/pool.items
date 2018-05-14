@@ -1,0 +1,6 @@
+//zwave_node9_poolpump_Switch
+Switch poolpump_interface "Pool Pump" <switch> (Pool) ["NoTag"]
+Switch poolpump_calactive "Pool Pump Cal Active" <switch> (Pool) ["NoTag"]
+Switch poolpump_calswitch "Pool Pump Cal Switch" <switch> (Pool) ["NoTag"]
+Number poolpump_hourrun_number "Pool Pump Run for Hours" <switch> (Pool) ["NoTag"]
+Switch poolpump_hourrun_switch "Pool Pump hour run Switch" <switch> (Pool) ["NoTag"]

@@ -1,13 +1,26 @@
 sitemap test label="Alexa Test"
 {
+	Frame label="pool test" {
+		Switch item=poolpump_interface
+		Switch item=poolpump_calswitch
+	}
+	Frame label="camera test" {
+		Switch item=backyard_camera_alert
+		Switch item=driveway_camera_alert
+	}
 	Frame label="zwave test" {
+		Switch item=zwave_node9_poolpump_Switch
+		Switch item=BackYardLights_Switch
 		Switch item=zwave_device_node4_sensor_binary
+		Slider item=zwave_node7_livingroom_dimmer_interface
+		Slider item=zwave_node7_livingroom_dimmer
 	}
 	Frame label="General Status" icon="sofa" {
 		Switch item=meidacenter_status
 		Switch item=halvr_status
 		Switch item=mediacenter_sleep_control
 		Switch item=halvr_sleep_control
+		Switch item=samsungtv_status
 	}
 	Frame label="Alexa" icon="sofa" {
 		Switch item=alexa_media_center_power
@@ -28,6 +41,7 @@ sitemap test label="Alexa Test"
 		Switch item=alexa_playsearchnetflix_test mappings=[ON="Go!"]
 		Selection item=alexa_netflixprof label="Netflix Profile" mappings=["Aaron"="Aaron", "Brenna"="Brenna", "Emi"="Emi"]
 		Text item=alexaresp
+		Switch item=alexa_doorbell
 	}
 	Frame label="Alexa Status" icon="sofa" {
 		Text item=ECHO_Processed
@@ -44,6 +58,7 @@ sitemap test label="Alexa Test"
                 Switch item=autoit_mc_stop_spotify mappings=[ON="Go!"]
 	}
 	Frame label="MySensor Test" icon="sofa" {
+		Switch item=global_lovedoorbell_drivewayactivate_switch
 		Text item=nodelcdtop
 		Text item=nodelcdbottom
 		Switch item=global_love_switch

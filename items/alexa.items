@@ -26,3 +26,5 @@ String alexaresp "Alexa Execute Resp: [%s]" <string> (Alexa) ["NoTag"]
 String ECHO_Processed "ECHO_Processed: [%s]" <string> (Alexa) ["NoTag"]
 String ECHO_VoiceCMD "ECHO_VoiceCMD: [%s]" <string> (Alexa) ["NoTag"]
 String ECHO_Answer "ECHO_Answer: [%s]" <string> (Alexa) ["NoTag"]
+
+Switch alexa_doorbell "Ax Doorbell" <switch> (TV) ["NoTag"] { autoupdate="false" }

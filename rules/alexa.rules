@@ -6,6 +6,7 @@ when
 	Item alexa_tv_power received command
 then
 	if(receivedCommand == ON) {
+		logInfo("rule", "foward to alexa_media_center_power")
 		alexa_media_center_power.sendCommand(receivedCommand)
 	}
 	else {
@@ -51,22 +52,38 @@ end
 
 rule "alexa_media_center_power_update_rule"
 when
-        Item samsungtv_lr_power_interface changed or
-        Item yamahareceiver_power changed or 
+        //Item samsungtv_lr_power_interface changed or
+        //Item yamahareceiver_power changed or 
         Item meidacenter_status changed
 then
-        if(samsungtv_lr_power_interface.state == ON && yamahareceiver_power.state == ON && meidacenter_status.state == ON) {
-			postUpdate(alexa_media_center_power, ON)
-			postUpdate(alexa_tv_power, ON)
-        }
-        else if(samsungtv_lr_power_interface.state == OFF && yamahareceiver_power.state == OFF && meidacenter_status.state == OFF) {
-			postUpdate(alexa_media_center_power, OFF)
-			postUpdate(alexa_tv_power, OFF)
-        }
-        else {
-        	postUpdate(alexa_media_center_power, ON)
-        	postUpdate(alexa_tv_power, ON)
-        }
+        //if(samsungtv_lr_power_interface.state == ON && yamahareceiver_power.state == ON && meidacenter_status.state == ON) {
+		//	postUpdate(alexa_media_center_power, ON)
+		//	postUpdate(alexa_tv_power, ON)
+        //}
+        //else if(samsungtv_lr_power_interface.state == ON && yamahareceiver_power.state == ON && meidacenter_status.state == OFF) {
+		//	postUpdate(alexa_media_center_power, OFF)
+		//	postUpdate(alexa_tv_power, ON)
+        //}
+        //else if(samsungtv_lr_power_interface.state == OFF && yamahareceiver_power.state == OFF && meidacenter_status.state == ON) //{
+		//	postUpdate(alexa_media_center_power, ON)
+		//	postUpdate(alexa_tv_power, OFF)
+        //}
+        //else if(samsungtv_lr_power_interface.state == OFF && yamahareceiver_power.state == OFF && meidacenter_status.state == OFF) {
+		//	postUpdate(alexa_media_center_power, OFF)
+		//	postUpdate(alexa_tv_power, OFF)
+        //}
+        //else {
+        //	postUpdate(alexa_media_center_power, ON)
+        //	postUpdate(alexa_tv_power, ON)
+        //}
+        alexa_media_center_power.postUpdate(meidacenter_status.state)
+end
+
+rule "alexa_tv_power_update_rule"
+when
+	Item samsungtv_lr_power_interface changed
+then
+	alexa_tv_power.postUpdate(samsungtv_lr_power_interface.state)
 end
 
 rule "alexa_execute_test_rule"
@@ -84,4 +101,12 @@ when
 then
 	logInfo("rules","foward to autoit_mc_netflixprof")
 	autoit_mc_netflixprof.sendCommand(receivedCommand)
+end
+
+rule "alexa_doorbell_rule"
+when
+	Item alexa_doorbell received command
+then
+	logInfo("rules","alexa_doorbell foward to global_lovedoorbell_switch")
+	global_lovedoorbell_switch.sendCommand(receivedCommand)
 end

@@ -1,0 +1,18 @@
+sitemap pool label="Pool"
+{
+	Frame label="Pool Control" {
+		Switch item=BackYardLights_Switch
+		Setpoint item=poolpump_hourrun_number label="Pump Run: [%d Hours]" minValue=0 maxValue=12 step=1
+		Switch item=poolpump_interface
+	}
+	Frame label="Pump Activation / Schedule" {
+		Switch item=poolpump_calactive
+		Switch item=poolpump_calswitch
+	}
+	Frame label="Pool Pump Zwave" {
+		Switch item=zwave_node9_poolpump_Switch
+	}
+	Frame label="Debug" {
+		Switch item=poolpump_hourrun_switch
+	}
+}

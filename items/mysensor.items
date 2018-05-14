@@ -12,6 +12,7 @@ DateTime sensorGarageLastCom "Garge Sensor Last Com [%1$tm/%1$td/%1$ty %1$tH:%1$
 Switch  relayLove01   "Love Relay"   <garagedoor>    (All)           { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/10/0/1/0/2:command:ON:1]" }
 Switch nodeReqLove01 "NREQ Love" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/10/0/2/0/2:command:ON]" }
 Number relayLoveSleep   "Love Sleep"   <garagedoor>    (All)           { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/10/1/1/0/24:command:*:${command}]" }
+String relayLoveCustom   "Love Custom"   <garagedoor>    (All)           { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/10/2/1/0/24:command:*:${command}]" }
 Switch nodeReqLoveSleep "NREQ Love Sleep" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/10/1/2/0/24:command:ON]" }
 DateTime sensorLoveLastCom "Love Box Last Com [%1$tm/%1$td/%1$ty %1$tH:%1$tM]" <calendar> (status) ["NoTag"]
 
@@ -25,6 +26,9 @@ Switch nodeReqlcdbottom "NREQ LCDBottom" <switch> (All) ["NoTag"] { autoupdate="
 String nodeSndlcdbottom "NSND LCDBottom [%s]" <switch> (All) ["NoTag"] { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/11/1/1/0/47:command:*:${command}]" }
 Switch nodeReqlcdbright "NREQ LCDBrightness" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/11/2/2/0/3:command:ON]" }
 Number nodeSndlcdbright "NSND LCDBrightness [%d %%]" <switch> (All) ["NoTag"] { autoupdate="false", mqtt=">[mymosquitto:mygateway1-in/11/2/1/0/3:command:*:${command}]" }
+Switch nodeLCDButtonLeft "LCD BLeft" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/11/3/1/0/2:command:ON]" }
+Switch nodeLCDButtonMid "LCD BMid" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/11/4/1/0/2:command:ON]" }
+Switch nodeLCDButtonRight "LCD BRight" <switch> (All) ["NoTag"] { autoupdate="false", mqtt="<[mymosquitto:mygateway1-out/11/5/1/0/2:command:ON]" }
 
 String nodelcdtop "LCDTop [%s]" <switch> (All) ["NoTag"]
 String nodelcdbottom "LCDBottom [%s]" <switch> (All) ["NoTag"]

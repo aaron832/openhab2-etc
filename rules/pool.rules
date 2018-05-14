@@ -1,0 +1,97 @@
+var Timer timer_RunPump = null
+var int pumpHours = 0
+
+rule "poolpump_hourrun_switch_rule"
+when
+	Item poolpump_hourrun_switch received command
+then
+	if(receivedCommand == OFF) {
+		if(timer_RunPump !== null){
+	        timer_RunPump.cancel
+	        timer_RunPump = null
+	    }
+	    pumpHours = 0
+		poolpump_hourrun_number.postUpdate(pumpHours)
+	}
+
+	//Do not needlessly send commands.  Also calednar takes priority when on.
+	if(poolpump_interface.state != receivedCommand && poolpump_calswitch.state != ON) {
+		logInfo("rules","poolpump_hourrun_switch -" + receivedCommand.toString + "-> poolpump_interface")
+		poolpump_interface.sendCommand(receivedCommand)		
+	}
+end
+
+//Pool temp run timer
+rule "poolpump_hourrun_command_rule"
+when
+	Item poolpump_hourrun_number received command
+then
+	pumpHours = (receivedCommand as DecimalType).intValue
+
+	if(timer_RunPump !== null){
+        timer_RunPump.cancel
+        timer_RunPump = null
+    }
+
+    if(pumpHours == 0) {
+    	logInfo("rules","pool pump timer disabled.")
+    }
+    else {
+	    logInfo("rules","setting pool pump timer for " + pumpHours + " hours.")
+	    timer_RunPump = createTimer(now.plusHours(pumpHours)) [ |
+	        logInfo("rules","pool pump timer finished.")
+	        pushover("Pool Pump Timer Finished!", 0)
+	        pumpHours = 0
+	        poolpump_hourrun_number.postUpdate(pumpHours)
+	        poolpump_hourrun_switch.sendCommand(OFF)
+	        timer_RunPump = null
+	    ]
+	    poolpump_hourrun_switch.sendCommand(ON)
+	}
+end
+
+//Pool schedule rule
+rule "poolpump_calswitch_triggered_rule"
+when
+	Item poolpump_calswitch received command
+then
+	//Only do stuff if calendar is active
+	if(poolpump_calactive.state == ON) {
+	 	
+	 	//Do not send command if already at that state
+	 	if(receivedCommand != poolpump_interface.state) {
+	 		//Hour run switch should take priority here when on.
+			if(poolpump_hourrun_switch.state != ON) {
+				logInfo("rules","poolpump_calswitch -" + receivedCommand.toString + "-> poolpump_interface")
+				poolpump_interface.sendCommand(receivedCommand)
+			}
+		}
+
+	}
+	
+	if (poolpump_calactive.state != OFF && poolpump_calactive.state != ON) {
+		logInfo("rules","Unset state for poolpump_calactive")
+		pushover("Pump schedule event ran with poolpump_calactive as null!", 0)
+	}
+end
+
+//Interface to z-wave
+rule "poolpump_interface_rule"
+when
+	Item poolpump_interface received command
+then
+	logInfo("rules","forward command poolpump_interface to zwave_node9_poolpump_Switch")
+
+	//This hooks the interface to the actual zwave pump device
+	zwave_node9_poolpump_Switch.sendCommand(receivedCommand)
+end
+
+//Update z-wave to interface
+rule "zwave_node9_poolpump_Switch_rule"
+when
+	Item zwave_node9_poolpump_Switch changed
+then
+	pushover("Pool Pump: " + zwave_node9_poolpump_Switch.state.toString, 0)
+	logInfo("rules","forward update zwave_node9_poolpump_Switch_rule to poolpump_interface")
+	poolpump_interface.postUpdate(zwave_node9_poolpump_Switch.state)
+end

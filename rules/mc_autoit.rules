@@ -1,5 +1,7 @@
 import org.eclipse.xtext.xbase.lib.Functions
+import org.openhab.model.script.actions.Timer
 
+var Timer timer = null
 val gatewayScript = "openhabgateway.au3"
 
 val Functions$Function3<String, String, String, String> execSSHCommand= [ script, command, receivedCommand |
@@ -12,11 +14,37 @@ val Functions$Function3<String, String, String, String> execSSHCommand= [ script
     return results;
 ]
 
+val Functions$Function3<String, String, String, String> execSSHCommandMCWake= [ script, command, receivedCommand |
+    val Functions$Function3<String, String, String, String> fexecSSHCommand= [ script, command, receivedCommand |
+        val sshConnect = "ssh -o ConnectTimeout=4 Aaron@mediahal2015 "
+        val autoItWithScriptPath = "\"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\"
+        logInfo("execSSHCommand_function_rule", script)
+        logInfo("execSSHCommand_function_rule", command)
+        logInfo("execSSHCommand_function_rule", receivedCommand)
+        var results = executeCommandLine(sshConnect + autoItWithScriptPath + script + "\" \"" + command + "\" \"" + receivedCommand + "\"", 5000)
+        return results;
+    ]
+
+    if ( (meidacenter_status.state == OFF) && (timer == null || timer.hasTerminated) ) {
+        mediacenter_wol.sendCommand(ON)
+        timer = createTimer(now.plusSeconds(6)) [|
+            logInfo("execSSHCommandMCWake", "delay timer")
+            fexecSSHCommand.apply(script, command, receivedCommand)
+        ]
+        return "delayed"
+    }
+    else {
+        logInfo("execSSHCommandMCWake","go directly to execSSHCommand")
+        return fexecSSHCommand.apply(script, command, receivedCommand)
+    }
+]
+
 rule "autoit_mc_netflix_rule"
 when
 	Item autoit_mc_netflix received command
 then
-	val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\startnetflix.au3\"", 5000)
+	//val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\startnetflix.au3\"", 5000)
+    val results = execSSHCommandMCWake.apply("startnetflix.au3","","")
 	logInfo("autoit_mc_netflix_rule", results)
 end
 
@@ -24,7 +52,8 @@ rule "autoit_mc_watch_ponyo_rule"
 when
 	Item autoit_mc_watch_ponyo received command
 then
-	val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\emimoteB.au3\" 3", 5000)
+	//val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\emimoteB.au3\" 3", 5000)
+    val results = execSSHCommandMCWake.apply("emimoteB.au3","3","")
 	logInfo("autoit_mc_watch_ponyo_rule", results)
 end
 
@@ -32,7 +61,8 @@ rule "autoit_mc_watch_kidsmovie_rule"
 when
         Item autoit_mc_watch_kidsmovie received command
 then
-        val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\emimoteB.au3\" 1", 5000)
+        //val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\emimoteB.au3\" 1", 5000)
+        val results = execSSHCommandMCWake.apply("emimoteB.au3","1","")
         logInfo("autoit_mc_watch_kidsmovie_rule", results)
 end
 
@@ -40,7 +70,8 @@ rule "autoit_mc_watch_danieltiger_rule"
 when
 	Item autoit_mc_watch_danieltiger received command
 then
-	val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\emimoteB.au3\" 2", 5000)
+	//val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\emimoteB.au3\" 2", 5000)
+    val results = execSSHCommandMCWake.apply("emimoteB.au3","2","")
 	logInfo("autoit_mc_watch_danieltiger_rule", results)
 end
 
@@ -48,7 +79,8 @@ rule "autoit_mc_kill_vlc_rule"
 when
         Item autoit_mc_kill_vlc received command
 then
-        val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\openhabgateway.au3\" \"closeall\" \"" + receivedCommand + "\"", 5000)
+        //val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\openhabgateway.au3\" \"closeall\" \"" + receivedCommand + "\"", 5000)
+        val results = execSSHCommandMCWake.apply(gatewayScript,"closeall",receivedCommand.toString)
         logInfo("autoit_mc_kill_vlc_rule", results)
 end
 
@@ -57,7 +89,8 @@ rule "autoit_mc_start_airplay_rule"
 when
         Item autoit_mc_start_airplay received command
 then
-        val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\start_airplay.au3\" 3", 5000)
+        //val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\start_airplay.au3\" 3", 5000)
+        val results = execSSHCommandMCWake.apply("start_airplay.au3","","")
         logInfo("autoit_mc_start_airplay_rule", results)
 end
 
@@ -65,7 +98,8 @@ rule "autoit_mc_start_spotify_rule"
 when
         Item autoit_mc_start_spotify received command
 then
-        val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\start_spotify.au3\" 3", 5000)
+        //val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\start_spotify.au3\" 3", 5000)
+        val results = execSSHCommandMCWake.apply("start_spotify.au3","","")
         logInfo("autoit_mc_start_spotify_rule", results)
 end
 
@@ -73,7 +107,7 @@ rule "autoit_mc_stop_spotify_rule"
 when
         Item autoit_mc_stop_spotify received command
 then
-        val results = execSSHCommand.apply(gatewayScript,"closeall",receivedCommand.toString)
+        val results = execSSHCommandMCWake.apply(gatewayScript,"closeall",receivedCommand.toString)
         logInfo("autoit_mc_stop_spotify_rule", results)
 end
 
@@ -81,7 +115,7 @@ rule "alexa_playsearchkodi_rule"
 when
         Item alexa_playsearchkodi received command
 then
-        val results = execSSHCommand.apply(gatewayScript,"playsearchkodi",receivedCommand.toString)
+        val results = execSSHCommandMCWake.apply(gatewayScript,"playsearchkodi",receivedCommand.toString)
         logInfo("alexa_playsearchkodi_rule", results)
 end
 
@@ -89,7 +123,7 @@ rule "autoit_mc_killkodi_rule"
 when
         Item autoit_mc_killkodi received command
 then
-        val results = execSSHCommand.apply(gatewayScript,"killkodi",receivedCommand.toString)
+        val results = execSSHCommandMCWake.apply(gatewayScript,"killkodi",receivedCommand.toString)
         logInfo("autoit_mc_killkodi_rule", results)
 end
 
@@ -98,7 +132,7 @@ when
         Item alexa_playsearchnetflix received command
 then
         var paramsString = receivedCommand.toString + "\" \"" + autoit_mc_netflixprof.state.toString
-        val results = execSSHCommand.apply(gatewayScript,"playsearchnetflix",paramsString)
+        val results = execSSHCommandMCWake.apply(gatewayScript,"playsearchnetflix",paramsString)
         logInfo("alexa_playsearchnetflix_rule", paramsString + " Res:" + results)
 end
 
@@ -106,7 +140,7 @@ rule "autoit_mc_stop_netflix_rule"
 when
         Item autoit_mc_stop_netflix received command
 then
-        val results = execSSHCommand.apply(gatewayScript,"closeall",receivedCommand.toString)
+        val results = execSSHCommandMCWake.apply(gatewayScript,"closeall",receivedCommand.toString)
         logInfo("autoit_mc_stop_netflix_rule", results)
 end
 
@@ -114,6 +148,6 @@ rule "autoit_mc_closeall_rule"
 when
         Item autoit_mc_closeall received command
 then
-        val results = execSSHCommand.apply(gatewayScript,"closeall",receivedCommand.toString)
+        val results = execSSHCommandMCWake.apply(gatewayScript,"closeall",receivedCommand.toString)
         logInfo("autoit_mc_closeall_rule", results)
 end

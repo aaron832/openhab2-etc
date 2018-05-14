@@ -3,9 +3,8 @@ when
         Item nodeReqlcddisplaytime received command
 then
 		logInfo("rules","forward to nodeSndlcddisplaytime")
-        //nodeSndlcddisplaytime.sendCommand( new DecimalType(now.millis/1000) )
         nodeSndlcddisplaytime.sendCommand( new DecimalType(now.minusHours(8).millis/1000) )
-        //nodeSndlcddisplaytime.sendCommand( new DecimalType(((new DateTimeType()) as DateTimeType).calendar.timeInMillis / 1000) )
+        //nodeSndlcddisplaytime.sendCommand( ((CurrentTime.state as DateTimeType).calendar.timeInMillis)/1000 )
 end
 
 rule "sensorLoveLastCom_rule"
@@ -26,6 +25,14 @@ then
 		relayLove01.sendCommand(receivedCommand)
 		global_love_switch.postUpdate(OFF)
 	}
+	else if(global_lovedoorbell_drivewayactivate_switch.state == ON) {
+		logInfo("rules","forward to relayLoveCustom")
+		//0x90,60, 0,250, 0x90,72, 0,250, 0x80, 0xf0
+		//var testinput = "\u003C\u0048"
+		var testinput = "\u0050\u0050\u0050"
+		relayLoveCustom.sendCommand(testinput) 
+		global_lovedoorbell_drivewayactivate_switch.postUpdate(OFF)
+	}
 end
 
 rule "nodeReqLoveSleep_rule"
@@ -34,7 +41,8 @@ when
 then
 	logInfo("rules","forward to relayLoveSleep")
 	//relayLoveSleep.sendCommand(new DecimalType(300000))
-	relayLoveSleep.sendCommand(new DecimalType(60000))
+	//relayLoveSleep.sendCommand(new DecimalType(60000))
+	relayLoveSleep.sendCommand(new DecimalType(10000))
 end
 
 rule "nodeReqlcdtop_rule"
@@ -84,4 +92,18 @@ then
 		Thread::sleep(200)
 	}
 	nodeSndlcdbright.sendCommand(nodelcdbright.state as DecimalType)
+end
+
+rule "nodeLCDButtonMid_rule"
+when
+	Item nodeLCDButtonMid received command
+then
+	global_alarm.sendCommand(ON)
+end
+
+rule "nodeLCDButtonRight_rule"
+when
+	Item nodeLCDButtonRight received command
+then
+	global_alarm.sendCommand(OFF)
 end

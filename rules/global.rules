@@ -1,11 +1,15 @@
+import org.openhab.model.script.actions.Timer
+var Timer lv_light_timer = null
+
 rule "global_lockitdown_rule"
 when
         Item global_lockitdown received command
 then
-	autoit_mc_closeall.sendCommand(ON)
+	//autoit_mc_closeall.sendCommand(ON)
 	
     if(samsungtv_lr_power_interface.state != OFF) {
             samsungtv_lr_power_interface.sendCommand(OFF)
+            Thread::sleep(1000)
     }
     if(yamahareceiver_power.state != OFF) {
             yamahareceiver_power.sendCommand(OFF)
@@ -21,14 +25,29 @@ then
 	if(zwave_node2_uphallway_dimmer.state != 0) {
 		zwave_node2_uphallway_dimmer.sendCommand(0)
 	}
+
 	if(zwave_node3_garagelight_switch.state != OFF) {
 		zwave_node3_garagelight_switch.sendCommand(OFF)
 	}
+
 	if(zwav_node5_laundryroomlight_switch != OFF) {
 		zwav_node5_laundryroomlight_switch.sendCommand(OFF)
 	}
 	
-	mediacenter_sleep.sendCommand(ON)
+        //Dont want to sleep media center.  Maybe another time.
+	//mediacenter_sleep.sendCommand(ON)
 	halvr_sleep.sendCommand(ON)
+
+	if ( lv_light_timer == null || lv_light_timer.hasTerminated ) {
+		logInfo("global_lockitdown_rule", "Low lights on hallways and living room")
+		//zwave_node2_uphallway_dimmer.sendCommand(new DecimalType(5))
+		zwave_node7_livingroom_dimmer_interface.sendCommand(new DecimalType(2))
+		logInfo("global_lockitdown_rule", "delay timer for zwave_node7_livingroom_dimmer_interface started")
+		lv_light_timer = createTimer(now.plusMinutes(5)) [|
+			logInfo("global_lockitdown_rule", "OFF lights on hallways and living room")
+			zwave_node7_livingroom_dimmer_interface.sendCommand(new DecimalType(0))
+			//zwave_node2_uphallway_dimmer.sendCommand(new DecimalType(0))
+		]	
+	}
 end
 

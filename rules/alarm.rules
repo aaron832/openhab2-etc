@@ -1,0 +1,69 @@
+//rename this to alarm rules
+
+rule "motiongarage_alarm_rule"
+when
+	Item zwave_device_node4_sensor_binary changed to ON
+then
+	var String timestr = CurrentTime.state.format("%1$tR")
+	
+	nodelcdtop.sendCommand(timestr)
+	nodelcdbottom.sendCommand("Garage Motion")
+	if(global_alarm.state == ON) {
+		global_alarm_triggered.sendCommand(ON)
+		nodelcdbright.sendCommand(100)
+		pushover("Garage Motion", 0)
+	}
+end
+
+rule "nest_home_away_alarm_rule"
+when
+	Item home_away changed from away to home
+then
+	var String timestr = CurrentTime.state.format("%1$tR")
+	
+	nodelcdtop.sendCommand(timestr)
+	nodelcdbottom.sendCommand("Nest Set Home")
+	if(global_alarm.state == ON) {
+		global_alarm_triggered.sendCommand(ON)
+		nodelcdbright.sendCommand(100)
+		pushover("Nest changed to Home", 0)	
+	}
+end
+
+rule "global_alarm_rule"
+when
+	Item global_alarm received command
+then
+	var String timestr = CurrentTime.state.format("%1$tR")
+	
+	nodelcdtop.sendCommand(timestr)
+	if(receivedCommand == ON) {
+		nodelcdbottom.sendCommand("Alarm Set")
+		nodelcdbright.sendCommand(0);
+	}
+	else {
+		nodelcdbottom.sendCommand("Alarm Off")
+		global_alarm_triggered.sendCommand(OFF)
+	}
+end
+
+rule "global_alarm_triggered_rule"
+when
+	Item global_alarm_triggered changed from OFF to ON
+then
+	pushover("Alarm Triggered", 2)
+end
+
+rule "driveway_camera_alert_rule"
+when
+	Item driveway_camera_alert received command ON
+then
+	if(global_lovedoorbell_switch.state == ON) {
+		global_lovedoorbell_drivewayactivate_switch.sendCommand(ON)
+		val results = executeCommandLine("wget http://mediahal2015:8081/image/DW?q=50&s=80&user=hab&pw=HabPass12 -O /home/openhab/ImageDrop/" + "dw_doorbell.jpeg",5000)
+		logInfo("Test", results)
+		//pushover("Garage Motion Doorbell", 0)
+		sendPushoverMessage(pushoverBuilder("Garage Motion Doorbell").withPriority(0).withAttachment("/home/openhab/ImageDrop/dw_doorbell.jpeg"))
+		//sendPushoverImage("Garage Motion Doorbell", "/home/openhab/ImageDrop/dw_doorbell.jpeg")
+	}
+end

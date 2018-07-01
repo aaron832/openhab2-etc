@@ -18,8 +18,8 @@ then
 		//Need to power up lights for lower levels
 		//logInfo("zwave_node7_livingroom_dimmer_interface_rule", "current value: " + zwave_node7_livingroom_dimmer.state.toString)
 		if(currentValue == 0 && newValue < 10) {
-			//logInfo("zwave_node7_livingroom_dimmer_interface_rule", "Starting lights brighter to power them up with 20")
-			zwave_node7_livingroom_dimmer.sendCommand(new DecimalType(20))	
+			logInfo("zwave_node7_livingroom_dimmer_interface_rule", "Starting lights brighter to power them up with 100 to get to " + newValue)
+			zwave_node7_livingroom_dimmer.sendCommand(90)	
 			Thread::sleep(1000)
 			//logInfo("zwave_node7_livingroom_dimmer_interface_rule", "set to correct lighting value")
 			zwave_node7_livingroom_dimmer.sendCommand(newValue)

@@ -1,1 +1,4 @@
 //Thing samsungtv:tv:samsung_tv_livingroom_thing "Samsung TV LR" @ "Living Room" [ hostName="192.168.1.19", port=55000, refreshInterval=1000 ]
+Thing samsungtv:tv:samsungtvpingthing "Samsung TV LR" @ "Living Room" [ hostName="192.168.1.19", port=55000, refreshInterval=1000 ]
+Thing network:pingdevice:halvr2106pingthing [ hostname="192.168.1.90" ]
+Thing network:pingdevice:mediahal2015pingthing [ hostname="192.168.1.118" ]

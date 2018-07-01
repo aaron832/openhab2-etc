@@ -1,6 +1,6 @@
-Switch samsungtv_lr_power "SamsungTV Power" <switch> (TV) ["NoTag"] 
-Number samsungtv_lr_sourceid "SamsungTV Source" <heating-0> (TV) ["NoTag"] 
-Dimmer samsungtv_lr_volume "SamsungTV Volume [%d]" <soundvolume> (TV) ["NoTag"] 
-String samsungtv_lr_sourcename "SamsungTV Source [%s]" <heating-0> (TV) ["NoTag"] 
+Switch samsungtv_lr_power "SamsungTV Power" <switch> (TV) ["NoTag"] { channel="samsungtv:tv:samsungtvpingthing:power" }
+Number samsungtv_lr_sourceid "SamsungTV Source" <heating-0> (TV) ["NoTag"] { channel="samsungtv:tv:samsungtvpingthing:sourceName" }
+Dimmer samsungtv_lr_volume "SamsungTV Volume [%d]" <soundvolume> (TV) ["NoTag"] { channel="samsungtv:tv:samsungtvpingthing:volume" }
+String samsungtv_lr_sourcename "SamsungTV Source [%s]" <heating-0> (TV) ["NoTag"] { channel="samsungtv:tv:samsungtvpingthing:sourceName" }
 
 Switch samsungtv_lr_power_interface "SamsungTV Power" <switch> (TV) ["NoTag"]

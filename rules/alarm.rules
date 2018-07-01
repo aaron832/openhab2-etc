@@ -67,3 +67,17 @@ then
 		//sendPushoverImage("Garage Motion Doorbell", "/home/openhab/ImageDrop/dw_doorbell.jpeg")
 	}
 end
+
+rule "door_camera_alert_rule"
+when
+	Item door_camera_alert received command ON
+then
+	if(global_lovedoorbell_switch.state == ON) {
+		global_lovedoorbell_dooractivate_switch.sendCommand(ON)
+		val results = executeCommandLine("wget http://mediahal2015:8081/image/Door?q=50&s=80&user=hab&pw=HabPass12 -O /home/openhab/ImageDrop/" + "dw_doorbell.jpeg",5000)
+		logInfo("Test", results)
+		//pushover("Garage Motion Doorbell", 0)
+		sendPushoverMessage(pushoverBuilder("Door Motion Doorbell").withPriority(0).withAttachment("/home/openhab/ImageDrop/dw_doorbell.jpeg"))
+		//sendPushoverImage("Garage Motion Doorbell", "/home/openhab/ImageDrop/dw_doorbell.jpeg")
+	}
+end

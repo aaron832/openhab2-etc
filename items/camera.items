@@ -1,3 +1,3 @@
 Switch backyard_camera_alert "Backyard Cam Alert" <switch> (Camera) ["NoTag"]
 Switch driveway_camera_alert "Driveway Cam Alert" <switch> (Camera) ["NoTag"]
-
+Switch door_camera_alert "Door Cam Alert" <switch> (Camera) ["NoTag"]

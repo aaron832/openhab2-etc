@@ -19,7 +19,8 @@ sitemap default label="Rose House"
                 Switch item=autoit_mc_stop_spotify mappings=[ON="Go!"]
 	}
 	Frame label="Downstairs" {
-		Switch item=zwav_node5_laundryroomlight_switch
+		Switch item=zwave_node5_laundryroomlight_switch
+		Slider item=zwave_node6_DownstairsLighting_Dimmer
 	}
 	Frame label="Garage" {
 		Switch item=zwave_node3_garagelight_switch	
@@ -31,8 +32,10 @@ sitemap default label="Rose House"
 		Switch item=relayGarage01 mappings=[ON="Go!"]		
 	}
 	Frame label="Outdoor" {
-		Switch item=BackYardLights_Switch
-		Slider item=zwav_node6_outdoorlighting_switch
+		Switch item=zwave_node10_FrontYardLights_Switch
+		Switch item=zwave_node8_backyardlights_switch
+		Switch item=zwave_node11_PoolLight_Switch
+		Slider item=zwave_node12_StringLights_Dimmer
 	}	
 	Frame label="Man Cave" {
 		Switch item=halvr_sleep_control

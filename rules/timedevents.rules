@@ -3,7 +3,7 @@ rule "bedtimeevent_rule"
 when
     Time cron "0 0 22 * * ?"
 then
-    zwav_node6_outdoorlighting_switch.sendCommand(OFF)
+    zwave_node10_FrontYardLights_Switch.sendCommand(OFF)
 end
 
 rule "sunset_rule"
@@ -12,5 +12,5 @@ when
 	//This is broken until I upgrade out of 2.1.0-1
 	Channel 'astro:sun:astrosun:set#event' triggered END
 then
-	zwav_node6_outdoorlighting_switch.sendCommand(100)
+	zwave_node10_FrontYardLights_Switch.sendCommand(ON)
 end

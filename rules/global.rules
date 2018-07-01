@@ -30,8 +30,24 @@ then
 		zwave_node3_garagelight_switch.sendCommand(OFF)
 	}
 
-	if(zwav_node5_laundryroomlight_switch != OFF) {
-		zwav_node5_laundryroomlight_switch.sendCommand(OFF)
+	if(zwave_node5_laundryroomlight_switch != OFF) {
+		zwave_node5_laundryroomlight_switch.sendCommand(OFF)
+	}
+
+	if(zwave_node6_DownstairsLighting_Dimmer.state != 0) {
+		zwave_node6_DownstairsLighting_Dimmer.sendCommand(0)
+	}
+
+	if(zwave_node8_backyardlights_switch.state != OFF) {
+		zwave_node8_backyardlights_switch.sendCommand(OFF)
+	}
+
+	if(zwave_node11_PoolLight_Switch.state != OFF) {
+		zwave_node11_PoolLight_Switch.sendCommand(OFF)
+	}
+	
+	if(zwave_node12_StringLights_Dimmer.state != OFF) {
+		zwave_node12_StringLights_Dimmer.sendCommand(0)
 	}
 	
         //Dont want to sleep media center.  Maybe another time.

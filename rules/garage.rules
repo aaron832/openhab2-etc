@@ -43,15 +43,15 @@ then
                 logInfo("laundry room", "Laundry room light reschedule")
                 timerLL.reschedule(now.plusMinutes(2))
         }
-        if(zwav_node5_laundryroomlight_switch.state == OFF) {
+        if(zwave_node5_laundryroomlight_switch.state == OFF) {
                 if(timerLL != null){
                         timerLL.cancel
                         timerLL = null
                 }
                 timerLL = createTimer(now.plusMinutes(2)) [|
-                        zwav_node5_laundryroomlight_switch.sendCommand(OFF)
+                        zwave_node5_laundryroomlight_switch.sendCommand(OFF)
                 ]
-                zwav_node5_laundryroomlight_switch.sendCommand(ON)
+                zwave_node5_laundryroomlight_switch.sendCommand(ON)
         }
         Thread::sleep(2000)
         raceCheck = 0
@@ -69,11 +69,11 @@ then
         }
 end
 
-rule "zwav_node5_laundryroomlight_switch_rule"
+rule "zwave_node5_laundryroomlight_switch_rule"
 when
-        Item zwav_node5_laundryroomlight_switch changed
+        Item zwave_node5_laundryroomlight_switch changed
 then
-        logInfo("laundry room", "Laundry light state: " + zwav_node5_laundryroomlight_switch.state)
+        logInfo("laundry room", "Laundry light state: " + zwave_node5_laundryroomlight_switch.state)
         //Can check isRunning on timer to see if this is triggered by timer.
         //But there doesn't seem to be a need
         if(timerLL != null && raceCheck == 0){

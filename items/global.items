@@ -12,3 +12,4 @@ DateTime CurrentTime "NTP Date [%1$tA, %1$tm/%1$td/%1$tY %1$tT]" <calendar> { ch
 
 Switch global_lovedoorbell_switch "Love Doorbell" <switch> (TV) ["NoTag"]
 Switch global_lovedoorbell_drivewayactivate_switch "Love Doorbell Driveway Activate" <switch> (TV) ["NoTag"]
+Switch global_lovedoorbell_dooractivate_switch "Love Doorbell Door Activate" <switch> (TV) ["NoTag"]

@@ -7,10 +7,11 @@ sitemap test label="Alexa Test"
 	Frame label="camera test" {
 		Switch item=backyard_camera_alert
 		Switch item=driveway_camera_alert
+		Switch item=door_camera_alert
 	}
 	Frame label="zwave test" {
 		Switch item=zwave_node9_poolpump_Switch
-		Switch item=BackYardLights_Switch
+		Switch item=zwave_node8_backyardlights_switch
 		Switch item=zwave_device_node4_sensor_binary
 		Slider item=zwave_node7_livingroom_dimmer_interface
 		Slider item=zwave_node7_livingroom_dimmer

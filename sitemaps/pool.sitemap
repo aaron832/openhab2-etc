@@ -1,7 +1,9 @@
 sitemap pool label="Pool"
 {
 	Frame label="Pool Control" {
-		Switch item=BackYardLights_Switch
+		Switch item=zwave_node8_backyardlights_switch
+		Slider item=zwave_node12_StringLights_Dimmer
+		Switch item=zwave_node11_PoolLight_Switch
 		Setpoint item=poolpump_hourrun_number label="Pump Run: [%d Hours]" minValue=0 maxValue=12 step=1
 		Switch item=poolpump_interface
 	}

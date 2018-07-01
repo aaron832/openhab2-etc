@@ -29,9 +29,17 @@ then
 		logInfo("rules","forward to relayLoveCustom")
 		//0x90,60, 0,250, 0x90,72, 0,250, 0x80, 0xf0
 		//var testinput = "\u003C\u0048"
-		var testinput = "\u0050\u0050\u0050"
+		var testinput = "\u0050\u0040\u0050"
 		relayLoveCustom.sendCommand(testinput) 
 		global_lovedoorbell_drivewayactivate_switch.postUpdate(OFF)
+	}
+	else if(global_lovedoorbell_dooractivate_switch.state == ON) {
+		logInfo("rules","forward to relayLoveCustom")
+		//0x90,60, 0,250, 0x90,72, 0,250, 0x80, 0xf0
+		//var testinput = "\u003C\u0048"
+		var testinput = "\u0040\u0050\u0040\u0050"
+		relayLoveCustom.sendCommand(testinput) 
+		global_lovedoorbell_dooractivate_switch.postUpdate(OFF)
 	}
 end
 

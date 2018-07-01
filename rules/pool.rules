@@ -71,7 +71,7 @@ then
 	
 	if (poolpump_calactive.state != OFF && poolpump_calactive.state != ON) {
 		logInfo("rules","Unset state for poolpump_calactive")
-		pushover("Pump schedule event ran with poolpump_calactive as null!", 0)
+		pushover("Pump schedule event ran with poolpump_calactive as null!  You likely rebooted openhab and need to set the pool pump calendar to ON or OFF.", 1)
 	}
 end
 
@@ -91,7 +91,8 @@ rule "zwave_node9_poolpump_Switch_rule"
 when
 	Item zwave_node9_poolpump_Switch changed
 then
-	pushover("Pool Pump: " + zwave_node9_poolpump_Switch.state.toString, 0)
+	//pushover("Pool Pump: " + zwave_node9_poolpump_Switch.state.toString, 0)
+	sendPushoverMessage(pushoverBuilder("Pool Pump: " + zwave_node9_poolpump_Switch.state.toString).withPriority(-2))
 	logInfo("rules","forward update zwave_node9_poolpump_Switch_rule to poolpump_interface")
 	poolpump_interface.postUpdate(zwave_node9_poolpump_Switch.state)
 end

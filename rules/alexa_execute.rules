@@ -3,18 +3,38 @@ when
 	Item alexa_media_center_execute_lockitdown received command
 then
 	var myString = " "
+	var lightString = " "
 	if(bayDoorGarage01.state != 0) {
-		myString += "Closing garage bay door."
+		myString += "Closing garage bay door. "
 	}
 	if(doorGarage01.state != 0) {
-		myString += "Garage back door is open.  Please close it."
+		myString += "Garage back door is open.  Please close it. "
 	}
+
+	//Lights section
 	if(zwave_node3_garagelight_switch.state != OFF) {
-		myString += "Turning off garage light. "
+		lightString += "garage,"
 	}
-	if(zwav_node5_laundryroomlight_switch.state != OFF) {
-		myString += "Turning off laundry room light. "
+	if(zwave_node5_laundryroomlight_switch.state != OFF) {
+		lightString += "laundry room,"
 	}
+	if(zwave_node6_DownstairsLighting_Dimmer.state != 0) {
+		lightString += "downstairs,"
+	}
+	if(zwave_node8_backyardlights_switch.state != OFF) {
+		lightString += "back yard,"
+	}
+	if(zwave_node11_PoolLight_Switch.state != OFF) {
+		lightString += "pool,"
+	}
+	if(zwave_node12_StringLights_Dimmer.state != 0) {
+		lightString += "string,"
+	}
+	if(lightString != " ")
+	{
+		myString += "Turning off " + lightString + " lights. "
+	}
+
 	if(halvr_status.state != OFF) {
 		myString += "Putting Hal V.R. to sleep. "
 	}

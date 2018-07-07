@@ -12,7 +12,7 @@ sitemap test label="Alexa Test"
 	Frame label="zwave test" {
 		Switch item=zwave_node9_poolpump_Switch
 		Switch item=zwave_node8_backyardlights_switch
-		Switch item=zwave_device_node4_sensor_binary
+		Text item=zwave_node4_MotionSensor_BinarySensor
 		Slider item=zwave_node7_livingroom_dimmer_interface
 		Slider item=zwave_node7_livingroom_dimmer
 	}

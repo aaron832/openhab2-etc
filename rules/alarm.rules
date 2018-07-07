@@ -2,7 +2,7 @@
 
 rule "motiongarage_alarm_rule"
 when
-	Item zwave_device_node4_sensor_binary changed to ON
+	Item zwave_node4_MotionSensor_BinarySensor changed to OPEN
 then
 	var String timestr = CurrentTime.state.format("%1$tR")
 	

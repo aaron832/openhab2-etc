@@ -20,7 +20,7 @@ rule "autoGarageLightOnBayDoor"
 when
         Item bayDoorGarage01 changed to 1 
 or
-	Item zwave_device_node4_sensor_binary changed to ON
+	Item zwave_node4_MotionSensor_BinarySensor changed to OPEN
 then
         raceCheck = 1
 

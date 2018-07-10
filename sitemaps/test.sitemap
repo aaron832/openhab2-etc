@@ -24,6 +24,8 @@ sitemap test label="Alexa Test"
 		Switch item=samsungtv_status
 	}
 	Frame label="Alexa" icon="sofa" {
+		Switch item=halvr_wol mappings=[ON="Go!"]
+		Switch item=halvr_sleep mappings=[ON="Go!"]
 		Switch item=alexa_media_center_power
 		Switch item=alexa_tv_power
 		Selection item=alexa_tv_mode mappings=["pc"="PC", "wii"="Wii"]

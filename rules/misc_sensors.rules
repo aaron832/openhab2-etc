@@ -47,7 +47,7 @@ rule "nodeReqLoveSleep_rule"
 when
 	Item nodeReqLoveSleep received command
 then
-	logInfo("rules","forward to relayLoveSleep")
+	//logInfo("rules","forward to relayLoveSleep")
 	//relayLoveSleep.sendCommand(new DecimalType(300000))
 	//relayLoveSleep.sendCommand(new DecimalType(60000))
 	relayLoveSleep.sendCommand(new DecimalType(10000))

@@ -17,7 +17,7 @@ end
 
 rule "nest_home_away_alarm_rule"
 when
-	Item home_away changed from away to home
+	Item home_away changed from AWAY to HOME
 then
 	var String timestr = CurrentTime.state.format("%1$tR")
 	

@@ -1,12 +1,12 @@
 String home_away "Home/Away [%s]" <present> { nest="=[structures(Home).away]" }
 DateTime nest_room_last_connection "Last Connection [%1$tm/%1$td/%1$tY %1$tH:%1$tM:%1$tS]" <calendar> {nest="<[thermostats(halnest).last_connection]"}
 String nest_room_hvac_mode "HVAC Mode" <climate> { nest="=[thermostats(halnest).hvac_mode]" }
-String nest_room_temperature_scale "Temperature Scale [%s]" { nest="<[thermostats(halnest).temperature_scale]" }
 Number nest_room_ambient_temperature_f "Ambient Temperature [%.1f °F]" <temperature> { nest="<[thermostats(halnest).ambient_temperature_f]" }
-Number nest_room_ambient_temperature_c "Ambient Temperature [%.1f °C]" <temperature> { nest="<[thermostats(halnest).ambient_temperature_c]" }
 Number nest_room_humidity "Humidity [%d %%]" <humidity> { nest="<[thermostats(halnest).humidity]" }
 Number nest_room_target_temperature_f "Target Temperature [%.1f °F]" <temperature> { nest="=[thermostats(halnest).target_temperature_f]" }
 Number nest_room_target_temperature_low_f "Minimum Temperature [%.1f °F]" <temperature> { nest="=[thermostats(halnest).target_temperature_low_f]" }
 Number nest_room_target_temperature_high_f "Maximum Temperature [%.1f °F]" <temperature> { nest="=[thermostats(halnest).target_temperature_high_f]" }
 Number nest_room_away_temperature_low_f "Minimum Away Temp. [%.1f °F]" <temperature> { nest="<[thermostats(halnest).away_temperature_low_f]" }
 Number nest_room_away_temperature_high_f "Maximum Away Temp. [%.1f °F]" <temperature> { nest="<[thermostats(halnest).away_temperature_high_f]" }
+
+Number:Temperature nest_temperature "Temperature [%.1f %unit%]" { channel="nest:thermostat:myaccount:living_thermostat:temperature" }

@@ -1,3 +1,4 @@
 Thing samsungtv:tv:samsungtvpingthing "Ping Thing Samsung TV LR" @ "Living Room" [ hostName="192.168.1.19", port=55000, refreshInterval=1000 ]
-Thing network:pingdevice:halvr2106pingthing "Ping Thing HalVR2016" [ hostname="192.168.1.90", port="0", retry="1", refresh_interval="60000", timeout="5000", use_system_ping="false", dhcplisten="true" ]
+//Thing network:pingdevice:halvr2106pingthing "Ping Thing HalVR2016" [ hostname="192.168.1.90", port="0", retry="1", refresh_interval="60000", timeout="5000", use_system_ping="false", dhcplisten="true" ]
+Thing network:pingdevice:halvr2106pingthing "Ping Thing HalVR2016" [ hostname="192.168.1.90" ]
 Thing network:pingdevice:mediahal2015pingthing "Ping Thing MediaHal2015" [ hostname="192.168.1.118" ]

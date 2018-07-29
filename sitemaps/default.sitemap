@@ -44,8 +44,9 @@ sitemap default label="Rose House"
 	Frame label="Home" icon="house" {
 		Slider item=zwave_node2_uphallway_dimmer		
 		Switch item=home_away mappings=[HOME="HOME", AWAY="AWAY"]		
-		Text item=nest_room_ambient_temperature_f visibility=[nest_room_temperature_scale=="F"]		
-		Text item=nest_room_ambient_temperature_c visibility=[nest_room_temperature_scale=="C"]		
+		Text item=nest_room_ambient_temperature_f	
+		Text item=nest_room_target_temperature_low_f
+		Text item=nest_room_target_temperature_high_f
 		Text item=nest_room_humidity		
 		Switch item=nest_room_hvac_mode mappings=["HEAT-COOL"="both", HEAT="heat", COOL="cool", ECO="eco", OFF="off"]		
 		Text item=nest_room_away_temperature_low_f visibility=[home_away=="away", home_away=="auto-away"]		

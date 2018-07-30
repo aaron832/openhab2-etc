@@ -2,3 +2,8 @@ Thing samsungtv:tv:samsungtvpingthing "Ping Thing Samsung TV LR" @ "Living Room"
 //Thing network:pingdevice:halvr2106pingthing "Ping Thing HalVR2016" [ hostname="192.168.1.90", port="0", retry="1", refresh_interval="60000", timeout="5000", use_system_ping="false", dhcplisten="true" ]
 Thing network:pingdevice:halvr2106pingthing "Ping Thing HalVR2016" [ hostname="192.168.1.90" ]
 Thing network:pingdevice:mediahal2015pingthing "Ping Thing MediaHal2015" [ hostname="192.168.1.118" ]
+
+Bridge yamahareceiver:yamahaAV:lryamahareceiver "Yamaha Receiver Bridge" [host="192.168.1.125", refreshInterval=20] {
+	Thing zone LRMainZone "Yamaha Main Zone" @ "Living Room" [zone="Main_Zone", volumeDbMin=-81, volumeDbMax=12]
+	Thing zone LRZone2 "Yamaha Zone 2" @ "Living Room" [zone="Zone_2"]
+}

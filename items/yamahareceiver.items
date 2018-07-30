@@ -1,0 +1,3 @@
+Switch yamahareceiver_power "Yamaha Power" <switch> (Receiver) ["NoTag"] { channel="yamahareceiver:zone:lryamahareceiver:LRMainZone:zone_channels#power" }
+Dimmer yamahareceiver_volume "Yamaha Volume [%d]" <soundvolume> (Receiver) ["NoTag"] { channel="yamahareceiver:zone:lryamahareceiver:LRMainZone:zone_channels#volume" }
+Switch yamahareceiver_mute "Yamaha Mute" <switch> (Receiver) ["NoTag"] { channel="yamahareceiver:zone:lryamahareceiver:LRMainZone:zone_channels#mute" }

@@ -25,7 +25,7 @@ val Functions$Function3<String, String, String, String> execSSHCommandMCWake= [ 
         return results;
     ]
 
-    if ( (meidacenter_status.state == OFF) && (timer == null || timer.hasTerminated) ) {
+    if ( (meidacenter_status.state == OFF) && (timer === null || timer.hasTerminated) ) {
         mediacenter_wol.sendCommand(ON)
         timer = createTimer(now.plusSeconds(6)) [|
             logInfo("execSSHCommandMCWake", "delay timer")

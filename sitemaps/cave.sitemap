@@ -1,0 +1,38 @@
+sitemap cave label="Cave"
+{
+	Frame label="AutoItCommands" icon="sofa" {
+		Switch item=autoit_vr_test mappings=[ON="Go!"]
+		Switch item=autoit_vr_receiver_power mappings=[ON="Go!"]
+		Switch item=autoit_vr_receiver_dvd mappings=[ON="Go!"]
+		Switch item=autoit_vr_receiver_vol_up mappings=[ON="Go!"]
+		Switch item=autoit_vr_receiver_vol_down mappings=[ON="Go!"]
+		Switch item=autoit_vr_receiver_zone2_power mappings=[ON="Go!"]
+		Switch item=autoit_vr_receiver_zone2_dvd mappings=[ON="Go!"]
+		Switch item=autoit_vr_receiver_zone2_vol_up mappings=[ON="Go!"]
+		Switch item=autoit_vr_receiver_zone2_vol_down mappings=[ON="Go!"]
+		Selection item=autoit_vr_spotify_playlist mappings=["OFF"="OFF", "EvChill"="EvChill", "TheWater"="TheWater", "Groove"="Groove", "Techno"="Techno", "Kids_Party"="Kids_Party", "Pool_Party"="Pool_Party", "Pool_Party_Extended"="Pool_Party_Extended"]
+		Switch item=autoit_vr_tv_power mappings=[ON="Go!"]
+		Switch item=autoit_vr_tv_volup mappings=[ON="Go!"]
+		Switch item=autoit_vr_tv_voldown mappings=[ON="Go!"]
+		Switch item=autoit_vr_tv_mute mappings=[ON="Go!"]
+		Switch item=autoit_vr_tv_picsize mappings=[ON="Go!"]
+		Switch item=autoit_vr_tv_exit mappings=[ON="Go!"]
+		Switch item=autoit_vr_tv_input mappings=[ON="Go!"]
+		Switch item=autoit_vr_tv_0 mappings=[ON="Go!"]
+		Switch item=autoit_vr_tv_1 mappings=[ON="Go!"]
+		Switch item=autoit_vr_tv_2 mappings=[ON="Go!"]
+		Switch item=autoit_vr_tv_3 mappings=[ON="Go!"]
+		Switch item=autoit_vr_tv_4 mappings=[ON="Go!"]
+		Switch item=autoit_vr_tv_5 mappings=[ON="Go!"]
+	}
+	
+	Frame label="Others" icon="sofa" {
+		Switch item=halvr_sleep_control
+		Switch item=zwave_node5_laundryroomlight_switch
+		Slider item=zwave_node6_DownstairsLighting_Dimmer
+		Switch item=zwave_node11_PoolLight_Switch
+		Switch item=zwave_node8_backyardlights_switch
+		Slider item=zwave_node12_StringLights_Dimmer
+		Setpoint item=poolpump_hourrun_number label="Pump Run: [%d Hours]" minValue=0 maxValue=12 step=1
+	}
+}

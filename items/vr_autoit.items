@@ -1,0 +1,25 @@
+Switch autoit_vr_test 						"Test" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_receiver_power 			"RC Power" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_receiver_dvd 				"RC DVD" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_receiver_zone2_power 		"RC Z2 Power" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_receiver_vol_up 			"RC Vol Up" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_receiver_vol_down 			"RC Vol Down" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_receiver_zone2_vol_up 		"RC Z2 Vol Up" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_receiver_zone2_vol_down 	"RC Z2 Vol Down" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_receiver_zone2_dvd 		"RC Z2 DVD" <switch> (TV) ["NoTag"] { autoupdate="false" }
+
+Switch autoit_vr_tv_power "TV Power" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_tv_volup "TV Vol Up" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_tv_voldown "TV Vol Down" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_tv_mute "TV Mute" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_tv_picsize "TV Pic Size" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_tv_exit "TV Exit" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_tv_input "TV Input" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_tv_0 "TV 0" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_tv_1 "TV 1" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_tv_2 "TV 2" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_tv_3 "TV 3" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_tv_4 "TV 4" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch autoit_vr_tv_5 "TV 5" <switch> (TV) ["NoTag"] { autoupdate="false" }
+
+String autoit_vr_spotify_playlist "Spotify Pool Party" <switch> (TV) ["NoTag"]

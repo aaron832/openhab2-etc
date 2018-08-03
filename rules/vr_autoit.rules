@@ -1,0 +1,215 @@
+import org.eclipse.xtext.xbase.lib.Functions
+import org.openhab.model.script.actions.Timer
+
+var Timer timer = null
+val gatewayScript = "openhabgateway.au3"
+
+val Functions$Function3<String, String, String, String> execSSHCommandVRWake= [ script, command, receivedCommand |
+    val Functions$Function3<String, String, String, String> fexecSSHCommand= [ script, command, receivedCommand |
+        val sshConnect = "ssh -o ConnectTimeout=4 Aaron@halvr2016 "
+        val autoItWithScriptPath = "\"C:\\Program Files (x86)\\AutoIt3\\AutoIt3.exe\" \"C:\\Program Files (x86)\\AutoIt3\\myscripts\\"
+        logInfo("execSSHCommand_function_rule", script)
+        logInfo("execSSHCommand_function_rule", command)
+        logInfo("execSSHCommand_function_rule", receivedCommand)
+        var results = executeCommandLine(sshConnect + autoItWithScriptPath + script + "\" \"" + command + "\" \"" + receivedCommand + "\"", 5000)
+        return results;
+    ]
+
+    if ( (halvr_status.state == OFF) && (timer === null || timer.hasTerminated) ) {
+        halvr_wol.sendCommand(ON)
+        timer = createTimer(now.plusSeconds(6)) [|
+            logInfo("execSSHCommandVRWake", "delay timer")
+            fexecSSHCommand.apply(script, command, receivedCommand)
+        ]
+        return "delayed"
+    }
+    else {
+        logInfo("execSSHCommandVRWake","go directly to execSSHCommand")
+        return fexecSSHCommand.apply(script, command, receivedCommand)
+    }
+]
+
+rule "autoit_vr_test_rule"
+when
+    Item autoit_vr_test received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"test",receivedCommand.toString)
+    logInfo("autoit_vr_test_rule", results)
+end
+
+rule "autoit_vr_spotify_playlist_rule"
+when
+    Item autoit_vr_spotify_playlist received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"spotify",receivedCommand.toString)
+    logInfo("autoit_vr_spotify_playlist_rule", results)
+end
+
+rule "autoit_vr_receiver_power_rule"
+when
+    Item autoit_vr_receiver_power received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"receiver_power",receivedCommand.toString)
+    logInfo("autoit_vr_receiver_power_rule", results)
+end
+
+rule "autoit_vr_receiver_dvd_rule"
+when
+    Item autoit_vr_receiver_dvd received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"receiver_dvd",receivedCommand.toString)
+    logInfo("autoit_vr_receiver_dvd_rule", results)
+end
+
+rule "autoit_vr_receiver_vol_up_rule"
+when
+    Item autoit_vr_receiver_vol_up received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"receiver_volup",receivedCommand.toString)
+    logInfo("autoit_mc_netflix_rule", results)
+end
+
+rule "autoit_vr_receiver_vol_down_rule"
+when
+    Item autoit_vr_receiver_vol_down received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"receiver_voldown",receivedCommand.toString)
+    logInfo("autoit_mc_netflix_rule", results)
+end
+
+rule "autoit_vr_receiver_zone2_power_rule"
+when
+    Item autoit_vr_receiver_zone2_power received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"receiver_zone2_power",receivedCommand.toString)
+    logInfo("autoit_vr_receiver_zone2_power_rule", results)
+end
+
+rule "autoit_vr_receiver_zone2_dvd_rule"
+when
+    Item autoit_vr_receiver_zone2_dvd received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"receiver_zone2_dvd",receivedCommand.toString)
+    logInfo("autoit_vr_receiver_zone2_dvd_rule", results)
+end
+
+rule "autoit_vr_receiver_zone2_vol_up_rule"
+when
+    Item autoit_vr_receiver_zone2_vol_up received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"receiver_zone2_volup",receivedCommand.toString)
+    logInfo("autoit_vr_receiver_zone2_vol_up_rule", results)
+end
+
+rule "autoit_vr_receiver_zone2_vol_down_rule"
+when
+    Item autoit_vr_receiver_zone2_vol_down received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"receiver_zone2_voldown",receivedCommand.toString)
+    logInfo("autoit_vr_receiver_zone2_vol_down_rule", results)
+end
+
+
+rule "autoit_vr_tv_power_rule"
+when
+    Item autoit_vr_tv_power received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"tv_power",receivedCommand.toString)
+    logInfo("autoit_vr_tv_power_rule", results)
+end
+
+rule "autoit_vr_tv_volup_rule"
+when
+    Item autoit_vr_tv_volup received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"tv_volup",receivedCommand.toString)
+    logInfo("autoit_vr_tv_volup_rule", results)
+end
+
+rule "autoit_vr_tv_voldown_rule"
+when
+    Item autoit_vr_tv_voldown received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"tv_voldown",receivedCommand.toString)
+    logInfo("autoit_vr_tv_voldown_rule", results)
+end
+
+rule "autoit_vr_tv_mute_rule"
+when
+    Item autoit_vr_tv_mute received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"tv_mute",receivedCommand.toString)
+    logInfo("autoit_vr_tv_mute_rule", results)
+end
+
+rule "autoit_vr_tv_picsize_rule"
+when
+    Item autoit_vr_tv_picsize received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"tv_picsize",receivedCommand.toString)
+    logInfo("autoit_vr_tv_picsize_rule", results)
+end
+
+rule "autoit_vr_tv_exit_rule"
+when
+    Item autoit_vr_tv_exit received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"tv_exit",receivedCommand.toString)
+    logInfo("autoit_vr_tv_exit_rule", results)
+end
+
+rule "autoit_vr_tv_input_rule"
+when
+    Item autoit_vr_tv_input received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"tv_input",receivedCommand.toString)
+    logInfo("autoit_vr_tv_input_rule", results)
+end
+
+rule "autoit_vr_tv_0_rule"
+when
+    Item autoit_vr_tv_0 received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"tv_0",receivedCommand.toString)
+    logInfo("autoit_vr_tv_0_rule", results)
+end
+
+rule "autoit_vr_tv_1_rule"
+when
+    Item autoit_vr_tv_1 received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"tv_1",receivedCommand.toString)
+    logInfo("autoit_vr_tv_1_rule", results)
+end
+
+rule "autoit_vr_tv_2_rule"
+when
+    Item autoit_vr_tv_2 received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"tv_2",receivedCommand.toString)
+    logInfo("autoit_vr_tv_2_rule", results)
+end
+
+rule "autoit_vr_tv_3_rule"
+when
+    Item autoit_vr_tv_3 received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"tv_3",receivedCommand.toString)
+    logInfo("autoit_vr_tv_3_rule", results)
+end
+
+rule "autoit_vr_tv_4_rule"
+when
+    Item autoit_vr_tv_4 received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"tv_4",receivedCommand.toString)
+    logInfo("autoit_vr_tv_4_rule", results)
+end
+
+rule "autoit_vr_tv_5_rule"
+when
+    Item autoit_vr_tv_5 received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"tv_5",receivedCommand.toString)
+    logInfo("autoit_vr_tv_5_rule", results)
+end

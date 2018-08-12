@@ -1,0 +1,7 @@
+sitemap openhab label="openhab"
+{
+	Frame label="Bindings" icon="sofa" {
+		Switch item=openhab_binding_zwave_stop mappings=[ON="Go!"]
+		Switch item=openhab_binding_zwave_start mappings=[ON="Go!"]
+	}
+}

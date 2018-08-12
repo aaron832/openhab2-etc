@@ -1,0 +1,2 @@
+Switch openhab_binding_zwave_stop "Stop Z-Wave Binding" <switch> (openhab) ["NoTag"] { autoupdate="false" }
+Switch openhab_binding_zwave_start "Start Z-Wave Binding" <switch> (openhab) ["NoTag"] { autoupdate="false" }

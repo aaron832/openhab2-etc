@@ -1,0 +1,15 @@
+rule "openhab_binding_zwave_stop_rule"
+when
+    Item openhab_binding_zwave_stop received command
+then
+    val results = executeCommandLine("bash /etc/openhab2/scripts/zwave_binding_stop.sh", 7000)
+    logInfo("openhab_binding_zwave_stop_rule", results)
+end
+
+rule "openhab_binding_zwave_start_rule"
+when
+    Item openhab_binding_zwave_start received command
+then
+    val results = executeCommandLine("bash /etc/openhab2/scripts/zwave_binding_start.sh", 7000)
+    logInfo("openhab_binding_zwave_start_rule", results)
+end

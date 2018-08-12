@@ -103,6 +103,14 @@ then
         logInfo("autoit_mc_start_spotify_rule", results)
 end
 
+rule "autoit_mc_start_sp_playlist_rule"
+when
+        Item autoit_mc_start_sp_playlist received command
+then
+        val results = execSSHCommandMCWake.apply(gatewayScript,"spotify",receivedCommand.toString)
+        logInfo("autoit_mc_start_sp_playlist_rule", results)
+end
+
 rule "autoit_mc_stop_spotify_rule"
 when
         Item autoit_mc_stop_spotify received command

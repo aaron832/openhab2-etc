@@ -45,6 +45,14 @@ then
 	logInfo("rules","foward to autoit_mc_start_airplay"); 
 end
 
+rule "alexa_media_center_listen_spotify_playlist_rule"
+when
+	Item alexa_media_center_listen_spotify_playlist received command
+then
+	autoit_mc_start_sp_playlist.sendCommand(receivedCommand);
+	logInfo("rules","foward to autoit_mc_start_sp_playlist"); 
+end
+
 rule "alexa_media_center_stop_music_rule"
 when
 	Item alexa_media_center_stop_music received command

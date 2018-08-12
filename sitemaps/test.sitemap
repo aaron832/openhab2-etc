@@ -13,6 +13,7 @@ sitemap test label="Alexa Test"
 		Switch item=zwave_node9_poolpump_Switch
 		Switch item=zwave_node8_backyardlights_switch
 		Text item=zwave_node4_MotionSensor_BinarySensor
+		Text item=zwave_node13_MotionSensor_BinarySensor
 		Slider item=zwave_node7_livingroom_dimmer_interface
 		Slider item=zwave_node7_livingroom_dimmer
 	}
@@ -45,6 +46,7 @@ sitemap test label="Alexa Test"
 		Selection item=alexa_netflixprof label="Netflix Profile" mappings=["Aaron"="Aaron", "Brenna"="Brenna", "Emi"="Emi"]
 		Text item=alexaresp
 		Switch item=alexa_doorbell
+		Selection item=autoit_mc_start_sp_playlist mappings=["OFF"="OFF", "evening chill"="EvChill", "water"="TheWater", "groove"="Groove", "techno"="Techno", "kids party"="Kids_Party", "pool party"="Pool_Party", "pool party extended"="Pool_Party_Extended"]
 	}
 	Frame label="Alexa Status" icon="sofa" {
 		Text item=ECHO_Processed

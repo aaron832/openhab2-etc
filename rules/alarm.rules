@@ -15,6 +15,21 @@ then
 	}
 end
 
+rule "livingroommotion_alarm_rule"
+when
+	Item zwave_node13_MotionSensor_BinarySensor changed to ON
+then
+	var String timestr = CurrentTime.state.format("%1$tR")
+	
+	nodelcdtop.sendCommand(timestr)
+	nodelcdbottom.sendCommand("Livingroom Motion")
+	if(global_alarm.state == ON) {
+		global_alarm_triggered.sendCommand(ON)
+		nodelcdbright.sendCommand(100)
+		pushover("Livingroom Motion", 0)
+	}
+end
+
 rule "nest_home_away_alarm_rule"
 when
 	Item home_away changed from AWAY to HOME

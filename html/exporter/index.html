@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>openHAB Exporter</title>
+    </head>
+
+    <!-- 
+        Enjoy!
+        Kuba Wolanin 
+    -->
+    <body>
+
+        <h1>All Items:</h1>
+        <pre id="items"></pre>
+
+        <script src="js/ascii-table.min.js"></script>
+        <script src="js/textItems.js"></script>
+        <script>
+            fetch(document.location.origin + '/rest/items')
+                .then(function(response) {
+                    let contentType = response.headers.get("content-type");
+                    if (contentType && contentType.includes("application/json")) {
+                        return response.json();
+                    }
+                    throw new TypeError("Oops, we haven't got JSON!");
+                })
+                .then(function(json) {
+                    let textItems = generateItems(json);
+                    document.querySelector('#items').innerHTML = textItems;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        </script>
+    </body>
+
+</html>

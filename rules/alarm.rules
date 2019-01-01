@@ -11,7 +11,10 @@ then
 	if(global_alarm.state == ON) {
 		global_alarm_triggered.sendCommand(ON)
 		nodelcdbright.sendCommand(100)
-		pushover("Garage Motion", 0)
+		sendPushoverMessage(pushoverBuilder("Garage Motion").withPriority(0))
+	}
+	else if(global_night_alarm.state == ON) {
+		nodelcdbright.sendCommand(100)
 	}
 end
 
@@ -26,7 +29,10 @@ then
 	if(global_alarm.state == ON) {
 		global_alarm_triggered.sendCommand(ON)
 		nodelcdbright.sendCommand(100)
-		pushover("Livingroom Motion", 0)
+		sendPushoverMessage(pushoverBuilder("Livingroom Motion").withPriority(0))
+	}
+	else if(global_night_alarm.state == ON) {
+		nodelcdbright.sendCommand(100)
 	}
 end
 
@@ -41,7 +47,7 @@ then
 	if(global_alarm.state == ON) {
 		global_alarm_triggered.sendCommand(ON)
 		nodelcdbright.sendCommand(100)
-		pushover("Nest changed to Home", 0)	
+		sendPushoverMessage(pushoverBuilder("Nest changed to Home").withPriority(0))
 	}
 end
 
@@ -51,6 +57,7 @@ when
 then
 	var String timestr = CurrentTime.state.format("%1$tR")
 	
+	global_camera_pushover_alert.sendCommand(receivedCommand)
 	nodelcdtop.sendCommand(timestr)
 	if(receivedCommand == ON) {
 		nodelcdbottom.sendCommand("Alarm Set")
@@ -66,7 +73,7 @@ rule "global_alarm_triggered_rule"
 when
 	Item global_alarm_triggered changed from OFF to ON
 then
-	pushover("Alarm Triggered", 2)
+	sendPushoverMessage(pushoverBuilder("Alarm Triggered").withPriority(2))
 end
 
 rule "driveway_camera_alert_rule"
@@ -75,11 +82,11 @@ when
 then
 	if(global_lovedoorbell_switch.state == ON) {
 		global_lovedoorbell_drivewayactivate_switch.sendCommand(ON)
+	}
+	if(global_camera_pushover_alert.state == ON) {
 		val results = executeCommandLine("wget http://mediahal2015:8081/image/DW?q=50&s=80&user=hab&pw=HabPass12 -O /home/openhab/ImageDrop/" + "dw_doorbell.jpeg",5000)
-		logInfo("Test", results)
-		//pushover("Garage Motion Doorbell", 0)
+		logInfo("execResults", results)
 		sendPushoverMessage(pushoverBuilder("Garage Motion Doorbell").withPriority(0).withAttachment("/home/openhab/ImageDrop/dw_doorbell.jpeg"))
-		//sendPushoverImage("Garage Motion Doorbell", "/home/openhab/ImageDrop/dw_doorbell.jpeg")
 	}
 end
 
@@ -89,10 +96,10 @@ when
 then
 	if(global_lovedoorbell_switch.state == ON) {
 		global_lovedoorbell_dooractivate_switch.sendCommand(ON)
+	}
+	if(global_camera_pushover_alert.state == ON) {
 		val results = executeCommandLine("wget http://mediahal2015:8081/image/Door?q=50&s=80&user=hab&pw=HabPass12 -O /home/openhab/ImageDrop/" + "dw_doorbell.jpeg",5000)
-		logInfo("Test", results)
-		//pushover("Garage Motion Doorbell", 0)
+		logInfo("execResults", results)
 		sendPushoverMessage(pushoverBuilder("Door Motion Doorbell").withPriority(0).withAttachment("/home/openhab/ImageDrop/dw_doorbell.jpeg"))
-		//sendPushoverImage("Garage Motion Doorbell", "/home/openhab/ImageDrop/dw_doorbell.jpeg")
 	}
 end

@@ -3,6 +3,7 @@ sitemap default label="Rose House"
 	Frame label="Alarm" icon="sofa" {
 		Switch item=global_alarm
 		Switch item=global_alarm_triggered
+		Switch item=global_camera_pushover_alert
 		Switch item=global_lovedoorbell_switch
 		Default item=nodelcdbottom
 	}
@@ -25,7 +26,7 @@ sitemap default label="Rose House"
 	}
 	Frame label="Garage" {
 		Switch item=zwave_node3_garagelight_switch	
-		Text item=sensorGarage		
+		Text item=sensorGarageLastCom		
 		Text item=tempGarage01		
 		Text item=humGarage01		
 		Text item=bayDoorGarage01		
@@ -57,5 +58,8 @@ sitemap default label="Rose House"
 	}
 	Frame label="Misc" icon="house" {
 		Switch item=global_love_switch
+	}
+	Frame label="Controls" {
+		Switch item=global_lighttimer_disable
 	}
 }

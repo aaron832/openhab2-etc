@@ -7,3 +7,5 @@ Bridge yamahareceiver:yamahaAV:lryamahareceiver "Yamaha Receiver Bridge" [host="
 	Thing zone LRMainZone "Yamaha Main Zone" @ "Living Room" [zone="Main_Zone", volumeDbMin=-81, volumeDbMax=12]
 	Thing zone LRZone2 "Yamaha Zone 2" @ "Living Room" [zone="Zone_2"]
 }
+
+astro:sun:astrosun  [ geolocation="39.497029,-119.838725,1373", interval=60 ]

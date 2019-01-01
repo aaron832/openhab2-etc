@@ -9,6 +9,8 @@ Switch alexa_media_center_default_music "Media Center Music" <switch> (TV) ["NoT
 Switch alexa_media_center_listen_airplay "MC AirPlay" <switch> (TV) ["NoTag"] { autoupdate="false" }
 String alexa_media_center_listen_spotify_playlist "MC SP PL" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch alexa_media_center_execute_lockitdown "MC Lock It Down" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch alexa_media_center_execute_iamleaving "MC I am leaving" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch alexa_media_center_execute_iamhome "MC I am home" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch alexa_media_center_watch_ponyo "MC Watch Ponyo" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch alexa_media_center_watch_kidsmovie "MC Watch KidsMovie" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch alexa_media_center_stop_music "MC Stop Music"  <switch> (TV) ["NoTag"] { autoupdate="false" }

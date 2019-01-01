@@ -45,3 +45,21 @@ then
 	postUpdate(alexaresp, myString)
 	global_lockitdown.sendCommand(ON);//receivedCommand);
 end
+
+rule "alexa_media_center_execute_iamleaving_rule"
+when
+	Item alexa_media_center_execute_iamleaving received command
+then
+	var myString = "Ok, Goodbye"
+	postUpdate(alexaresp, myString)
+	global_ex_leaving.sendCommand(ON);
+end
+
+rule "alexa_media_center_execute_iamhome_rule"
+when
+	Item alexa_media_center_execute_iamhome received command
+then
+	var myString = "Welcome home!"
+	postUpdate(alexaresp, myString)
+	global_ex_home.sendCommand(ON);
+end

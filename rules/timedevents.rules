@@ -3,7 +3,9 @@ rule "bedtimeevent_rule"
 when
     Time cron "0 0 22 * * ?"
 then
-    zwave_node10_FrontYardLights_Switch.sendCommand(OFF)
+	if(global_lighttimer_disable.state != OFF) {
+    	zwave_node10_FrontYardLights_Switch.sendCommand(OFF)
+    }
 end
 
 rule "sunset_rule"
@@ -12,5 +14,7 @@ when
 	//This is broken until I upgrade out of 2.1.0-1
 	Channel 'astro:sun:astrosun:set#event' triggered END
 then
-	zwave_node10_FrontYardLights_Switch.sendCommand(ON)
+	if(global_lighttimer_disable.state != OFF) {
+		zwave_node10_FrontYardLights_Switch.sendCommand(ON)
+	}
 end

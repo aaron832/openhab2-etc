@@ -1,5 +1,6 @@
 import org.openhab.model.script.actions.Timer
 var Timer lv_light_timer = null
+var Timer leaving_timer = null
 
 rule "global_lockitdown_rule"
 when
@@ -54,7 +55,7 @@ then
 	//mediacenter_sleep.sendCommand(ON)
 	halvr_sleep.sendCommand(ON)
 
-	if ( lv_light_timer == null || lv_light_timer.hasTerminated ) {
+	if ( lv_light_timer === null || lv_light_timer.hasTerminated ) {
 		logInfo("global_lockitdown_rule", "Low lights on hallways and living room")
 		//zwave_node2_uphallway_dimmer.sendCommand(new DecimalType(5))
 		zwave_node7_livingroom_dimmer_interface.sendCommand(new DecimalType(2))
@@ -67,3 +68,75 @@ then
 	}
 end
 
+rule "global_ex_leaving_rule"
+when
+    Item global_ex_leaving received command
+then
+	if(samsungtv_lr_power_interface.state != OFF) {
+            samsungtv_lr_power_interface.sendCommand(OFF)
+            Thread::sleep(1000)
+    }
+    if(yamahareceiver_power.state != OFF) {
+            yamahareceiver_power.sendCommand(OFF)
+    }
+
+	if(doorGarage01.state != 0) {
+		logInfo("rule", "Garage back door is open!")
+	}
+
+	if(zwave_node2_uphallway_dimmer.state != 0) {
+		zwave_node2_uphallway_dimmer.sendCommand(0)
+	}
+
+	if(zwave_node3_garagelight_switch.state != OFF) {
+		zwave_node3_garagelight_switch.sendCommand(OFF)
+	}
+
+	if(zwave_node5_laundryroomlight_switch != OFF) {
+		zwave_node5_laundryroomlight_switch.sendCommand(OFF)
+	}
+
+	if(zwave_node6_DownstairsLighting_Dimmer.state != 0) {
+		zwave_node6_DownstairsLighting_Dimmer.sendCommand(0)
+	}
+
+	if(zwave_node8_backyardlights_switch.state != OFF) {
+		zwave_node8_backyardlights_switch.sendCommand(OFF)
+	}
+
+	if(zwave_node11_PoolLight_Switch.state != OFF) {
+		zwave_node11_PoolLight_Switch.sendCommand(OFF)
+	}
+	
+	if(zwave_node12_StringLights_Dimmer.state != OFF) {
+		zwave_node12_StringLights_Dimmer.sendCommand(0)
+	}
+	
+	halvr_sleep.sendCommand(ON)
+
+	if(leaving_timer !== null && !leaving_timer.isRunning() && !leaving_timer.hasTerminated()) {
+		logInfo("global_ex_leaving_rule", "leaving_timer reschedule")
+		leaving_timer.reschedule(now.plusMinutes(10))
+	}
+	else if ( leaving_timer === null || leaving_timer.hasTerminated ) {
+		logInfo("global_ex_leaving_rule", "Laundry room light on")
+		zwave_node5_laundryroomlight_switch.sendCommand(ON)
+		logInfo("global_ex_leaving_rule", "delay timer for light and alarm")
+		leaving_timer = createTimer(now.plusMinutes(10)) [|
+			logInfo("global_ex_leaving_rule", "OFF laundry light and set alarm")
+			zwave_node5_laundryroomlight_switch.sendCommand(OFF)
+			//global_alarm.sendCommand(ON)
+		]
+	}
+end
+
+rule "global_ex_home_rule"
+when
+    Item global_ex_home received command
+then
+	if(leaving_timer !== null) {
+		leaving_timer.cancel
+		leaving_timer = null
+	}
+	global_alarm.sendCommand(OFF)
+end

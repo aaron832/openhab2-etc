@@ -159,3 +159,11 @@ then
         val results = execSSHCommandMCWake.apply(gatewayScript,"closeall",receivedCommand.toString)
         logInfo("autoit_mc_closeall_rule", results)
 end
+
+rule "alexa_googlelookup_rule"
+when
+        Item alexa_googlelookup received command
+then
+        val results = execSSHCommandMCWake.apply(gatewayScript,"googlelookup",receivedCommand.toString)
+        logInfo("alexa_googlelookup_rule", " Res:" + results)
+end

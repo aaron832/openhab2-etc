@@ -1,13 +1,13 @@
 //Interfaces
-Dimmer zwave_node7_livingroom_dimmer_interface "Living Room Light" <light> (Light) ["NoTag"]
+Dimmer zwave_node7_livingroom_dimmer_interface "Living Room Light" <light> (Light) ["Lighting"]
 
 //Zwave items
 Dimmer                     zwave_node2_uphallway_dimmer                  "Hallway Light"                     <DimmableLight>	(All)	["Lighting"]	
 Switch                     zwave_node3_garagelight_switch                "Garage Light"                      <switch>			(All)	["Lighting"]
-Contact                    zwave_node4_MotionSensor_BinarySensor         "Garage Sensor [%s]"                <Door>				(All)	["NoTag"]
+Switch                     zwave_node4_MotionSensor_BinarySensor         "Garage Sensor [%s]"                <Door>				(All)	["NoTag"]
 Switch                     zwave_node5_laundryroomlight_switch           "Laundry Room Light"                <switch>			(All)	["Lighting"]
 Dimmer                     zwave_node6_DownstairsLighting_Dimmer         "Downstairs Lights"                 <DimmableLight>	(All)	["Lighting"]
-Dimmer                     zwave_node7_livingroom_dimmer                 "Living Room Dimmer"                <DimmableLight>	(All)	["Lighting"]
+Dimmer                     zwave_node7_livingroom_dimmer                 "Living Room Dimmer"                <DimmableLight>	(All)	["NoTag"]
 Switch                     zwave_node8_backyardlights_switch             "BackYard Lights"                   <switch>			(All)	["Lighting"]
 Switch                     zwave_node9_poolpump_Switch                   "Pool Pump Switch"                  <switch>			(All)	["NoTag"]
 Switch                     zwave_node10_FrontYardLights_Switch           "Front Yard Lights"                 <switch>			(All)	["Lighting"]

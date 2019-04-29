@@ -1,5 +1,5 @@
 Switch alexa_media_center_power "Media Center" <switch> (TV) ["NoTag"]
-Switch alexa_tv_power "TV/Rec Power" <switch> (TV) ["NoTag"]
+Switch alexa_tv_power "TV" <switch> (TV) ["Switchable"]
 String alexa_tv_mode "TV Mode [%s]" <heating-0> (TV) ["NoTag"]
 String alexa_netflixprof "Netflix Profile: [%s]" <string> (TV) ["NoTag"]
 
@@ -23,6 +23,7 @@ Switch alexa_playsearchkodi_test "Alexa Play Search Kodi Test" <switch> (TV) ["N
 String alexa_playsearchkodi "Play Search Kodi: [%s]" <string> (TV) ["NoTag"]
 Switch alexa_playsearchnetflix_test "Alexa Play Search Netflix Test" <switch> (TV) ["NoTag"] { autoupdate="false" }
 String alexa_playsearchnetflix "Play Search Netflix: [%s]" <string> (TV) ["NoTag"]
+String alexa_googlelookup "Google Lookup: [%s]" <string> (TV) ["NoTag"]
 
 String alexaresp "Alexa Execute Resp: [%s]" <string> (Alexa) ["NoTag"]
 

@@ -1,5 +1,5 @@
 Switch halvr_wol   "HalVR Wol" <switch>  (Status, Network) ["NoTag"]  { autoupdate="false", wol="192.168.1.255#4c:cc:6a:05:96:e7" }
-Switch halvr_sleep "HalVR Sleep" <switch> (TV) ["NoTag"] { autoupdate="false", wol="halvr2016#e7:96:05:6a:cc:4c" }
+Switch halvr_sleep "HalVR Sleep" <switch> (TV) ["NoTag"] { autoupdate="false", wol="192.168.1.255#e7:96:05:6a:cc:4c" }
 Switch halvr_status "HalVR Ping Status" { channel="network:pingdevice:halvr2106pingthing:online" }
 Switch halvr_sleep_control "HALVR" <switch> (TV) ["NoTag"] { autoupdate="false" }
 
@@ -9,3 +9,6 @@ Switch meidacenter_status "MC Ping Status" { channel="network:pingdevice:mediaha
 Switch mediacenter_sleep_control "Media Center" <switch> (TV) ["NoTag"] { autoupdate="false" }
 
 Switch samsungtv_status "SamungTV Ping Status" <switch> (TV) ["NoTag"] { channel="network:pingdevice:samsungtvpingthing:online" }
+
+Switch phone_aaroniphone "Aaron Iphone Status" <switch> (TV) ["NoTag"]
+Switch phone_aaroniphone_IFTTTHomeProximity "Aaron Iphone IFTTT Home Proximity" <switch> (TV) ["NoTag"]

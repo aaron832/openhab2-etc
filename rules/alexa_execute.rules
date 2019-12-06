@@ -4,10 +4,10 @@ when
 then
 	var myString = " "
 	var lightString = " "
-	if(bayDoorGarage01.state != 0) {
+	if(bayDoorGarage01.state == OPEN) {
 		myString += "Closing garage bay door. "
 	}
-	if(doorGarage01.state != 0) {
+	if(doorGarage01.state == OPEN) {
 		myString += "Garage back door is open.  Please close it. "
 	}
 
@@ -42,6 +42,9 @@ then
 	if(myString == " ") {
 		myString = "All clear."
 	}
+	//say(myString)
+	say(myString,"googletts:enUSStandardC","chromecast:chromecast:LivingRoomGHub")
+	sendPushoverMessage(pushoverBuilder(myString).withPriority(0))
 	postUpdate(alexaresp, myString)
 	global_lockitdown.sendCommand(ON);//receivedCommand);
 end
@@ -51,6 +54,7 @@ when
 	Item alexa_media_center_execute_iamleaving received command
 then
 	var myString = "Ok, Goodbye"
+	say(myString)
 	postUpdate(alexaresp, myString)
 	global_ex_leaving.sendCommand(ON);
 end
@@ -60,6 +64,7 @@ when
 	Item alexa_media_center_execute_iamhome received command
 then
 	var myString = "Welcome home!"
+	say(myString)
 	postUpdate(alexaresp, myString)
 	global_ex_home.sendCommand(ON);
 end

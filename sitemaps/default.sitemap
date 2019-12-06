@@ -26,7 +26,8 @@ sitemap default label="Rose House"
 	}
 	Frame label="Garage" {
 		Switch item=zwave_node3_garagelight_switch	
-		Text item=sensorGarageLastCom		
+		Text item=sensorGarageLastCom
+		Text item=sensorGarageStatus
 		Text item=tempGarage01		
 		Text item=humGarage01		
 		Text item=bayDoorGarage01		
@@ -35,6 +36,7 @@ sitemap default label="Rose House"
 	}
 	Frame label="Outdoor" {
 		Switch item=zwave_node10_FrontYardLights_Switch
+		Switch item=zwave_node15_GarageFrontLights_Dimmer
 		Switch item=zwave_node8_backyardlights_switch
 		Switch item=zwave_node11_PoolLight_Switch
 		Slider item=zwave_node12_StringLights_Dimmer

@@ -1,6 +1,6 @@
 rule "nodeReqlcddisplaytime_rule"
 when
-        Item nodeReqlcddisplaytime received command
+        Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqlcddisplaytime" triggered
 then
 		logInfo("rules","forward to nodeSndlcddisplaytime")
         nodeSndlcddisplaytime.sendCommand( new DecimalType(now.minusHours(8).millis/1000) )
@@ -9,19 +9,19 @@ end
 
 rule "sensorLoveLastCom_rule"
 when
-        Item nodeReqLove01 received command
+        Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqLove01" triggered
 or
-        Item nodeReqLoveSleep received command
+        Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqLoveSleep" triggered
 then
         sensorLoveLastCom.postUpdate( new DateTimeType() )
 end
 
 rule "nodeReqLove01_rule"
 when
-	Item nodeReqLove01 received command
+	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqLove01" triggered
 then
 	if(global_love_switch.state == ON) {
-		logInfo("rules","forward to nodeReqLove01")
+		logInfo("rules","forward to relayLove01")
 		relayLove01.sendCommand(receivedCommand)
 		global_love_switch.postUpdate(OFF)
 	}
@@ -45,7 +45,7 @@ end
 
 rule "nodeReqLoveSleep_rule"
 when
-	Item nodeReqLoveSleep received command
+	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqLoveSleep" triggered
 then
 	//logInfo("rules","forward to relayLoveSleep")
 	//relayLoveSleep.sendCommand(new DecimalType(300000))
@@ -55,7 +55,7 @@ end
 
 rule "nodeReqlcdtop_rule"
 when
-	Item nodeReqlcdtop received command or
+	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqlcdtop" triggered or
 	Item nodelcdtop received command
 then
 	logInfo("rules","forward to nodeSndlcdtop")
@@ -72,7 +72,7 @@ end
 
 rule "nodeReqlcdbottom_rule"
 when
-	Item nodeReqlcdbottom received command or
+	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqlcdbottom" triggered or
 	Item nodelcdbottom received command
 then
 	logInfo("rules","forward to nodeSndlcdbottom")
@@ -89,7 +89,7 @@ end
 
 rule "nodeReqlcdbright_rule"
 when
-	Item nodeReqlcdbright received command or
+	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqlcdbright" triggered or
 	Item nodelcdbright received command
 then
 	logInfo("rules","forward to nodeSndlcdbright")
@@ -104,14 +104,14 @@ end
 
 rule "nodeLCDButtonMid_rule"
 when
-	Item nodeLCDButtonMid received command
+	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeLCDButtonMid" triggered
 then
 	global_alarm.sendCommand(ON)
 end
 
 rule "nodeLCDButtonRight_rule"
 when
-	Item nodeLCDButtonRight received command
+	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeLCDButtonRight" triggered
 then
 	global_alarm.sendCommand(OFF)
 end

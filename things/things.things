@@ -9,3 +9,6 @@ Bridge yamahareceiver:yamahaAV:lryamahareceiver "Yamaha Receiver Bridge" [host="
 }
 
 astro:sun:astrosun  [ geolocation="39.497029,-119.838725,1373", interval=60 ]
+
+Thing chromecast:chromecast:LivingRoomGHub "GHub Downstairs" [ipAddress="192.168.1.34", port=8009]
+Thing chromecast:chromecast:DownstairsGHub "GHub Living Room" [ipAddress="192.168.1.35", port=8009]

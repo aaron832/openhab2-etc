@@ -2,7 +2,7 @@
 
 rule "motiongarage_alarm_rule"
 when
-	Item zwave_node4_MotionSensor_BinarySensor changed to OPEN
+	Item zwave_node4_MotionSensor_BinarySensor changed to ON
 then
 	var String timestr = CurrentTime.state.format("%1$tR")
 	
@@ -102,4 +102,11 @@ then
 		logInfo("execResults", results)
 		sendPushoverMessage(pushoverBuilder("Door Motion Doorbell").withPriority(0).withAttachment("/home/openhab/ImageDrop/dw_doorbell.jpeg"))
 	}
+end
+
+rule "phones_gone_rule"
+when
+	Item phone_aaroniphone received command
+then
+	sendPushoverMessage(pushoverBuilder("AaronIphone: " + receivedCommand.toString).withPriority(0))
 end

@@ -5,6 +5,7 @@ when
 then
 	if(global_lighttimer_disable.state != OFF) {
     	zwave_node10_FrontYardLights_Switch.sendCommand(OFF)
+    	zwave_node15_GarageFrontLights_Dimmer.sendCommand(OFF)
     }
 end
 
@@ -16,5 +17,6 @@ when
 then
 	if(global_lighttimer_disable.state != OFF) {
 		zwave_node10_FrontYardLights_Switch.sendCommand(ON)
+		zwave_node15_GarageFrontLights_Dimmer.sendCommand(ON)
 	}
 end

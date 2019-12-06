@@ -14,3 +14,5 @@ Switch                     zwave_node10_FrontYardLights_Switch           "Front 
 Dimmer                     zwave_node12_StringLights_Dimmer              "String Lights"                     <DimmableLight>	(All)	["Lighting"]
 Switch                     zwave_node11_PoolLight_Switch                 "Pool Light"                        <switch>			(All)	["Lighting"]
 Switch                     zwave_node13_MotionSensor_BinarySensor        "Livingroom Motion [%s]"            <Door>				(All)	["NoTag"]
+// node 14 is now zwave_node5_laundryroomlight_switch
+Dimmer                     zwave_node15_GarageFrontLights_Dimmer         "Front Garage Lights"               <DimmableLight>	(All)	["Lighting"]

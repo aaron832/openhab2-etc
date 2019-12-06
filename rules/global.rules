@@ -16,10 +16,10 @@ then
             yamahareceiver_power.sendCommand(OFF)
     }
 
-	if(bayDoorGarage01.state != 0) {
+	if(bayDoorGarage01.state == OPEN) {
 		relayGarage01.sendCommand(ON)
 	}
-	if(doorGarage01.state != 0) {
+	if(doorGarage01.state == OPEN) {
 		logInfo("rule", "Garage back door is open!")
 	}
 

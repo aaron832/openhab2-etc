@@ -1,5 +1,6 @@
 import org.openhab.model.script.actions.Timer
 var Timer timer = null
+var Timer timerGarageSanityCheck = null
 
 rule "alexa_tv_power_rule"
 when
@@ -26,7 +27,7 @@ then
 	if (receivedCommand == OFF) {
 		autoit_mc_closeall.sendCommand(ON)
 	}
-	if ( (receivedCommand == ON) && (meidacenter_status.state == OFF) && (timer == null || timer.hasTerminated) ) {
+	if ( (receivedCommand == ON) && (meidacenter_status.state == OFF) && (timer === null || timer.hasTerminated) ) {
 		mediacenter_wol.sendCommand(ON)
 		logInfo("rule", "delay timer for alexa_media_center_power started")
 		timer = createTimer(now.plusSeconds(6)) [|
@@ -109,4 +110,68 @@ when
 then
 	logInfo("rules","alexa_doorbell foward to global_lovedoorbell_switch")
 	global_lovedoorbell_switch.sendCommand(receivedCommand)
+end
+
+rule "bayDoorGarage01_alexa_update_rule"
+when
+        Item bayDoorGarage01 changed
+then
+		logInfo("rules","forward bayDoorGarage01 to alexa_garagedoorwantstate")
+		if(bayDoorGarage01.state == OPEN) {
+			alexa_garagedoorwantstate.postUpdate(0)
+		}
+		else if(bayDoorGarage01.state == CLOSED) {
+			alexa_garagedoorwantstate.postUpdate(100)
+		}
+end
+
+rule "alexa_garagedoorwantstate_rule"
+when
+        Item alexa_garagedoorwantstate received command
+then
+		//0 is open and 100 is closed.
+		if((alexa_garagedoorwantstate.state == 0 && bayDoorGarage01.state == CLOSED) ||  //want open
+		   (alexa_garagedoorwantstate.state == 100 && bayDoorGarage01.state == OPEN)) {  //want closed
+		   relayGarage01.sendCommand(ON)
+		}
+		else {
+			var myGarageCheckString = "Garage is already "
+			if(bayDoorGarage01.state == OPEN) {
+			    myGarageCheckString += "open."
+			}
+			else if(bayDoorGarage01.state == CLOSED) {
+			    myGarageCheckString += "close."
+			}
+			else {
+			    myGarageCheckString += "unknown."
+			}
+			say(myGarageCheckString,"googletts:enUSStandardC","chromecast:chromecast:LivingRoomGHub")
+			say(myGarageCheckString,"googletts:enUSStandardC","chromecast:chromecast:DownstairsGHub")
+
+			return;
+		}
+
+		timerGarageSanityCheck = createTimer(now.plusSeconds(15)) [|
+			logInfo("rule", "timer to check sanity of garage door")
+			if( (alexa_garagedoorwantstate.state == 100 && bayDoorGarage01.state == OPEN) ||
+			    (alexa_garagedoorwantstate.state == 0 && bayDoorGarage01.state == CLOSED) ) {
+			    var myGarageCheckString = "Garage action may have failed.  Garage is "
+			    if(bayDoorGarage01.state == OPEN) {
+			    	myGarageCheckString += "open."
+			    }
+			    else if(bayDoorGarage01.state == CLOSED) {
+			    	myGarageCheckString += "close."
+			    }
+			    else {
+			    	myGarageCheckString += "unknown."
+			    }
+				say(myGarageCheckString,"googletts:enUSStandardC","chromecast:chromecast:LivingRoomGHub")
+				say(myGarageCheckString,"googletts:enUSStandardC","chromecast:chromecast:DownstairsGHub")
+				sendPushoverMessage(pushoverBuilder(myGarageCheckString).withPriority(0))
+			}
+			else {
+				say("Done","googletts:enUSStandardC","chromecast:chromecast:LivingRoomGHub")
+				say("Done","googletts:enUSStandardC","chromecast:chromecast:DownstairsGHub")
+			}
+		]
 end

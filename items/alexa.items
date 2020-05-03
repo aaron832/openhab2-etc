@@ -32,3 +32,4 @@ String ECHO_VoiceCMD "ECHO_VoiceCMD: [%s]" <string> (Alexa) ["NoTag"]
 String ECHO_Answer "ECHO_Answer: [%s]" <string> (Alexa) ["NoTag"]
 
 Switch alexa_doorbell "Ax Doorbell" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Rollershutter alexa_garagedoorwantstate "Garage Door" <switch> (None) ["Blinds"] 

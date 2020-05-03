@@ -15,7 +15,7 @@ then
 	if(zwave_node3_garagelight_switch.state != OFF) {
 		lightString += "garage,"
 	}
-	if(zwave_node5_laundryroomlight_switch.state != OFF) {
+	if(zwave_node14_laundryroomlight_switch.state != OFF) {
 		lightString += "laundry room,"
 	}
 	if(zwave_node6_DownstairsLighting_Dimmer.state != 0) {
@@ -36,7 +36,12 @@ then
 	}
 
 	if(halvr_status.state != OFF) {
-		myString += "Putting Hal V.R. to sleep. "
+		if(disable_automated_halvrsleep.state == ON) {
+			myString += "Hal V.R. is awake.  Sleep disabled."
+		}
+		else {
+			myString += "Putting Hal V.R. to sleep. "
+		}
 	}
 
 	if(myString == " ") {
@@ -44,6 +49,7 @@ then
 	}
 	//say(myString)
 	say(myString,"googletts:enUSStandardC","chromecast:chromecast:LivingRoomGHub")
+	say(myString,"googletts:enUSStandardC","chromecast:chromecast:DownstairsGHub")
 	sendPushoverMessage(pushoverBuilder(myString).withPriority(0))
 	postUpdate(alexaresp, myString)
 	global_lockitdown.sendCommand(ON);//receivedCommand);

@@ -1,12 +1,3 @@
-rule "nodeReqlcddisplaytime_rule"
-when
-        Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqlcddisplaytime" triggered
-then
-		logInfo("rules","forward to nodeSndlcddisplaytime")
-        nodeSndlcddisplaytime.sendCommand( new DecimalType(now.minusHours(8).millis/1000) )
-        //nodeSndlcddisplaytime.sendCommand( ((CurrentTime.state as DateTimeType).calendar.timeInMillis)/1000 )
-end
-
 rule "sensorLoveLastCom_rule"
 when
         Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqLove01" triggered

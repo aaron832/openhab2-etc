@@ -28,7 +28,7 @@ sitemap cave label="Cave"
 	
 	Frame label="Others" icon="sofa" {
 		Switch item=halvr_sleep_control
-		Switch item=zwave_node5_laundryroomlight_switch
+		Switch item=zwave_node14_laundryroomlight_switch
 		Slider item=zwave_node6_DownstairsLighting_Dimmer
 		Switch item=zwave_node11_PoolLight_Switch
 		Switch item=zwave_node8_backyardlights_switch

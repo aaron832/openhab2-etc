@@ -1,6 +1,8 @@
 var Timer timerGL = null
 var Timer timerLL = null
+var Timer timerGFL = null
 var Number raceCheck = 0
+var Number raceCheckGFL = 0
 
 rule "sensorGarageLastCom_rule"
 when
@@ -30,7 +32,7 @@ end
 
 rule "autoGarageLightOnBayDoor"
 when
-        Item bayDoorGarage01 changed to 1 
+        Item bayDoorGarage01 changed to OPEN 
 or
 	Item zwave_node4_MotionSensor_BinarySensor changed to ON
 then
@@ -55,18 +57,52 @@ then
                 logInfo("laundry room", "Laundry room light reschedule")
                 timerLL.reschedule(now.plusMinutes(2))
         }
-        if(zwave_node5_laundryroomlight_switch.state == OFF) {
+        if(zwave_node14_laundryroomlight_switch.state == OFF) {
                 if(timerLL !== null){
                         timerLL.cancel
                         timerLL = null
                 }
                 timerLL = createTimer(now.plusMinutes(2)) [|
-                        zwave_node5_laundryroomlight_switch.sendCommand(OFF)
+                        zwave_node14_laundryroomlight_switch.sendCommand(OFF)
                 ]
-                zwave_node5_laundryroomlight_switch.sendCommand(ON)
+                zwave_node14_laundryroomlight_switch.sendCommand(ON)
         }
         Thread::sleep(2000)
         raceCheck = 0
+end
+
+rule "autoGarageFrontLightOn"
+when
+        Item bayDoorGarage01 changed to OPEN
+or
+        Item driveway_camera_alert received command ON
+or
+        Item door_camera_alert received command ON
+then
+        if(global_sunisdown.state == OFF) {
+                return;
+        }
+        raceCheckGFL = 1
+
+        if(timerGFL !== null && !timerGFL.isRunning() && !timerGFL.hasTerminated() && zwave_node15_GarageFrontLights_Dimmer.state != 0) {
+                logInfo("garage", "Garage Front light reschedule")
+                timerGFL.reschedule(now.plusMinutes(15))
+        }
+        else if(zwave_node15_GarageFrontLights_Dimmer.state == 0) {
+                if(timerGFL !== null){
+                        timerGFL.cancel
+                        timerGFL = null
+                }
+                timerGFL = createTimer(now.plusMinutes(15)) [|
+                        logInfo("garage", "turn off light for autoGarageFrontLightOn")
+                        zwave_node15_GarageFrontLights_Dimmer.sendCommand(0)
+                ]
+                logInfo("garage", "turn on light for autoGarageFrontLightOn")
+                zwave_node15_GarageFrontLights_Dimmer.sendCommand(100)
+        }
+
+        Thread::sleep(2000)
+        raceCheckGFL = 0
 end
 
 rule "zwave_node3_garagelight_switch_rule"
@@ -81,17 +117,48 @@ then
         }
 end
 
-rule "zwave_node5_laundryroomlight_switch_rule"
+rule "zwave_node14_laundryroomlight_switch_rule"
 when
-        Item zwave_node5_laundryroomlight_switch changed
+        Item zwave_node14_laundryroomlight_switch changed
 then
-        logInfo("laundry room", "Laundry light state: " + zwave_node5_laundryroomlight_switch.state)
+        logInfo("laundry room", "Laundry light state: " + zwave_node14_laundryroomlight_switch.state)
         //Can check isRunning on timer to see if this is triggered by timer.
         //But there doesn't seem to be a need
         if(timerLL !== null && raceCheck == 0){
                 logInfo("laundry room", "Cancel timerLL")
                 timerLL.cancel
                 timerLL = null
+        }
+end
+
+//rule "global_outdoor_night_lighting-GarageFrontLights_rule"
+//when
+//        Item global_outdoor_night_lighting received command
+//then
+//        if(receivedCommand == ON) {
+//                if(timerGFL !== null) {
+//                        timerGFL.cancel
+//                        timerGFL = null
+//                }
+//                zwave_node15_GarageFrontLights_Dimmer.sendCommand(100)
+//        }
+//        else if(receivedCommand == OFF)
+//        {
+//                if(timerGFL === null || timerGFL.hasTerminated()) {
+//                        zwave_node15_GarageFrontLights_Dimmer.sendCommand(0)
+//                }
+//        }
+//end
+
+rule "zwave_node15_GarageFrontLights_Dimmer_rule"
+when
+        Item zwave_node15_GarageFrontLights_Dimmer changed
+then
+        logInfo("garage fl", "Garage fl light state: " + zwave_node15_GarageFrontLights_Dimmer.state)
+        if(timerGFL !== null && raceCheckGFL == 0){
+                logInfo("garage", "Cancel timerGFL")
+                timerGFL.cancel
+                timerGFL = null
         }
 end
 

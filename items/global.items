@@ -1,3 +1,4 @@
+Switch global_alarm_timer_start "Alarm Timer" <switch> (Security) ["NoTag"]
 Switch global_alarm "Alarm" <switch> (Security) ["NoTag"]
 Switch global_alarm_triggered "Alarm Triggered" <switch> (Security) ["NoTag"]
 Switch global_night_alarm "Night Alarm" <switch> (Security) ["NoTag"]
@@ -6,6 +7,7 @@ Switch global_camera_pushover_alert "Camera Pushover Alert" <switch> (Security) 
 Switch global_lockitdown "Lock It Down" <switch> (None) ["Switchable"] { autoupdate="false" }
 Switch global_ex_leaving "Execute Leaving" <switch> (None) ["Switchable"] { autoupdate="false" }
 Switch global_ex_home "Execute Home" <switch> (None) ["Switchable"] { autoupdate="false" }
+Switch global_ex_pulling_in "Execute Pulling In" <switch> (None) ["Switchable"] { autoupdate="false" }
 Switch global_love_switch "Love Switch" <switch> (None) ["Switchable"]
 DateTime Sunset_Start_Time "Sunset Start [%1$tH:%1$tM]"   { channel="astro:sun:astrosun:set#start" }
 DateTime Sunset_End_Time "Sunset End [%1$tH:%1$tM]"   { channel="astro:sun:astrosun:set#end" }
@@ -14,6 +16,8 @@ DateTime EVNight_End_Time "Evening Night End [%1$tH:%1$tM]"   { channel="astro:s
 DateTime Night_Start_Time "Night Start [%1$tH:%1$tM]"   { channel="astro:sun:astrosun:night#start" }
 DateTime Night_End_Time "Night End [%1$tH:%1$tM]"   { channel="astro:sun:astrosun:night#end" }
 DateTime CurrentTime "NTP Date [%1$tA, %1$tm/%1$td/%1$tY %1$tT]" <calendar> { channel="ntp:ntp:local:dateTime" }
+Switch global_sunisdown "Global Sun Is Down" <switch> (None) ["NoTag"]
+Switch global_outdoor_night_lighting "Global outdoor night lighting" <switch> (None) ["NoTag"]
 
 Switch global_lovedoorbell_switch "Love Doorbell" <switch> (None) ["NoTag"]
 Switch global_lovedoorbell_drivewayactivate_switch "Love Doorbell Driveway Activate" <switch> (None) ["NoTag"]
@@ -22,3 +26,4 @@ Switch global_lovedoorbell_dooractivate_switch "Love Doorbell Door Activate" <sw
 Group:Switch:OR(ON,OFF) Light "All Lights [%d]" <light> (All)
 
 Switch global_lighttimer_disable "Disable Light Schedule" <switch> (None) ["NoTag"] 
+Switch disable_automated_halvrsleep "Diable Automated HalVR sleep" <switch> (None) ["NoTag"]

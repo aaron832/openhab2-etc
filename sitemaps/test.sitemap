@@ -1,5 +1,8 @@
 sitemap test label="Alexa Test"
 {
+	Frame label="Global" {
+		Switch item=global_outdoor_night_lighting
+	}
 	Frame label="pool test" {
 		Switch item=poolpump_interface
 		Switch item=poolpump_calswitch
@@ -14,8 +17,8 @@ sitemap test label="Alexa Test"
 		Switch item=zwave_node8_backyardlights_switch
 		Text item=zwave_node4_MotionSensor_BinarySensor
 		Text item=zwave_node13_MotionSensor_BinarySensor
-		Slider item=zwave_node7_livingroom_dimmer_interface
-		Slider item=zwave_node7_livingroom_dimmer
+		Slider item=zwave_node17_livingroom_dimmer_interface
+		Slider item=zwave_node17_livingroom_dimmer
 	}
 	Frame label="General Status" icon="sofa" {
 		Switch item=meidacenter_status

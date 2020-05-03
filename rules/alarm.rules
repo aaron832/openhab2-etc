@@ -1,4 +1,5 @@
 //rename this to alarm rules
+var Timer timerArmAlarm = null
 
 rule "motiongarage_alarm_rule"
 when
@@ -55,6 +56,12 @@ rule "global_alarm_rule"
 when
 	Item global_alarm received command
 then
+	//Get rid of the alarm set timer unless we are currently running it.
+	if(timerArmAlarm !== null && !timerArmAlarm.isRunning()){
+            timerArmAlarm.cancel
+            timerArmAlarm = null
+    }
+
 	var String timestr = CurrentTime.state.format("%1$tR")
 	
 	global_camera_pushover_alert.sendCommand(receivedCommand)
@@ -109,4 +116,17 @@ when
 	Item phone_aaroniphone received command
 then
 	sendPushoverMessage(pushoverBuilder("AaronIphone: " + receivedCommand.toString).withPriority(0))
+end
+
+rule "global_alarm_timer_start_rule"
+when
+	Item global_alarm_timer_start received command ON
+then
+	if(timerArmAlarm !== null){
+            timerArmAlarm.cancel
+            timerArmAlarm = null
+    }
+    timerArmAlarm = createTimer(now.plusMinutes(15)) [|
+            global_alarm.sendCommand(ON)
+    ]
 end

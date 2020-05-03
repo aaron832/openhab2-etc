@@ -1,18 +1,20 @@
 //Interfaces
-Dimmer zwave_node7_livingroom_dimmer_interface "Living Room Light" <light> (Light) ["Lighting"]
+Dimmer zwave_node17_livingroom_dimmer_interface "Living Room Light" <light> (Light) ["Lighting"]
 
 //Zwave items
-Dimmer                     zwave_node2_uphallway_dimmer                  "Hallway Light"                     <DimmableLight>	(All)	["Lighting"]	
-Switch                     zwave_node3_garagelight_switch                "Garage Light"                      <switch>			(All)	["Lighting"]
-Switch                     zwave_node4_MotionSensor_BinarySensor         "Garage Sensor [%s]"                <Door>				(All)	["NoTag"]
-Switch                     zwave_node5_laundryroomlight_switch           "Laundry Room Light"                <switch>			(All)	["Lighting"]
-Dimmer                     zwave_node6_DownstairsLighting_Dimmer         "Downstairs Lights"                 <DimmableLight>	(All)	["Lighting"]
-Dimmer                     zwave_node7_livingroom_dimmer                 "Living Room Dimmer"                <DimmableLight>	(All)	["NoTag"]
-Switch                     zwave_node8_backyardlights_switch             "BackYard Lights"                   <switch>			(All)	["Lighting"]
-Switch                     zwave_node9_poolpump_Switch                   "Pool Pump Switch"                  <switch>			(All)	["NoTag"]
-Switch                     zwave_node10_FrontYardLights_Switch           "Front Yard Lights"                 <switch>			(All)	["Lighting"]
-Dimmer                     zwave_node12_StringLights_Dimmer              "String Lights"                     <DimmableLight>	(All)	["Lighting"]
-Switch                     zwave_node11_PoolLight_Switch                 "Pool Light"                        <switch>			(All)	["Lighting"]
-Switch                     zwave_node13_MotionSensor_BinarySensor        "Livingroom Motion [%s]"            <Door>				(All)	["NoTag"]
-// node 14 is now zwave_node5_laundryroomlight_switch
-Dimmer                     zwave_node15_GarageFrontLights_Dimmer         "Front Garage Lights"               <DimmableLight>	(All)	["Lighting"]
+Dimmer  zwave_node2_uphallway_dimmer                  "Hallway Light"            <DimmableLight>	(All)	["Lighting"]	
+Switch  zwave_node3_garagelight_switch                "Garage Light"             <switch>			(All)	["Lighting"]
+Switch  zwave_node4_MotionSensor_BinarySensor         "Garage Sensor [%s]"       <Door>				(All)	["NoTag"]
+//Node 5 is gone.  14 replaces
+Dimmer  zwave_node6_DownstairsLighting_Dimmer         "Downstairs Lights"        <DimmableLight>	(All)	["Lighting"]
+//Node 7 is gone.  17 replaces
+Switch  zwave_node8_backyardlights_switch             "BackYard Lights"          <switch>			(All)	["Lighting"]
+Switch  zwave_node9_poolpump_Switch                   "Pool Pump Switch"         <switch>			(All)	["NoTag"]
+Switch  zwave_node10_FrontYardLights_Switch           "Front Yard Lights"        <switch>			(All)	["Lighting"]
+Dimmer  zwave_node12_StringLights_Dimmer              "String Lights"            <DimmableLight>	(All)	["Lighting"]
+Switch  zwave_node11_PoolLight_Switch                 "Pool Light"               <switch>			(All)	["Lighting"]
+Switch  zwave_node13_MotionSensor_BinarySensor        "Livingroom Motion [%s]"   <Door>				(All)	["NoTag"]
+Switch  zwave_node14_laundryroomlight_switch           "Laundry Room Light"       <switch>			(All)	["Lighting"]
+Dimmer  zwave_node15_GarageFrontLights_Dimmer         "Front Garage Lights"      <DimmableLight>	(All)	["Lighting"]
+Dimmer  zwave_node16_kitchen_dimmer                   "Kitchen Dimmer"           <DimmableLight>	(All)	["Lighting"]
+Dimmer  zwave_node17_livingroom_dimmer                "Living Room Dimmer"       <DimmableLight>	(All)	["NoTag"]

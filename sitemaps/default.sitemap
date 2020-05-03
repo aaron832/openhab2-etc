@@ -8,7 +8,8 @@ sitemap default label="Rose House"
 		Default item=nodelcdbottom
 	}
 	Frame label="Living Room" icon="sofa" {
-		Slider item=zwave_node7_livingroom_dimmer_interface
+		Slider item=zwave_node17_livingroom_dimmer_interface
+		Slider item=zwave_node16_kitchen_dimmer
 		Switch item=samsungtv_lr_power_interface
 		Setpoint item=samsungtv_lr_volume step=1 minValue=0 maxValue=10
 		Selection item=samsungtv_lr_sourcename mappings=[HDMI2="PC", COMPONENT="Wii"] valuecolor=[68="green", 61="blue"]
@@ -21,7 +22,7 @@ sitemap default label="Rose House"
                 Switch item=autoit_mc_stop_spotify mappings=[ON="Go!"]
 	}
 	Frame label="Downstairs" {
-		Switch item=zwave_node5_laundryroomlight_switch
+		Switch item=zwave_node14_laundryroomlight_switch
 		Slider item=zwave_node6_DownstairsLighting_Dimmer
 	}
 	Frame label="Garage" {

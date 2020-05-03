@@ -1,6 +1,5 @@
 import org.openhab.model.script.actions.Timer
 var Timer lv_light_timer = null
-var Timer leaving_timer = null
 
 rule "global_lockitdown_rule"
 when
@@ -31,8 +30,8 @@ then
 		zwave_node3_garagelight_switch.sendCommand(OFF)
 	}
 
-	if(zwave_node5_laundryroomlight_switch != OFF) {
-		zwave_node5_laundryroomlight_switch.sendCommand(OFF)
+	if(zwave_node14_laundryroomlight_switch != OFF) {
+		zwave_node14_laundryroomlight_switch.sendCommand(OFF)
 	}
 
 	if(zwave_node6_DownstairsLighting_Dimmer.state != 0) {
@@ -51,18 +50,20 @@ then
 		zwave_node12_StringLights_Dimmer.sendCommand(0)
 	}
 	
-        //Dont want to sleep media center.  Maybe another time.
+    //Dont want to sleep media center.  Maybe another time.
 	//mediacenter_sleep.sendCommand(ON)
-	halvr_sleep.sendCommand(ON)
+	if(disable_automated_halvrsleep.state != ON) {
+		halvr_sleep.sendCommand(ON)
+	}
 
 	if ( lv_light_timer === null || lv_light_timer.hasTerminated ) {
 		logInfo("global_lockitdown_rule", "Low lights on hallways and living room")
 		//zwave_node2_uphallway_dimmer.sendCommand(new DecimalType(5))
-		zwave_node7_livingroom_dimmer_interface.sendCommand(new DecimalType(2))
-		logInfo("global_lockitdown_rule", "delay timer for zwave_node7_livingroom_dimmer_interface started")
+		zwave_node17_livingroom_dimmer_interface.sendCommand(new DecimalType(2))
+		logInfo("global_lockitdown_rule", "delay timer for zwave_node17_livingroom_dimmer_interface started")
 		lv_light_timer = createTimer(now.plusMinutes(5)) [|
 			logInfo("global_lockitdown_rule", "OFF lights on hallways and living room")
-			zwave_node7_livingroom_dimmer_interface.sendCommand(new DecimalType(0))
+			zwave_node17_livingroom_dimmer_interface.sendCommand(new DecimalType(0))
 			//zwave_node2_uphallway_dimmer.sendCommand(new DecimalType(0))
 		]	
 	}
@@ -92,8 +93,8 @@ then
 		zwave_node3_garagelight_switch.sendCommand(OFF)
 	}
 
-	if(zwave_node5_laundryroomlight_switch != OFF) {
-		zwave_node5_laundryroomlight_switch.sendCommand(OFF)
+	if(zwave_node14_laundryroomlight_switch != OFF) {
+		zwave_node14_laundryroomlight_switch.sendCommand(OFF)
 	}
 
 	if(zwave_node6_DownstairsLighting_Dimmer.state != 0) {
@@ -112,31 +113,28 @@ then
 		zwave_node12_StringLights_Dimmer.sendCommand(0)
 	}
 	
-	halvr_sleep.sendCommand(ON)
+	//Dont want to sleep media center.  Maybe another time.
+	//mediacenter_sleep.sendCommand(ON)
+	if(disable_automated_halvrsleep.state != ON) {
+		halvr_sleep.sendCommand(ON)
+	}
 
-	if(leaving_timer !== null && !leaving_timer.isRunning() && !leaving_timer.hasTerminated()) {
-		logInfo("global_ex_leaving_rule", "leaving_timer reschedule")
-		leaving_timer.reschedule(now.plusMinutes(10))
-	}
-	else if ( leaving_timer === null || leaving_timer.hasTerminated ) {
-		logInfo("global_ex_leaving_rule", "Laundry room light on")
-		zwave_node5_laundryroomlight_switch.sendCommand(ON)
-		logInfo("global_ex_leaving_rule", "delay timer for light and alarm")
-		leaving_timer = createTimer(now.plusMinutes(10)) [|
-			logInfo("global_ex_leaving_rule", "OFF laundry light and set alarm")
-			zwave_node5_laundryroomlight_switch.sendCommand(OFF)
-			//global_alarm.sendCommand(ON)
-		]
-	}
+	global_alarm_timer_start.sendCommand(ON)
 end
 
 rule "global_ex_home_rule"
 when
-    Item global_ex_home received command
+    Item global_ex_home received command ON
 then
-	if(leaving_timer !== null) {
-		leaving_timer.cancel
-		leaving_timer = null
-	}
 	global_alarm.sendCommand(OFF)
 end
+
+rule "global_ex_pulling_in_rule"
+when
+    Item global_ex_pulling_in received command ON
+then
+	global_alarm.sendCommand(OFF)
+	alexa_garagedoorwantstate.sendCommand(0)
+	sendPushoverMessage(pushoverBuilder("Pulling in executed.  Opening Garage.").withPriority(0))
+end
+

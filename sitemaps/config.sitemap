@@ -1,0 +1,8 @@
+sitemap pool label="Config"
+{
+	Frame label="Configuration" {
+		Switch item=poolpump_calactive
+		Switch item=disable_automated_halvrsleep
+		Switch item=global_lighttimer_disable
+	}
+}

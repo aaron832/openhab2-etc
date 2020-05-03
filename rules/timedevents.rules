@@ -5,8 +5,15 @@ when
 then
 	if(global_lighttimer_disable.state != OFF) {
     	zwave_node10_FrontYardLights_Switch.sendCommand(OFF)
-    	zwave_node15_GarageFrontLights_Dimmer.sendCommand(OFF)
+    	global_outdoor_night_lighting.sendCommand(OFF)
     }
+end
+
+rule "sunrise_rule"
+when
+	Channel 'astro:sun:astrosun:rise#event' triggered END
+then
+	global_sunisdown.sendCommand(OFF)
 end
 
 rule "sunset_rule"
@@ -17,6 +24,8 @@ when
 then
 	if(global_lighttimer_disable.state != OFF) {
 		zwave_node10_FrontYardLights_Switch.sendCommand(ON)
-		zwave_node15_GarageFrontLights_Dimmer.sendCommand(ON)
+		global_outdoor_night_lighting.sendCommand(ON)
 	}
+	global_sunisdown.sendCommand(ON)
 end
+ 

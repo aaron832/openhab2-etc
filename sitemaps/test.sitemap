@@ -12,13 +12,23 @@ sitemap test label="Alexa Test"
 		Switch item=driveway_camera_alert
 		Switch item=door_camera_alert
 	}
-	Frame label="zwave test" {
-		Switch item=zwave_node9_poolpump_Switch
+	Frame label="zwave switch test" {
+		Slider item=zwave_node2_uphallway_dimmer
+		Switch item=zwave_node3_garagelight_switch
+		Slider item=zwave_node6_DownstairsLighting_Dimmer
 		Switch item=zwave_node8_backyardlights_switch
+		Switch item=zwave_node9_poolpump_Switch
+		Switch item=zwave_node10_FrontYardLights_Switch
+		Switch item=zwave_node11_PoolLight_Switch
+		Slider item=zwave_node12_StringLights_Dimmer
+		Switch item=zwave_node14_laundryroomlight_switch
+		Slider item=zwave_node15_GarageFrontLights_Dimmer
+		Slider item=zwave_node16_kitchen_dimmer
+		Slider item=zwave_node17_livingroom_dimmer
+	}
+	Frame label="zwave motion test" {
 		Text item=zwave_node4_MotionSensor_BinarySensor
 		Text item=zwave_node13_MotionSensor_BinarySensor
-		Slider item=zwave_node17_livingroom_dimmer_interface
-		Slider item=zwave_node17_livingroom_dimmer
 	}
 	Frame label="General Status" icon="sofa" {
 		Switch item=meidacenter_status

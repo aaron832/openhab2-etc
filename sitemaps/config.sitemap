@@ -1,4 +1,4 @@
-sitemap pool label="Config"
+sitemap config label="Config"
 {
 	Frame label="Configuration" {
 		Switch item=poolpump_calactive

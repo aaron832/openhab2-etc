@@ -84,6 +84,10 @@ then
 
 	//This hooks the interface to the actual zwave pump device
 	zwave_node9_poolpump_Switch.sendCommand(receivedCommand)
+
+	if(receivedCommand == OFF) {
+	poolpump_hourrun_number.sendCommand(0);	
+	}
 end
 
 //Update z-wave to interface

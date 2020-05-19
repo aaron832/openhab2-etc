@@ -96,3 +96,24 @@ then
 	logInfo("rules","forward update zwave_node9_poolpump_Switch_rule to poolpump_interface")
 	poolpump_interface.postUpdate(zwave_node9_poolpump_Switch.state)
 end
+
+rule "poolpump_execute_2_hour_run_triggered_rule"
+when
+	Item poolpump_execute_2_hour_run received command
+then
+	poolpump_hourrun_number.sendCommand(2);
+end
+
+rule "poolpump_execute_4_hour_run_triggered_rule"
+when
+	Item poolpump_execute_4_hour_run received command
+then
+	poolpump_hourrun_number.sendCommand(4);
+end
+
+rule "poolpump_execute_8_hour_run_triggered_rule"
+when
+	Item poolpump_execute_8_hour_run received command
+then
+	poolpump_hourrun_number.sendCommand(8);
+end

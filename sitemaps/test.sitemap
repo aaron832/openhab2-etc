@@ -1,4 +1,4 @@
-sitemap test label="Alexa Test"
+sitemap test label="test"
 {
 	Frame label="Global" {
 		Switch item=global_outdoor_night_lighting
@@ -26,6 +26,14 @@ sitemap test label="Alexa Test"
 		Slider item=zwave_node16_kitchen_dimmer
 		Slider item=zwave_node17_livingroom_dimmer
 	}
+	Frame label="samsungTV" {
+		Switch item=samsungtv_lr_power_interface
+		Switch item=samsungtv_status
+		Switch item=samsungtv_lr_power
+		Switch item=samsungtv_lr_volume
+		Switch item=samsungtv_lr_sourcename
+		Switch item=samsungtv_lr_sourceid
+	}
 	Frame label="zwave motion test" {
 		Text item=zwave_node4_MotionSensor_BinarySensor
 		Text item=zwave_node13_MotionSensor_BinarySensor
@@ -35,7 +43,6 @@ sitemap test label="Alexa Test"
 		Switch item=halvr_status
 		Switch item=mediacenter_sleep_control
 		Switch item=halvr_sleep_control
-		Switch item=samsungtv_status
 	}
 	Frame label="Alexa" icon="sofa" {
 		Switch item=halvr_wol mappings=[ON="Go!"]

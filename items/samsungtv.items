@@ -3,4 +3,4 @@ Number samsungtv_lr_sourceid "SamsungTV Source" <heating-0> (TV) ["NoTag"] { cha
 Dimmer samsungtv_lr_volume "SamsungTV Volume [%d]" <soundvolume> (TV) ["NoTag"] { channel="samsungtv:tv:samsungtvpingthing:volume" }
 String samsungtv_lr_sourcename "SamsungTV Source [%s]" <heating-0> (TV) ["NoTag"] { channel="samsungtv:tv:samsungtvpingthing:sourceName" }
 
-Switch samsungtv_lr_power_interface "SamsungTV Power" <switch> (TV) ["NoTag"]
+Switch samsungtv_lr_power_interface "TV Power" <switch> (TV) ["NoTag"]

@@ -2,23 +2,37 @@ rule "samsungtv_lr_power_interface_rule"
 when
 	Item samsungtv_lr_power_interface received command
 then
-	if(receivedCommand==OFF && (samsungtv_lr_power.state == ON || samsungtv_status.state == ON) ) {
-		samsungtv_lr_power.sendCommand(OFF)
-		//val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\IR Server Suite\\IRBlast-NoWindow.exe\" \"SamsungTV_Power.IR\"", 5000)
-        //logInfo("samsungtv_lr_power_interface_rule", results)
-	}
-	else if(receivedCommand==ON && (samsungtv_lr_power.state == OFF || samsungtv_status.state == OFF) ) {
+	if(receivedCommand==OFF && samsungtv_status.state == ON ) {
+		//samsungtv_lr_power.sendCommand(OFF) //Not working 5/28/2020
 		val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\IR Server Suite\\IRBlast-NoWindow.exe\" \"SamsungTV_Power.IR\"", 5000)
-        	logInfo("samsungtv_lr_power_interface_rule", results)
+        logInfo("samsungtv_lr_power_interface_rule", results)
+	}
+	else if(receivedCommand==ON && samsungtv_status.state == OFF ) {
+		val results = executeCommandLine("ssh Aaron@mediahal2015 \"C:\\Program Files (x86)\\IR Server Suite\\IRBlast-NoWindow.exe\" \"SamsungTV_Power.IR\"", 5000)
+        logInfo("samsungtv_lr_power_interface_rule", results)
 	}
 end
 
-rule "samsungtv_lr_power_interface_update_rule"
+rule "samsungtv_interface_thing_update"
 when
-	Item samsungtv_lr_power changed
+	Thing "samsungtv:tv:0a21fe80_00aa_1000_b47c_1c5a3ecd11a4" changed
 then
-	postUpdate(samsungtv_lr_power_interface, samsungtv_lr_power.state)
+	var thingStatusInfo = getThingStatusInfo("samsungtv:tv:0a21fe80_00aa_1000_b47c_1c5a3ecd11a4")
+
+	if((thingStatusInfo !== null) && (thingStatusInfo.getStatus().toString() == "ONLINE")) {
+		samsungtv_status.postUpdate(ON);
+	}
+	else {
+		samsungtv_status.postUpdate(OFF);	
+	}
 end
+
+//rule "samsungtv_lr_power_interface_update_rule"
+//when
+//	Item samsungtv_lr_power changed
+//then
+//	postUpdate(samsungtv_lr_power_interface, samsungtv_lr_power.state)
+//end
 
 rule "samsungtv_status_rule"
 when

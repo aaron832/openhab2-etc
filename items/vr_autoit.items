@@ -23,3 +23,8 @@ Switch autoit_vr_tv_4 "TV 4" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch autoit_vr_tv_5 "TV 5" <switch> (TV) ["NoTag"] { autoupdate="false" }
 
 String autoit_vr_spotify_playlist "Spotify Pool Party" <switch> (TV) ["NoTag"]
+
+Switch autoit_vr_spotify_sonnd_set "Spotify Sound Set" <switch> (TV) ["NoTag"] { autoupdate="false" }
+
+Switch autoit_vr_pool_party_mode "Pool Party" <switch> (TV) ["Switchable"] { autoupdate="false" }
+Switch autoit_vr_pool_party_mode_impl "Ignore Pool Party Impl" <switch> (TV) ["NoTag"] { autoupdate="false" }

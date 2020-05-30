@@ -1,5 +1,8 @@
 sitemap cave label="Cave"
 {
+	Frame label="Modes" icon="sofa" {
+		Switch item=autoit_vr_pool_party_mode mappings=[ON="Go!"]
+	}
 	Frame label="AutoItCommands" icon="sofa" {
 		Switch item=autoit_vr_test mappings=[ON="Go!"]
 		Switch item=autoit_vr_receiver_power mappings=[ON="Go!"]
@@ -24,6 +27,7 @@ sitemap cave label="Cave"
 		Switch item=autoit_vr_tv_3 mappings=[ON="Go!"]
 		Switch item=autoit_vr_tv_4 mappings=[ON="Go!"]
 		Switch item=autoit_vr_tv_5 mappings=[ON="Go!"]
+		Switch item=autoit_vr_spotify_sonnd_set mappings=[ON="Go!"]
 	}
 	
 	Frame label="Others" icon="sofa" {

@@ -28,3 +28,7 @@ Switch autoit_vr_spotify_sonnd_set "Spotify Sound Set" <switch> (TV) ["NoTag"] {
 
 Switch autoit_vr_pool_party_mode "Pool Party" <switch> (TV) ["Switchable"] { autoupdate="false" }
 Switch autoit_vr_pool_party_mode_impl "Ignore Pool Party Impl" <switch> (TV) ["NoTag"] { autoupdate="false" }
+
+
+//Interface switches for tracking state
+Switch autoit_vr_receiver_zone2_power_interface	"Pool Speakers" <switch> (TV) ["Switchable"] { autoupdate="false" }

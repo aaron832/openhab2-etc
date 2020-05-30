@@ -239,11 +239,20 @@ then
     }
 end
 
+rule "autoit_vr_receiver_zone2_power_interface_rule"
+when
+    Item autoit_vr_receiver_zone2_power_interface received command
+then
+    autoit_vr_receiver_zone2_power.sendCommand(ON)
+end
+
 rule "autoit_vr_pool_party_mode_impl_rule"
 when
     Item autoit_vr_pool_party_mode_impl received command
 then
-    autoit_vr_receiver_zone2_power.sendCommand(ON)
+    if(autoit_vr_receiver_zone2_power_interface.state != ON) {
+        autoit_vr_receiver_zone2_power_interface.sendCommand(ON)
+    }
     autoit_vr_spotify_playlist.sendCommand("Pool_Party")
     spotifyAudioTimer = null
     spotifyAudioTimer = createTimer(now.plusSeconds(20)) [|
@@ -251,5 +260,9 @@ then
             spotifyAudioTimer = null
             logInfo("autoit_vr_pool_party_mode_impl_rule", "Spotify Sound Set")
         ]
+    zwave_node11_PoolLight_Switch.sendCommand(ON)
+    zwave_node8_backyardlights_switch.sendCommand(ON)
+    zwave_node12_StringLights_Dimmer.sendCommand(50)
+    poolpump_calswitch.sendCommand(ON)
     logInfo("autoit_vr_pool_party_mode_impl_rule", "DONE")
 end

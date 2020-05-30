@@ -157,10 +157,12 @@ then
 			    (alexa_garagedoorwantstate.state == 0 && bayDoorGarage01.state == CLOSED) ) {
 			    var myGarageCheckString = "Garage action may have failed.  Garage is "
 			    if(bayDoorGarage01.state == OPEN) {
+			    	alexa_garagedoorwantstate.postUpdate(0)
 			    	myGarageCheckString += "open."
 			    }
 			    else if(bayDoorGarage01.state == CLOSED) {
-			    	myGarageCheckString += "close."
+			    	alexa_garagedoorwantstate.postUpdate(100)
+			    	myGarageCheckString += "closed."
 			    }
 			    else {
 			    	myGarageCheckString += "unknown."

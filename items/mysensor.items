@@ -3,7 +3,7 @@ String	sensorGarage	"Garage Sensor [%s]"	(mysensors)		{ autoupdate="false", chan
 Number	tempGarage01	"Temperature [%s F]"	<temperature>	(temperature,humAndTemp)	["Thermostat"]	{ autoupdate="false", channel="mqtt:topic:mymosquitto:mymqttthing:garagetemp" }
 Number	humGarage01	"Humidity [%s %%]"	<temperature>	(humidity,humAndTemp)		{ autoupdate="false", channel="mqtt:topic:mymosquitto:mymqttthing:garagehumidity" }
 Contact	bayDoorGarage01	"Bay Door Status [%s]"	<garagedoor>	{ autoupdate="false", channel="mqtt:topic:mymosquitto:mymqttthing:garagebaydoor" }
-Contact	doorGarage01	"Door Status [%s]"	<door>	{ autoupdate="false", channel="mqtt:topic:mymosquitto:mymqttthing:garagebackdoor" }
+Contact	doorGarage01	"Back Door Status [%s]"	<door>	{ autoupdate="false", channel="mqtt:topic:mymosquitto:mymqttthing:garagebackdoor" }
 Switch	relayGarage01	"Garage Door Relay"	<garagedoor>	(All)	["NoTag"]		{ autoupdate="false", channel="mqtt:topic:mymosquitto:mymqttthing:garagerelay" }
 String  sensorGarageStatus "Garage Sensor Status [%s]" <zoom> (status) { channel="mqtt:topic:mymosquitto:mymqttthing:garagesensorstatus" }
 

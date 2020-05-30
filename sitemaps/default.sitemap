@@ -2,24 +2,25 @@ sitemap default label="Rose House"
 {
 	Frame label="Alarm" icon="sofa" {
 		Switch item=global_alarm
-		Switch item=global_alarm_triggered
+		//Switch item=global_alarm_triggered
 		Switch item=global_camera_pushover_alert
-		Switch item=global_lovedoorbell_switch
-		Default item=nodelcdbottom
+		//Switch item=global_lovedoorbell_switch
+		//Default item=nodelcdbottom
 	}
 	Frame label="Living Room" icon="sofa" {
 		Slider item=zwave_node17_livingroom_dimmer_interface
 		Slider item=zwave_node16_kitchen_dimmer
 		Switch item=samsungtv_lr_power_interface
-		Setpoint item=samsungtv_lr_volume step=1 minValue=0 maxValue=10
-		Selection item=samsungtv_lr_sourcename mappings=[HDMI2="PC", COMPONENT="Wii"] valuecolor=[68="green", 61="blue"]
+		//Setpoint item=samsungtv_lr_volume step=1 minValue=0 maxValue=10
+		//Selection item=samsungtv_lr_sourcename mappings=[HDMI2="PC", COMPONENT="Wii"] valuecolor=[68="green", 61="blue"]
 		Switch item=yamahareceiver_power		
-		Slider item=yamahareceiver_volume		
-		Slider item=yamahareceiver_volumeDB
-		Switch item=mediacenter_sleep_control		
-		Switch item=autoit_mc_start_airplay mappings=[ON="Go!"]
-		Switch item=autoit_mc_start_spotify mappings=[ON="Go!"]
-                Switch item=autoit_mc_stop_spotify mappings=[ON="Go!"]
+		Slider item=yamahareceiver_volume
+		Switch item=yamahareceiver_volume mappings=[30="Low", 50="Med", 70="High"]
+		//Slider item=yamahareceiver_volumeDB
+		//Switch item=mediacenter_sleep_control		
+		//Switch item=autoit_mc_start_airplay mappings=[ON="Go!"]
+		//Switch item=autoit_mc_start_spotify mappings=[ON="Go!"]
+        //        Switch item=autoit_mc_stop_spotify mappings=[ON="Go!"]
 	}
 	Frame label="Downstairs" {
 		Switch item=zwave_node14_laundryroomlight_switch
@@ -27,13 +28,14 @@ sitemap default label="Rose House"
 	}
 	Frame label="Garage" {
 		Switch item=zwave_node3_garagelight_switch	
-		Text item=sensorGarageLastCom
-		Text item=sensorGarageStatus
+		//Text item=sensorGarageLastCom
+		//Text item=sensorGarageStatus
 		Text item=tempGarage01		
-		Text item=humGarage01		
-		Text item=bayDoorGarage01		
+		//Text item=humGarage01		
+		//Text item=bayDoorGarage01		
 		Text item=doorGarage01		
-		Switch item=relayGarage01 mappings=[ON="Go!"]		
+		//Switch item=relayGarage01 mappings=[ON="Go!"]		
+		Switch item=alexa_garagedoorwantstate mappings=[100="CLOSED", 0="OPEN"]
 	}
 	Frame label="Outdoor" {
 		Switch item=zwave_node10_FrontYardLights_Switch

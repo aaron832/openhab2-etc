@@ -144,6 +144,14 @@ then
         logInfo("alexa_playsearchnetflix_rule", paramsString + " Res:" + results)
 end
 
+rule "alexa_playsearchdisney_rule"
+when
+        Item alexa_playsearchdisney received command
+then
+        val results = execSSHCommandMCWake.apply(gatewayScript,"playsearchdisney",receivedCommand.toString)
+        logInfo("alexa_playsearchnetflix_rule", paramsString + " Res:" + results)
+end
+
 rule "autoit_mc_stop_netflix_rule"
 when
         Item autoit_mc_stop_netflix received command

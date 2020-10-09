@@ -35,34 +35,41 @@ when
         Item bayDoorGarage01 changed to OPEN 
 or
 	Item zwave_node4_MotionSensor_BinarySensor changed to ON
+or
+	Item doorGarage01 changed
 then
         raceCheck = 1
 
         if(timerGL !== null && !timerGL.isRunning() && !timerGL.hasTerminated() && zwave_node3_garagelight_switch.state == ON) {
                 logInfo("garage", "Garage light reschedule")
-                timerGL.reschedule(now.plusMinutes(2))
+                timerGL.reschedule(now.plusMinutes(15))
         }
         else if(zwave_node3_garagelight_switch.state == OFF) {
                 if(timerGL !== null){
                         timerGL.cancel
                         timerGL = null
                 }
-                timerGL = createTimer(now.plusMinutes(2)) [|
-                        zwave_node3_garagelight_switch.sendCommand(OFF)
+                timerGL = createTimer(now.plusMinutes(15)) [|
+						if(doorGarage01.state == OPEN) {
+							timerGL.reschedule(now.plusMinutes(15))
+						}
+						else {
+							zwave_node3_garagelight_switch.sendCommand(OFF)
+						}
                 ]
                 zwave_node3_garagelight_switch.sendCommand(ON)
         }
 
         if(timerLL !== null && !timerLL.isRunning() && !timerLL.hasTerminated() && zwave_node3_garagelight_switch.state == ON) {
                 logInfo("laundry room", "Laundry room light reschedule")
-                timerLL.reschedule(now.plusMinutes(2))
+                timerLL.reschedule(now.plusMinutes(15))
         }
         if(zwave_node14_laundryroomlight_switch.state == OFF) {
                 if(timerLL !== null){
                         timerLL.cancel
                         timerLL = null
                 }
-                timerLL = createTimer(now.plusMinutes(2)) [|
+                timerLL = createTimer(now.plusMinutes(15)) [|
                         zwave_node14_laundryroomlight_switch.sendCommand(OFF)
                 ]
                 zwave_node14_laundryroomlight_switch.sendCommand(ON)

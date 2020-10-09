@@ -4,7 +4,7 @@ Switch global_alarm_triggered "Alarm Triggered" <switch> (Security) ["NoTag"]
 Switch global_night_alarm "Night Alarm" <switch> (Security) ["NoTag"]
 Switch global_camera_pushover_alert "Camera Pushover Alert" <switch> (Security) ["NoTag"]
 
-Switch global_lockitdown "Lock It Down" <switch> (None) ["Switchable"] { autoupdate="false" }
+Switch global_lockitdown "Global Lock It Down" <switch> (None) ["NoTag"] { autoupdate="false" }
 Switch global_ex_leaving "Execute Leaving" <switch> (None) ["Switchable"] { autoupdate="false" }
 Switch global_ex_home "Execute Home" <switch> (None) ["Switchable"] { autoupdate="false" }
 Switch global_ex_pulling_in "Execute Pulling In" <switch> (None) ["Switchable"] { autoupdate="false" }

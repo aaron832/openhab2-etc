@@ -1,6 +1,7 @@
 import org.eclipse.xtext.xbase.lib.Functions
 import org.openhab.model.script.actions.Timer
 
+var g_delayForWake = 70
 var Timer timer = null
 var Timer spotifyAudioTimer = null
 val gatewayScript = "openhabgateway.au3"
@@ -18,7 +19,7 @@ val Functions$Function3<String, String, String, String> execSSHCommandVRWake= [ 
 
     if ( (halvr_status.state == OFF) && (timer === null || timer.hasTerminated) ) {
         halvr_wol.sendCommand(ON)
-        timer = createTimer(now.plusSeconds(60)) [|
+        timer = createTimer(now.plusSeconds(g_delayForWake)) [|
             logInfo("execSSHCommandVRWake", "delay timer")
             fexecSSHCommand.apply(script, command, receivedCommand)
         ]
@@ -215,6 +216,14 @@ then
     logInfo("autoit_vr_tv_5_rule", results)
 end
 
+rule "autoit_vr_sound_device_rule"
+when
+    Item autoit_vr_sound_device received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"set_sound_device",receivedCommand.toString)
+    logInfo("autoit_vr_sound_device", results)
+end
+
 rule "autoit_vr_spotify_sonnd_set_rule"
 when
     Item autoit_vr_spotify_sonnd_set received command
@@ -223,19 +232,27 @@ then
     logInfo("autoit_vr_spotify_sonnd_set_rule", results)
 end
 
+rule "autoit_vr_monitor_sound_config_rule"
+when
+    Item autoit_vr_monitor_sound_config received command
+then
+    val results = execSSHCommandVRWake.apply(gatewayScript,"monitor_sound_config",receivedCommand.toString)
+    logInfo("autoit_vr_monitor_sound_config", results)
+end
+
 rule "autoit_vr_pool_party_mode_rule"
 when
     Item autoit_vr_pool_party_mode received command
 then
     if ( (halvr_status.state == OFF) && (timer === null || timer.hasTerminated) ) {
         halvr_wol.sendCommand(ON)
-        timer = createTimer(now.plusSeconds(60)) [|
-            logInfo("autoit_vr_pool_party_mode_rule", "delay timer 60 seconds")
+        timer = createTimer(now.plusSeconds(70)) [|
+            logInfo("autoit_vr_pool_party_mode_rule", "delay timer 70 seconds")
             autoit_vr_pool_party_mode_impl.sendCommand(ON)
         ]
     }
     else {
-        autoit_vr_pool_party_mode_impl.sendCommand(ON)
+        autoit_vr_pool_party_mode_impl.sendCommand(receivedCommand)
     }
 end
 
@@ -243,26 +260,53 @@ rule "autoit_vr_receiver_zone2_power_interface_rule"
 when
     Item autoit_vr_receiver_zone2_power_interface received command
 then
-    autoit_vr_receiver_zone2_power.sendCommand(ON)
+	if(autoit_vr_receiver_zone2_power.state != receivedCommand) {
+		autoit_vr_receiver_zone2_power.sendCommand(receivedCommand)
+	}
 end
 
 rule "autoit_vr_pool_party_mode_impl_rule"
 when
     Item autoit_vr_pool_party_mode_impl received command
 then
-    if(autoit_vr_receiver_zone2_power_interface.state != ON) {
-        autoit_vr_receiver_zone2_power_interface.sendCommand(ON)
-    }
-    autoit_vr_spotify_playlist.sendCommand("Pool_Party")
-    spotifyAudioTimer = null
-    spotifyAudioTimer = createTimer(now.plusSeconds(20)) [|
-            autoit_vr_spotify_sonnd_set.sendCommand(ON)
-            spotifyAudioTimer = null
-            logInfo("autoit_vr_pool_party_mode_impl_rule", "Spotify Sound Set")
-        ]
-    zwave_node11_PoolLight_Switch.sendCommand(ON)
-    zwave_node8_backyardlights_switch.sendCommand(ON)
-    zwave_node12_StringLights_Dimmer.sendCommand(50)
-    poolpump_calswitch.sendCommand(ON)
+    autoit_vr_receiver_zone2_power_interface.sendCommand(receivedCommand)
+	
+    zwave_node11_PoolLight_Switch.sendCommand(receivedCommand)
+    zwave_node8_backyardlights_switch.sendCommand(receivedCommand)
+    zwave_node12_StringLights_Dimmer.sendCommand(receivedCommand)
+	spotifyAudioTimer = null
+	if(receivedCommand == ON) {
+		poolpump_hourrun_number.sendCommand(4)
+		var tmpTime = 20
+		if(halvr_status.state == OFF)
+			tmpTime = g_delayForWake + 20
+		autoit_vr_spotify_playlist.sendCommand("Pool_Party")
+		spotifyAudioTimer = createTimer(now.plusSeconds(tmpTime)) [|
+		autoit_vr_spotify_sonnd_set.sendCommand(ON)
+		spotifyAudioTimer = null
+		logInfo("autoit_vr_pool_party_mode_impl_rule", "Spotify Sound Set")
+		]
+	}
+	else {
+		autoit_vr_spotify_playlist.sendCommand("OFF")
+	}
     logInfo("autoit_vr_pool_party_mode_impl_rule", "DONE")
+end
+
+rule "autoit_vr_game_mode_rule"
+when
+    Item autoit_vr_game_mode received command
+then
+	if(receivedCommand == ON) {
+		samsungtv_lr_power_interface.sendCommand(ON)
+		yamahareceiver_power.sendCommand(ON)
+		autoit_vr_monitor_sound_config.sendCommand(4)
+		autoit_vr_sound_device.sendCommand("SAMSUNG")
+		yamahareceiver_input.sendCommand("HDMI2")
+	}
+	else {
+		autoit_vr_monitor_sound_config.sendCommand(5)
+		autoit_vr_sound_device.sendCommand("Headphones")
+		yamahareceiver_input.sendCommand("HDMI1")
+	}
 end

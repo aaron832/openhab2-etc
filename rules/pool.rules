@@ -40,7 +40,7 @@ then
 	    logInfo("rules","setting pool pump timer for " + pumpHours + " hours.")
 	    timer_RunPump = createTimer(now.plusHours(pumpHours)) [ |
 	        logInfo("rules","pool pump timer finished.")
-	        pushover("Pool Pump Timer Finished!", 0)
+	        //pushover("Pool Pump Timer Finished!", 0)
 	        pumpHours = 0
 	        poolpump_hourrun_number.postUpdate(pumpHours)
 	        poolpump_hourrun_switch.sendCommand(OFF)

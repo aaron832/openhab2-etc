@@ -139,9 +139,27 @@ rule "alexa_playsearchnetflix_rule"
 when
         Item alexa_playsearchnetflix received command
 then
-        var paramsString = receivedCommand.toString + "\" \"" + autoit_mc_netflixprof.state.toString
+        var paramsString = receivedCommand.toString + "\" \"" + "aaron"
         val results = execSSHCommandMCWake.apply(gatewayScript,"playsearchnetflix",paramsString)
         logInfo("alexa_playsearchnetflix_rule", paramsString + " Res:" + results)
+end
+
+rule "alexa_playsearchnetflixbrenna_rule"
+when
+        Item alexa_playsearchnetflixbrenna received command
+then
+        var paramsString = receivedCommand.toString + "\" \"" + "brenna"
+        val results = execSSHCommandMCWake.apply(gatewayScript,"playsearchnetflix",paramsString)
+        logInfo("alexa_playsearchnetflixbrenna_rule", paramsString + " Res:" + results)
+end
+
+rule "alexa_playsearchnetflixemi_rule"
+when
+        Item alexa_playsearchnetflixemi received command
+then
+        var paramsString = receivedCommand.toString + "\" \"" + "emi"
+        val results = execSSHCommandMCWake.apply(gatewayScript,"playsearchnetflix",paramsString)
+        logInfo("alexa_playsearchnetflixemi_rule", paramsString + " Res:" + results)
 end
 
 rule "alexa_playsearchdisney_rule"

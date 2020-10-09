@@ -1,0 +1,3 @@
+Switch tplink21 "x-mas Lights" <switch> (None) { channel="tplinksmarthome:hs103:D9E885:switch" }
+Switch tplinkAA "Japan Lamp" <switch> (None) { channel="tplinksmarthome:hs103:D98D7D:switch" }
+Switch tplinkFC "Stand Light" <switch> (None) { channel="tplinksmarthome:hs103:D82C25:switch" }

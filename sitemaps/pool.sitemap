@@ -1,5 +1,12 @@
 sitemap pool label="Pool"
 {
+	Frame label="Music" {
+		Switch item=autoit_vr_receiver_zone2_power_interface
+		Switch item=autoit_vr_receiver_zone2_vol_up mappings=[ON="Go!"]
+		Switch item=autoit_vr_receiver_zone2_vol_down mappings=[ON="Go!"]
+		Selection item=autoit_vr_spotify_playlist mappings=["OFF"="OFF", "Discovery"="Discovery", "EvChill"="EvChill", "TheWater"="TheWater", "Groove"="Groove", "Techno"="Techno", "Kids_Party"="Kids_Party", "Pool_Party"="Pool_Party", "Pool_Party_Extended"="Pool_Party_Extended"]
+		Switch item=autoit_vr_spotify_sonnd_set mappings=[ON="Go!"]
+	}
 	Frame label="Pool Control" {
 		Switch item=zwave_node8_backyardlights_switch
 		Slider item=zwave_node12_StringLights_Dimmer

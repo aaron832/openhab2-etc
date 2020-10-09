@@ -22,8 +22,9 @@ Switch autoit_vr_tv_3 "TV 3" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch autoit_vr_tv_4 "TV 4" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch autoit_vr_tv_5 "TV 5" <switch> (TV) ["NoTag"] { autoupdate="false" }
 
-String autoit_vr_spotify_playlist "Spotify Pool Party" <switch> (TV) ["NoTag"]
+String autoit_vr_spotify_playlist "HALVR Spotify Playlist" <switch> (TV) ["NoTag"]
 
+String autoit_vr_sound_device "HALVR Sound Device" <soundvolume> (TV) ["NoTag"]
 Switch autoit_vr_spotify_sonnd_set "Spotify Sound Set" <switch> (TV) ["NoTag"] { autoupdate="false" }
 
 Switch autoit_vr_pool_party_mode "Pool Party" <switch> (TV) ["Switchable"] { autoupdate="false" }
@@ -31,4 +32,8 @@ Switch autoit_vr_pool_party_mode_impl "Ignore Pool Party Impl" <switch> (TV) ["N
 
 
 //Interface switches for tracking state
-Switch autoit_vr_receiver_zone2_power_interface	"Pool Speakers" <switch> (TV) ["Switchable"] { autoupdate="false" }
+Switch autoit_vr_receiver_zone2_power_interface	"Pool Speakers" <switch> (TV) ["Switchable"]
+
+Number autoit_vr_monitor_sound_config "Monitor Sound Config" <screen> (TV) ["NoTag"]
+
+Switch autoit_vr_game_mode "Game Mode" <switch> (None) ["Switchable"] { autoupdate="false" }

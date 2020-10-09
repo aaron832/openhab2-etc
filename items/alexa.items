@@ -8,7 +8,7 @@ Switch alexa_media_center_default_games "Media Center Games" <switch> (TV) ["NoT
 Switch alexa_media_center_default_music "Media Center Music" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch alexa_media_center_listen_airplay "MC AirPlay" <switch> (TV) ["NoTag"] { autoupdate="false" }
 String alexa_media_center_listen_spotify_playlist "MC SP PL" <switch> (TV) ["NoTag"] { autoupdate="false" }
-Switch alexa_media_center_execute_lockitdown "MC Lock It Down" <switch> (TV) ["NoTag"] { autoupdate="false" }
+Switch alexa_media_center_execute_lockitdown "Lock It Down" <switch> (TV) ["Switchable"] { autoupdate="false" }
 Switch alexa_media_center_execute_iamleaving "MC I am leaving" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch alexa_media_center_execute_iamhome "MC I am home" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch alexa_media_center_watch_ponyo "MC Watch Ponyo" <switch> (TV) ["NoTag"] { autoupdate="false" }
@@ -23,6 +23,8 @@ Switch alexa_playsearchkodi_test "Alexa Play Search Kodi Test" <switch> (TV) ["N
 String alexa_playsearchkodi "Play Search Kodi: [%s]" <string> (TV) ["NoTag"]
 Switch alexa_playsearchnetflix_test "Alexa Play Search Netflix Test" <switch> (TV) ["NoTag"] { autoupdate="false" }
 String alexa_playsearchnetflix "Play Search Netflix: [%s]" <string> (TV) ["NoTag"]
+String alexa_playsearchnetflixbrenna "Play Search Netflix Brenna: [%s]" <string> (TV) ["NoTag"]
+String alexa_playsearchnetflixemi "Play Search Netflix Emi: [%s]" <string> (TV) ["NoTag"]
 String alexa_playsearchdisney "Play Search Disney: [%s]" <string> (TV) ["NoTag"]
 String alexa_googlelookup "Google Lookup: [%s]" <string> (TV) ["NoTag"]
 
@@ -33,4 +35,4 @@ String ECHO_VoiceCMD "ECHO_VoiceCMD: [%s]" <string> (Alexa) ["NoTag"]
 String ECHO_Answer "ECHO_Answer: [%s]" <string> (Alexa) ["NoTag"]
 
 Switch alexa_doorbell "Ax Doorbell" <switch> (TV) ["NoTag"] { autoupdate="false" }
-Rollershutter alexa_garagedoorwantstate "Garage Door" <switch> (None) ["Blinds"] 
+Rollershutter alexa_garagedoorwantstate "Garage Door" <garagedoor> (None) ["Blinds"] 

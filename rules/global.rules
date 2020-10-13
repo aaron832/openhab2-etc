@@ -7,13 +7,15 @@ when
 then
 	//autoit_mc_closeall.sendCommand(ON)
 	
-    if(samsungtv_lr_power_interface.state != OFF) {
-            samsungtv_lr_power_interface.sendCommand(OFF)
-            Thread::sleep(1000)
-    }
-    if(yamahareceiver_power.state != OFF) {
-            yamahareceiver_power.sendCommand(OFF)
-    }
+	//Samsung disconnected
+    //if(samsungtv_lr_power_interface.state == ON) {
+    //        samsungtv_lr_power_interface.sendCommand(OFF)
+    //        Thread::sleep(1000)
+    //}
+	// TV off should handle this
+    //if(yamahareceiver_power.state == ON) {
+    //        yamahareceiver_power.sendCommand(OFF)
+    //}
 
 	if(bayDoorGarage01.state == OPEN) {
 		relayGarage01.sendCommand(ON)
@@ -50,6 +52,20 @@ then
 		zwave_node12_StringLights_Dimmer.sendCommand(0)
 	}
 	
+	if(zwave_node19_dinning_dimmer.state != OFF) {
+		zwave_node19_dinning_dimmer.sendCommand(0)
+	}
+	
+	if(tplink21.state != OFF) {
+		tplink21.sendCommand(OFF)
+	}
+	if(tplinkAA.state != OFF) {
+		tplinkAA.sendCommand(OFF)
+	}
+	if(tplinkFC.state != OFF) {
+		tplinkFC.sendCommand(OFF)
+	}
+	
     //Dont want to sleep media center.  Maybe another time.
 	//mediacenter_sleep.sendCommand(ON)
 	if(disable_automated_halvrsleep.state != ON) {
@@ -57,14 +73,20 @@ then
 	}
 
 	if ( lv_light_timer === null || lv_light_timer.hasTerminated ) {
-		logInfo("global_lockitdown_rule", "Low lights on hallways and living room")
-		//zwave_node2_uphallway_dimmer.sendCommand(new DecimalType(5))
+		logInfo("global_lockitdown_rule", "Low lights for going to sleep")
+		zwave_node18_entryway_dimmer.sendCommand(new DecimalType(30))
+		zwave_node16_kitchen_dimmer.sendCommand(new DecimalType(1))
 		zwave_node17_livingroom_dimmer_interface.sendCommand(new DecimalType(2))
-		logInfo("global_lockitdown_rule", "delay timer for zwave_node17_livingroom_dimmer_interface started")
-		lv_light_timer = createTimer(now.plusMinutes(5)) [|
+		logInfo("global_lockitdown_rule", "delay timer for light shutoff lockitdown started")
+		lv_light_timer = createTimer(now.plusMinutes(10)) [|
 			logInfo("global_lockitdown_rule", "OFF lights on hallways and living room")
+			zwave_node17_livingroom_dimmer_interface.sendCommand(new DecimalType(100))
+			zwave_node18_entryway_dimmer.sendCommand(new DecimalType(100))
+			zwave_node16_kitchen_dimmer.sendCommand(new DecimalType(100))
+			Thread::sleep(500)
 			zwave_node17_livingroom_dimmer_interface.sendCommand(new DecimalType(0))
-			//zwave_node2_uphallway_dimmer.sendCommand(new DecimalType(0))
+			zwave_node18_entryway_dimmer.sendCommand(new DecimalType(0))
+			zwave_node16_kitchen_dimmer.sendCommand(new DecimalType(0))
 		]	
 	}
 end

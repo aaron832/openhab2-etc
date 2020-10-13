@@ -1,6 +1,6 @@
 Switch alexa_media_center_power "Media Center" <switch> (TV) ["NoTag"]
 Switch alexa_tv_power "TV" <switch> (TV) ["Switchable"]
-String alexa_tv_mode "TV Mode [%s]" <heating-0> (TV) ["NoTag"]
+//String alexa_tv_mode "TV Mode [%s]" <heating-0> (TV) ["NoTag"]
 String alexa_netflixprof "Netflix Profile: [%s]" <string> (TV) ["NoTag"]
 
 Switch alexa_media_center_default_netflix "Media Center Netflix" <switch> (TV) ["NoTag"] { autoupdate="false" }

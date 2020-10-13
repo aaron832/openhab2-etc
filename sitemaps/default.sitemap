@@ -8,11 +8,14 @@ sitemap default label="Rose House"
 		//Default item=nodelcdbottom
 	}
 	Frame label="Living Room" icon="sofa" {
+		Slider item=zwave_node2_uphallway_dimmer		
 		Slider item=zwave_node17_livingroom_dimmer_interface
 		Slider item=zwave_node16_kitchen_dimmer
 		Slider item=zwave_node19_dinning_dimmer
 		Slider item=zwave_node18_entryway_dimmer
-		Switch item=samsungtv_lr_power_interface
+		Switch item=lgtv_lr_power_interface
+		Switch item=lgtv_lr_app mappings=["com.webos.app.hdmi2" = "PC", "netflix" = "NFX", "Disney+" = "DS+"]
+		//Switch item=samsungtv_lr_power_interface
 		//Setpoint item=samsungtv_lr_volume step=1 minValue=0 maxValue=10
 		//Selection item=samsungtv_lr_sourcename mappings=[HDMI2="PC", COMPONENT="Wii"] valuecolor=[68="green", 61="blue"]
 		Switch item=yamahareceiver_power		
@@ -56,7 +59,6 @@ sitemap default label="Rose House"
 		Switch item=tplinkFC
 	}	
 	Frame label="Home" icon="house" {
-		Slider item=zwave_node2_uphallway_dimmer		
 		Switch item=home_away mappings=[HOME="HOME", AWAY="AWAY"]		
 		Text item=nest_room_ambient_temperature_f	
 		Text item=nest_room_target_temperature_low_f

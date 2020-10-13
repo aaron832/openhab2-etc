@@ -60,6 +60,7 @@ sitemap test label="test"
 		Switch item=alexa_media_center_watch_kidsmovie mappings=[ON="Go!"]
 		Switch item=alexa_media_center_stop_vlc mappings=[ON="Go!"]
 		Switch item=alexa_media_center_execute_lockitdown mappings=[ON="Go!"]
+		Switch item=global_lockitdown mappings=[ON="Go!"]
 		Switch item=alexa_playsearchkodi_test mappings=[ON="Go!"]
 		Switch item=autoit_mc_killkodi mappings=[ON="Go!"]
 		Switch item=alexa_playsearchnetflix_test mappings=[ON="Go!"]

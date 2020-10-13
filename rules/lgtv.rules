@@ -1,0 +1,18 @@
+rule "lgtv_lr_power_interface_rule"
+when
+	Item lgtv_lr_power_interface received command
+then
+	if(receivedCommand==OFF) {
+		lgtv_lr_power.sendCommand(OFF);
+	}
+	else {
+		lgtv_lr_wol.sendCommand(ON);
+	}
+end
+
+rule "lgtv_lr_power_interface_update"
+when
+	Item lgtv_lr_power changed
+then
+	lgtv_lr_power_interface.postUpdate(lgtv_lr_power.state)
+end

@@ -2,22 +2,30 @@ import org.openhab.model.script.actions.Timer
 var Timer timer = null
 var Timer timerGarageSanityCheck = null
 
+//Old rule for samsung tv.
+//rule "alexa_tv_power_rule"
+//when
+//	Item alexa_tv_power received command
+//then
+//	if(receivedCommand == ON) {
+//		logInfo("rule", "foward to alexa_media_center_power")
+//		alexa_media_center_power.sendCommand(receivedCommand)
+//	}
+//	else {
+//		if(samsungtv_lr_power_interface.state != receivedCommand) {
+//			sendCommand(samsungtv_lr_power_interface, receivedCommand)
+//		}
+//		if(yamahareceiver_power.state != receivedCommand) {
+//			sendCommand(yamahareceiver_power, receivedCommand)
+//		}
+//	}
+//end
+
 rule "alexa_tv_power_rule"
 when
 	Item alexa_tv_power received command
 then
-	if(receivedCommand == ON) {
-		logInfo("rule", "foward to alexa_media_center_power")
-		alexa_media_center_power.sendCommand(receivedCommand)
-	}
-	else {
-		if(samsungtv_lr_power_interface.state != receivedCommand) {
-			sendCommand(samsungtv_lr_power_interface, receivedCommand)
-		}
-		if(yamahareceiver_power.state != receivedCommand) {
-			sendCommand(yamahareceiver_power, receivedCommand)
-		}
-	}
+	sendCommand(lgtv_lr_power_interface, receivedCommand)
 end
 
 rule "alexa_media_center_power_rule"

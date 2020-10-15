@@ -26,6 +26,7 @@ val Functions$Function3<String, String, String, String> execSSHCommandMCWake= [ 
     ]
 
     if ( (meidacenter_status.state == OFF) && (timer === null || timer.hasTerminated) ) {
+		lgtv_lr_power_interface.sendCommand(ON)
         mediacenter_wol.sendCommand(ON)
         timer = createTimer(now.plusSeconds(6)) [|
             logInfo("execSSHCommandMCWake", "delay timer")

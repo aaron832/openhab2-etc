@@ -40,15 +40,15 @@ then
 		logInfo("rule", "delay timer for alexa_media_center_power started")
 		timer = createTimer(now.plusSeconds(6)) [|
 			logInfo("rule", "delay timer for alexa_media_center_power running")
-			if(samsungtv_lr_power_interface.state != ON) {
-				samsungtv_lr_power_interface.sendCommand(ON)
-			}
+			//if(samsungtv_lr_power_interface.state != ON) {
+			//	samsungtv_lr_power_interface.sendCommand(ON)
+			//}
 		]	
 	}
 	else {
-		if(samsungtv_lr_power_interface.state != receivedCommand) {
-			sendCommand(samsungtv_lr_power_interface, receivedCommand)
-		}
+		//if(samsungtv_lr_power_interface.state != receivedCommand) {
+		//	sendCommand(samsungtv_lr_power_interface, receivedCommand)
+		//}
 		if(receivedCommand == OFF) {
 			mediacenter_sleep.sendCommand(ON);
 		}

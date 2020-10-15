@@ -298,7 +298,8 @@ when
     Item autoit_vr_game_mode received command
 then
 	if(receivedCommand == ON) {
-		samsungtv_lr_power_interface.sendCommand(ON)
+		//samsungtv_lr_power_interface.sendCommand(ON)
+		lgtv_lr_power_interface.sendCommand(ON)
 		yamahareceiver_power.sendCommand(ON)
 		autoit_vr_monitor_sound_config.sendCommand(4)
 		autoit_vr_sound_device.sendCommand("SAMSUNG")

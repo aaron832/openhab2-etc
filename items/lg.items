@@ -1,5 +1,5 @@
 Switch lgtv_lr_power "LGTV Power" <switch> (TV) ["NoTag"]
 Switch lgtv_lr_power_interface "LGTV PowerI" <switch> (TV) ["NoTag"]
-Switch lgtv_lr_wol   "LGTV Wol" <switch>  (Status, Network) ["NoTag"]  { autoupdate="false", wol="192.168.1.47#58:FD:B1:57:D6:50" }
+Switch lgtv_lr_wol   "LGTV Wol" <switch>  (Status, Network) ["NoTag"]  { autoupdate="false", wol="192.168.1.255#58:FD:B1:57:D6:50" }
 String lgtv_lr_channel "LGTV channel" <screen> (TV) ["NoTag"]
 String lgtv_lr_app "LGTV app" <screen> (TV) ["NoTag"]

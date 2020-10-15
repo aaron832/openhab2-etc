@@ -17,6 +17,10 @@ then
     //        yamahareceiver_power.sendCommand(OFF)
     //}
 
+	if(lgtv_lr_power_interface.state == ON) {
+		lgtv_lr_power_interface.sendCommand(OFF)
+	}
+	
 	if(bayDoorGarage01.state == OPEN) {
 		relayGarage01.sendCommand(ON)
 	}
@@ -95,13 +99,16 @@ rule "global_ex_leaving_rule"
 when
     Item global_ex_leaving received command
 then
-	if(samsungtv_lr_power_interface.state != OFF) {
-            samsungtv_lr_power_interface.sendCommand(OFF)
-            Thread::sleep(1000)
-    }
-    if(yamahareceiver_power.state != OFF) {
-            yamahareceiver_power.sendCommand(OFF)
-    }
+	//if(samsungtv_lr_power_interface.state != OFF) {
+    //        samsungtv_lr_power_interface.sendCommand(OFF)
+    //        Thread::sleep(1000)
+    //}
+	if(lgtv_lr_power_interface.state == ON) {
+		lgtv_lr_power_interface.sendCommand(OFF)
+	}
+    //if(yamahareceiver_power.state != OFF) {
+    //        yamahareceiver_power.sendCommand(OFF)
+    //}
 
 	if(doorGarage01.state != 0) {
 		logInfo("rule", "Garage back door is open!")

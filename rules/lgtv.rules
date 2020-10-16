@@ -16,3 +16,11 @@ when
 then
 	lgtv_lr_power_interface.postUpdate(lgtv_lr_power.state)
 end
+
+rule "yamahareceiver_power_update"
+when
+	Item lgtv_lr_power received update ON
+then
+	logInfo("yamahareceiver_power_update", "Change receiver to HDMI1")
+	yamahareceiver_input.sendCommand("HDMI1")
+end

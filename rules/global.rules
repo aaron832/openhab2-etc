@@ -78,19 +78,19 @@ then
 
 	if ( lv_light_timer === null || lv_light_timer.hasTerminated ) {
 		logInfo("global_lockitdown_rule", "Low lights for going to sleep")
-		zwave_node18_entryway_dimmer.sendCommand(new DecimalType(30))
-		zwave_node16_kitchen_dimmer.sendCommand(new DecimalType(1))
-		zwave_node17_livingroom_dimmer_interface.sendCommand(new DecimalType(2))
+		zwave_node18_entryway_dimmer.sendCommand(30)
+		zwave_node16_kitchen_dimmer.sendCommand(1)
+		zwave_node17_livingroom_dimmer_interface.sendCommand(2)
 		logInfo("global_lockitdown_rule", "delay timer for light shutoff lockitdown started")
 		lv_light_timer = createTimer(now.plusMinutes(10)) [|
 			logInfo("global_lockitdown_rule", "OFF lights on hallways and living room")
-			zwave_node17_livingroom_dimmer_interface.sendCommand(new DecimalType(100))
-			zwave_node18_entryway_dimmer.sendCommand(new DecimalType(100))
-			zwave_node16_kitchen_dimmer.sendCommand(new DecimalType(100))
+			zwave_node17_livingroom_dimmer_interface.sendCommand(100)
+			zwave_node18_entryway_dimmer.sendCommand(100)
+			zwave_node16_kitchen_dimmer.sendCommand(100)
 			Thread::sleep(500)
-			zwave_node17_livingroom_dimmer_interface.sendCommand(new DecimalType(0))
-			zwave_node18_entryway_dimmer.sendCommand(new DecimalType(0))
-			zwave_node16_kitchen_dimmer.sendCommand(new DecimalType(0))
+			zwave_node17_livingroom_dimmer_interface.sendCommand(0)
+			zwave_node18_entryway_dimmer.sendCommand(0)
+			zwave_node16_kitchen_dimmer.sendCommand(0)
 		]	
 	}
 end

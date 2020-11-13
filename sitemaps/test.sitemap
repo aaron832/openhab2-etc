@@ -84,6 +84,7 @@ sitemap test label="test"
                 Switch item=autoit_mc_stop_spotify mappings=[ON="Go!"]
 	}
 	Frame label="MySensor Test" icon="sofa" {
+		Switch item=doorbell01
 		Switch item=global_lovedoorbell_drivewayactivate_switch
 		Text item=nodelcdtop
 		Text item=nodelcdbottom

@@ -14,6 +14,9 @@ Number	relayLoveSleep		"Love Sleep"		<garagedoor>	(All)	["NoTag"]	{ channel="mqt
 String	relayLoveCustom		"Love Custom"		<garagedoor>	(All)	["NoTag"]	{ channel="mqtt:topic:mymosquitto:mymqttthing:mqtt_relayLoveCustom" }
 DateTime sensorLoveLastCom "Love Box Last Com [%1$tm/%1$td/%1$ty %1$tH:%1$tM]" <calendar> (status) ["NoTag"]
 
+//DOOR BELL
+Switch  doorbell01	"Door Bell"	<motion>	{ autoupdate="false", channel="mqtt:topic:mymosquitto:mymqttthing:doorbell" }
+
 //LCD PANEL
 //mygateway1-out/11/255/3/0/1
 Number	nodeSndlcddisplaytime	"NSND LCDTime" 					<garagedoor>	(All)	["NoTag"] { channel="mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeSndlcddisplaytime" }

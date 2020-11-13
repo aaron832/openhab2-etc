@@ -1,108 +1,123 @@
-rule "sensorLoveLastCom_rule"
-when
-        Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqLove01" triggered
-or
-        Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqLoveSleep" triggered
-then
-        sensorLoveLastCom.postUpdate( new DateTimeType() )
-end
+var DateTime lastTrigger = null
 
-rule "nodeReqLove01_rule"
+rule "doorbell_rule"
 when
-	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqLove01" triggered
+    Item doorbell01 changed	
 then
-	if(global_love_switch.state == ON) {
-		logInfo("rules","forward to relayLove01")
-		relayLove01.sendCommand(receivedCommand)
-		global_love_switch.postUpdate(OFF)
-	}
-	else if(global_lovedoorbell_drivewayactivate_switch.state == ON) {
-		logInfo("rules","forward to relayLoveCustom")
-		//0x90,60, 0,250, 0x90,72, 0,250, 0x80, 0xf0
-		//var testinput = "\u003C\u0048"
-		var testinput = "\u0050\u0040\u0050"
-		relayLoveCustom.sendCommand(testinput) 
-		global_lovedoorbell_drivewayactivate_switch.postUpdate(OFF)
-	}
-	else if(global_lovedoorbell_dooractivate_switch.state == ON) {
-		logInfo("rules","forward to relayLoveCustom")
-		//0x90,60, 0,250, 0x90,72, 0,250, 0x80, 0xf0
-		//var testinput = "\u003C\u0048"
-		var testinput = "\u0040\u0050\u0040\u0050"
-		relayLoveCustom.sendCommand(testinput) 
-		global_lovedoorbell_dooractivate_switch.postUpdate(OFF)
+	if( lastTrigger === null || now.isAfter(lastTrigger.plusSeconds(5)) ) {
+		lastTrigger = now
+		logInfo("doorbell_rule","doorbell stuff")
+        sendPushoverMessage(pushoverBuilder("Door Bell").withPriority(1))
+		playSound("chromecast:chromecast:LivingRoomGHub","doorbell.mp3")
+		playSound("chromecast:chromecast:DownstairsGHub","doorbell.mp3")
 	}
 end
 
-rule "nodeReqLoveSleep_rule"
-when
-	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqLoveSleep" triggered
-then
-	//logInfo("rules","forward to relayLoveSleep")
-	//relayLoveSleep.sendCommand(new DecimalType(300000))
-	//relayLoveSleep.sendCommand(new DecimalType(60000))
-	relayLoveSleep.sendCommand(new DecimalType(10000))
-end
+//rule "sensorLoveLastCom_rule"
+//when
+//        Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqLove01" triggered
+//or
+//        Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqLoveSleep" triggered
+//then
+//        sensorLoveLastCom.postUpdate( new DateTimeType() )
+//end
 
-rule "nodeReqlcdtop_rule"
-when
-	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqlcdtop" triggered or
-	Item nodelcdtop received command
-then
-	logInfo("rules","forward to nodeSndlcdtop")
+//rule "nodeReqLove01_rule"
+//when
+//	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqLove01" triggered
+//then
+//	if(global_love_switch.state == ON) {
+//		logInfo("rules","forward to relayLove01")
+//		relayLove01.sendCommand(receivedCommand)
+//		global_love_switch.postUpdate(OFF)
+//	}
+//	else if(global_lovedoorbell_drivewayactivate_switch.state == ON) {
+//		logInfo("rules","forward to relayLoveCustom")
+//		//0x90,60, 0,250, 0x90,72, 0,250, 0x80, 0xf0
+//		//var testinput = "\u003C\u0048"
+//		var testinput = "\u0050\u0040\u0050"
+//		relayLoveCustom.sendCommand(testinput) 
+//		global_lovedoorbell_drivewayactivate_switch.postUpdate(OFF)
+//	}
+//	else if(global_lovedoorbell_dooractivate_switch.state == ON) {
+//		logInfo("rules","forward to relayLoveCustom")
+//		//0x90,60, 0,250, 0x90,72, 0,250, 0x80, 0xf0
+//		//var testinput = "\u003C\u0048"
+//		var testinput = "\u0040\u0050\u0040\u0050"
+//		relayLoveCustom.sendCommand(testinput) 
+//		global_lovedoorbell_dooractivate_switch.postUpdate(OFF)
+//	}
+//end
 
-	if(nodelcdtop.state == NULL) {
-		logInfo("rules","setting default for nodelcdtop")
-		nodelcdtop.postUpdate(new StringType("OpenHab"))
-		Thread::sleep(200)
-	}
+//rule "nodeReqLoveSleep_rule"
+//when
+//	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqLoveSleep" triggered
+//then
+//	//logInfo("rules","forward to relayLoveSleep")
+//	//relayLoveSleep.sendCommand(new DecimalType(300000))
+//	//relayLoveSleep.sendCommand(new DecimalType(60000))
+//	relayLoveSleep.sendCommand(new DecimalType(10000))
+//end
 
-	logInfo("rules","Sending top: " + nodelcdtop.state.toString)
-	nodeSndlcdtop.sendCommand(nodelcdtop.state.toString)
-end
+//rule "nodeReqlcdtop_rule"
+//when
+//	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqlcdtop" triggered or
+//	Item nodelcdtop received command
+//then
+//	logInfo("rules","forward to nodeSndlcdtop")
+//
+//	if(nodelcdtop.state == NULL) {
+//		logInfo("rules","setting default for nodelcdtop")
+//		nodelcdtop.postUpdate(new StringType("OpenHab"))
+//		Thread::sleep(200)
+//	}
+//
+//	logInfo("rules","Sending top: " + nodelcdtop.state.toString)
+//	nodeSndlcdtop.sendCommand(nodelcdtop.state.toString)
+//end
 
-rule "nodeReqlcdbottom_rule"
-when
-	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqlcdbottom" triggered or
-	Item nodelcdbottom received command
-then
-	logInfo("rules","forward to nodeSndlcdbottom")
+//rule "nodeReqlcdbottom_rule"
+//when
+//	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqlcdbottom" triggered or
+//	Item nodelcdbottom received command
+//then
+//	logInfo("rules","forward to nodeSndlcdbottom")
+//
+//	if(nodelcdbottom.state == NULL) {
+//		logInfo("rules","setting default for nodelcdbottom")
+//		nodelcdbottom.postUpdate(new StringType("OpenHab Connect"))
+//		Thread::sleep(200)
+//	}
+//
+//	logInfo("rules","Sending bottom: " + nodelcdbottom.state.toString)
+//	nodeSndlcdbottom.sendCommand(nodelcdbottom.state.toString)
+//end
 
-	if(nodelcdbottom.state == NULL) {
-		logInfo("rules","setting default for nodelcdbottom")
-		nodelcdbottom.postUpdate(new StringType("OpenHab Connect"))
-		Thread::sleep(200)
-	}
+//rule "nodeReqlcdbright_rule"
+//when
+//	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqlcdbright" triggered or
+//	Item nodelcdbright received command
+//then
+//	logInfo("rules","forward to nodeSndlcdbright")
+//
+//	if(nodelcdbright.state == NULL) {
+//		logInfo("rules","setting default for nodelcdbright")
+//		nodelcdbright.postUpdate(new DecimalType(0))
+//		Thread::sleep(200)
+//	}
+//	nodeSndlcdbright.sendCommand(nodelcdbright.state as DecimalType)
+//end
 
-	logInfo("rules","Sending bottom: " + nodelcdbottom.state.toString)
-	nodeSndlcdbottom.sendCommand(nodelcdbottom.state.toString)
-end
+//rule "nodeLCDButtonMid_rule"
+//when
+//	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeLCDButtonMid" triggered
+//then
+//	global_alarm.sendCommand(ON)
+//end
 
-rule "nodeReqlcdbright_rule"
-when
-	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeReqlcdbright" triggered or
-	Item nodelcdbright received command
-then
-	logInfo("rules","forward to nodeSndlcdbright")
-
-	if(nodelcdbright.state == NULL) {
-		logInfo("rules","setting default for nodelcdbright")
-		nodelcdbright.postUpdate(new DecimalType(0))
-		Thread::sleep(200)
-	}
-	nodeSndlcdbright.sendCommand(nodelcdbright.state as DecimalType)
-end
-
-rule "nodeLCDButtonMid_rule"
-when
-	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeLCDButtonMid" triggered
-then
-	global_alarm.sendCommand(ON)
-end
-
-rule "nodeLCDButtonRight_rule"
-when
-	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeLCDButtonRight" triggered
-then
-	global_alarm.sendCommand(OFF)
-end
+//rule "nodeLCDButtonRight_rule"
+//when
+//	Channel "mqtt:topic:mymosquitto:mymqttthing:mqtt_nodeLCDButtonRight" triggered
+//then
+//	global_alarm.sendCommand(OFF)
+//end

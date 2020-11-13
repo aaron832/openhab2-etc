@@ -50,7 +50,7 @@ then
 	//say(myString)
 	say(myString,"googletts:enUSStandardC","chromecast:chromecast:LivingRoomGHub")
 	say(myString,"googletts:enUSStandardC","chromecast:chromecast:DownstairsGHub")
-	sendPushoverMessage(pushoverBuilder(myString).withPriority(0))
+	//sendPushoverMessage(pushoverBuilder(myString).withPriority(0))
 	postUpdate(alexaresp, myString)
 	global_lockitdown.sendCommand(ON);//receivedCommand);
 end

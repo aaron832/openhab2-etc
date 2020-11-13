@@ -54,6 +54,7 @@ sitemap default label="Rose House"
 		Switch item=autoit_vr_monitor_sound_config mappings=[1="Def", 2="Work", 3="Bar", 4="Up", 5="Single"]
 		Switch item=autoit_vr_sound_device mappings=["Speakers"="Norm", "Headphones"="Hph", "SAMSUNG"="Up"]
 		Switch item=halvr_sleep_control
+		Selection item=autoit_vr_spotify_playlist mappings=["OFF"="OFF", "Liked"="Liked", "Discovery"="Discovery", "Throwback"="Throwback", "EvChill"="EvChill", "TheWater"="TheWater", "Groove"="Groove", "Techno"="Techno", "Kids_Party"="Kids_Party", "Pool_Party"="Pool_Party", "Pool_Party_Extended"="Pool_Party_Extended"]
 		Switch item=tplink21
 		Switch item=tplinkAA
 		Switch item=tplinkFC

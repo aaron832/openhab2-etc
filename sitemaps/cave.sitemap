@@ -14,7 +14,6 @@ sitemap cave label="Cave"
 		Switch item=autoit_vr_receiver_zone2_dvd mappings=[ON="Go!"]
 		Switch item=autoit_vr_receiver_zone2_vol_up mappings=[ON="Go!"]
 		Switch item=autoit_vr_receiver_zone2_vol_down mappings=[ON="Go!"]
-		Selection item=autoit_vr_spotify_playlist mappings=["OFF"="OFF", "Discovery"="Discovery", "EvChill"="EvChill", "TheWater"="TheWater", "Groove"="Groove", "Techno"="Techno", "Kids_Party"="Kids_Party", "Pool_Party"="Pool_Party", "Pool_Party_Extended"="Pool_Party_Extended"]
 		Switch item=autoit_vr_tv_power mappings=[ON="Go!"]
 		Switch item=autoit_vr_tv_volup mappings=[ON="Go!"]
 		Switch item=autoit_vr_tv_voldown mappings=[ON="Go!"]

@@ -17,10 +17,14 @@ then
 	lgtv_lr_power_interface.postUpdate(lgtv_lr_power.state)
 end
 
+//looks like LGTV softare 5.1.1-3706 webOS and Software 03.11.25 fixed it.
+//Actually.. it was working.. now its not?  Put the rule back in.
 rule "yamahareceiver_power_update"
 when
-	Item lgtv_lr_power received update ON
+	Item yamahareceiver_power changed to ON
 then
-	logInfo("yamahareceiver_power_update", "Change receiver to HDMI1")
-	yamahareceiver_input.sendCommand("HDMI1")
+	if(yamahareceiver_input.state.toString() == "AV4") {
+		logInfo("yamahareceiver_power_update", "Change receiver to HDMI1")
+		yamahareceiver_input.sendCommand("HDMI1")
+	}
 end

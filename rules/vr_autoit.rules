@@ -269,7 +269,9 @@ rule "autoit_vr_pool_party_mode_impl_rule"
 when
     Item autoit_vr_pool_party_mode_impl received command
 then
-    autoit_vr_receiver_zone2_power_interface.sendCommand(receivedCommand)
+	if(autoit_vr_receiver_zone2_power_interface.state == ON) {
+		autoit_vr_receiver_zone2_power_interface.sendCommand(OFF)
+	}
 	
     zwave_node11_PoolLight_Switch.sendCommand(receivedCommand)
     zwave_node8_backyardlights_switch.sendCommand(receivedCommand)

@@ -7,7 +7,7 @@ then
 	if( lastTrigger === null || now.isAfter(lastTrigger.plusSeconds(5)) ) {
 		lastTrigger = now
 		logInfo("doorbell_rule","doorbell stuff")
-        sendPushoverMessage(pushoverBuilder("Door Bell").withPriority(1))
+        sendPushoverMessage(pushoverBuilder("Door Bell").withPriority(2))
 		playSound("chromecast:chromecast:LivingRoomGHub","doorbell.mp3")
 		playSound("chromecast:chromecast:DownstairsGHub","doorbell.mp3")
 	}

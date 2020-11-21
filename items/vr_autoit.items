@@ -23,6 +23,8 @@ Switch autoit_vr_tv_4 "TV 4" <switch> (TV) ["NoTag"] { autoupdate="false" }
 Switch autoit_vr_tv_5 "TV 5" <switch> (TV) ["NoTag"] { autoupdate="false" }
 
 String autoit_vr_spotify_playlist "HALVR Spotify Playlist" <switch> (TV) ["NoTag"]
+Switch autoit_vr_spotify_playlist_default "Spotify" <switch> (TV) ["Switchable"]
+Switch autoit_vr_tuneblade "airplay" <network> (TV) ["Switchable"]
 
 String autoit_vr_sound_device "HALVR Sound Device" <soundvolume> (TV) ["NoTag"]
 Switch autoit_vr_spotify_sonnd_set "Spotify Sound Set" <switch> (TV) ["NoTag"] { autoupdate="false" }
